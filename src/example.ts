@@ -1,5 +1,5 @@
 import { Separator } from '@inquirer/core'
-import { form } from './index.js'
+import form from './index.js'
 import { exit } from 'node:process'
 
 const errorHander = (error: unknown): void => {
@@ -13,7 +13,7 @@ const errorHander = (error: unknown): void => {
 
 process.on('uncaughtException', errorHander)
 
-const example = async (): Promise<void> => {
+export const example = async (): Promise<void> => {
     console.log()
     try {
         const answers = await form({
@@ -85,5 +85,3 @@ const example = async (): Promise<void> => {
         }
     }
 }
-
-await example()

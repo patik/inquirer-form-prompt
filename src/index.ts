@@ -30,7 +30,7 @@ function getInitialIndex(fields: Fields): number {
     return firstNonSeparatorIndex >= 0 ? firstNonSeparatorIndex : 0
 }
 
-export const form = async (options: Config): Promise<ReturnedItems> => {
+export default async function form(options: Config): Promise<ReturnedItems> {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
