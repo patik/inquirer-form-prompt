@@ -1,10 +1,11 @@
 /* eslint-disable no-regex-spaces */
 /* eslint-disable no-control-regex */
-import { describe, it, expect } from 'vitest'
+
 import figures from '@inquirer/figures'
+import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline, white } from 'yoctocolors'
-import { renderCheckbox } from './checkbox.js'
 import type { InternalCheckboxField } from '../util/types.js'
+import { renderCheckbox } from './checkbox.js'
 
 describe('renderCheckbox', () => {
     const baseField: InternalCheckboxField = {
