@@ -59,7 +59,7 @@ export const editCheckboxField = ({
             if (currentValue.includes(highlightedValue)) {
                 nextField.value = currentValue.filter((x) => x !== highlightedValue)
             } else {
-                nextField.value.push(highlightedValue)
+                nextField.value = [...currentValue, highlightedValue]
             }
         }
 
