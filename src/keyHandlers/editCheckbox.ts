@@ -1,5 +1,5 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { InquirerReadline, InternalCheckboxField, InternalFields } from '../types.js'
+import type { InquirerReadline, InternalCheckboxField, InternalFields } from '../util/types.js'
 
 /**
  * Updates the entire `fields` array when one checkbox field is being edited

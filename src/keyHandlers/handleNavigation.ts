@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { isDownKey, isUpKey, Separator } from '@inquirer/core'
-import type { Fields, InquirerReadline } from '../types.js'
+import type { Fields, InquirerReadline } from '../util/types.js'
 
 function nextNonSeparatorIndex(fields: Fields, searchFromIndex: number): number {
     let nextIndex = searchFromIndex + 1

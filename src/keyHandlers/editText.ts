@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import clipboard from 'clipboardy'
-import type { InquirerReadline, InternalFields, TextField } from '../types.js'
+import type { InquirerReadline, InternalFields, TextField } from '../util/types.js'
 
 /**
  * Updates the entire `fields` array when one text field is being edited

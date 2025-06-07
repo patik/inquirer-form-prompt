@@ -9,7 +9,7 @@ import { editRadioField } from './keyHandlers/editRadio.js'
 import { editTextField } from './keyHandlers/editText.js'
 import { handleNavigation } from './keyHandlers/handleNavigation.js'
 import { fieldToTableRow } from './renderers/fieldToTableRow.js'
-import type { Config, Fields, InternalFields, ReturnedItems } from './types.js'
+import type { Config, Fields, InternalFields, ReturnedItems } from './util/types.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {

@@ -1,9 +1,9 @@
+import { Separator } from '@inquirer/core'
 import { bgGray, green, white } from 'yoctocolors'
-import type { InternalField } from '../types.js'
+import type { InternalField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
-import { Separator } from '@inquirer/core'
 
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
