@@ -135,7 +135,6 @@ export const form = async (options: Config): Promise<ReturnedItems> => {
         }
 
         return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-
 ${tables.join('\n')}${ansiEscapes.cursorHide}
 `
     })(options)
