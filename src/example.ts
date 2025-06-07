@@ -1,7 +1,19 @@
 import { Separator } from '@inquirer/core'
 import { form } from './index.js'
+import { exit } from 'node:process'
 
-export const example = async (): Promise<void> => {
+const errorHander = (error: unknown): void => {
+    if (error instanceof Error && error.name === 'ExitPromptError') {
+        console.log('✨')
+        exit(0)
+    } else {
+        throw error
+    }
+}
+
+process.on('uncaughtException', errorHander)
+
+const example = async (): Promise<void> => {
     console.log('')
     try {
         const answers = await form({
@@ -11,13 +23,13 @@ export const example = async (): Promise<void> => {
                 {
                     name: 'Alpha',
                     type: 'text',
-                    value: 'aaa aaa aaa',
+                    value: 'Hello, world',
                     description: 'This is a simple text field.',
                 },
                 {
                     name: 'Bravo',
                     type: 'text',
-                    value: 'bbb',
+                    value: '',
                     description: 'Another simple text field.',
                 },
                 new Separator('Boolean fields'),
@@ -73,3 +85,5 @@ export const example = async (): Promise<void> => {
         }
     }
 }
+
+await example()
