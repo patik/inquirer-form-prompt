@@ -4,22 +4,22 @@ Inquirer multi-field prompt with form-like interface
 
 A prompt for [inquirer](https://github.com/SBoudrias/Inquirer.js)
 
-![](https://github.com/user-attachments/assets/a77b4eaa-f1a1-4a89-83ab-30ecea57110e)
+![Demo](https://github.com/user-attachments/assets/a77b4eaa-f1a1-4a89-83ab-30ecea57110e)
 
 You provide a `statefulBanner` function. This function receives a `setState` function which can be called at will. The string sent to `setState` is shown above the select prompt. `statefulBanner` can also return a cleanup function.
 
 ## Install
 
 ```sh
-pnpm add inquirer-select-with-state
-yarn add inquirer-select-with-state
-npm add inquirer-select-with-state
+pnpm add inquirer-form-prompt
+yarn add inquirer-form-prompt
+npm add inquirer-form-prompt
 ```
 
 ## Usage
 
 ```tsx
-import select from 'inquirer-select-with-state'
+import select from 'inquirer-form-prompt'
 
 const answer = await select({
     message: 'Choose an option',
