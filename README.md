@@ -19,44 +19,16 @@ npm add inquirer-form-prompt
 ## Usage
 
 ```tsx
-import select from 'inquirer-form-prompt'
+import form from 'inquirer-form-prompt'
 
-const answer = await select({
+const answer = await form({
     message: 'Choose an option',
     choices: [
         { name: '1', value: '1' },
         { name: '2', value: '2' },
         { name: '3', value: '3' },
     ],
-    statefulBanner: (setState: (s: string) => void) => {
-        setState('Directory size: loading...')
-        exec('du -sh', (err, stdout) => {
-            if (!err) {
-                setState(`Directory size: ${stdout}`)
-            }
-        })
-    },
 })
-```
-
-The prompt will initially look like this:
-
-```tsx
-Directory size: loading...
-? Choose an option
-❯ 1
-  2
-  3
-```
-
-A moment later, it will automatically update:
-
-```tsx
-Directory size: 123M
-? Choose an option
-❯ 1
-  2
-  3
 ```
 
 ### Return value

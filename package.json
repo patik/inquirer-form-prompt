@@ -1,11 +1,6 @@
 {
-    "name": "gin",
-    "version": "1.0.0",
-    "description": "gin",
-    "main": "./dist/main.js",
-    "bin": {
-        "gin": "./dist/main.js"
-    },
+    "name": "inquirer-form-prompt",
+    "version": "0.0.1",
     "scripts": {
         "start": "tsx ./src/main.ts",
         "build": "tsc",
@@ -17,9 +12,7 @@
         "lint": "tsc --noEmit && eslint . --fix && pnpm run format"
     },
     "type": "module",
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "main": "./dist/index.js",
     "dependencies": {
         "@inquirer/core": "^10.1.13",
         "@inquirer/figures": "^1.0.12",
@@ -47,5 +40,13 @@
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.33.0",
         "vitest": "^3.1.4"
-    }
+    },
+    "keywords": [],
+    "description": "Form-like, multi-input prompt for Inquirer.js",
+    "author": {
+        "name": "Craig Patik",
+        "email": "craig@patik.com",
+        "url": "https://github.com/patik/inquirer-form-prompt"
+    },
+    "license": "ISC"
 }
