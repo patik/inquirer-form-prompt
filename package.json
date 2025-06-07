@@ -9,10 +9,17 @@
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",
         "check-format": "prettier --check --list-different .",
-        "lint": "tsc --noEmit && eslint . --fix && pnpm run format"
+        "lint": "tsc --noEmit && eslint . --fix && pnpm run format",
+        "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+        "ci": "pnpm build && pnpm check-format && pnpm check-exports",
+        "prepublishOnly": "pnpm run ci",
+        "prepare": "husky"
     },
     "type": "module",
     "main": "./dist/index.js",
+    "files": [
+        "dist"
+    ],
     "dependencies": {
         "@inquirer/core": "^10.1.13",
         "@inquirer/figures": "^1.0.12",
@@ -22,12 +29,15 @@
         "yoctocolors": "^2.1.1"
     },
     "devDependencies": {
+        "@arethetypeswrong/cli": "^0.18.1",
         "@eslint/js": "^9.28.0",
+        "@inquirer/testing": "^2.1.47",
         "@inquirer/type": "^3.0.7",
         "@types/node": "^22.15.30",
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-prettier": "^5.4.1",
+        "husky": "^9.1.7",
         "prettier": "3.5.3",
         "tsx": "^4.19.4",
         "typescript": "^5.8.3",
@@ -41,5 +51,13 @@
         "email": "craig@patik.com",
         "url": "https://github.com/patik/inquirer-form-prompt"
     },
-    "license": "MIT"
+    "homepage": "https://github.com/patik/inquirer-form-prompt",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/patik/inquirer-form-prompt.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }
