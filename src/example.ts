@@ -14,7 +14,7 @@ const errorHander = (error: unknown): void => {
 process.on('uncaughtException', errorHander)
 
 const example = async (): Promise<void> => {
-    console.log('')
+    console.log()
     try {
         const answers = await form({
             message: 'Fill in the form',

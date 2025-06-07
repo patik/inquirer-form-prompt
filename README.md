@@ -1,12 +1,8 @@
 # inquirer-form-prompt
 
-Inquirer multi-field prompt with form-like interface
+A prompt for [inquirer](https://github.com/SBoudrias/Inquirer.js) that presents a form with multiple fields and form-like interaction
 
-A prompt for [inquirer](https://github.com/SBoudrias/Inquirer.js)
-
-![Demo](https://github.com/user-attachments/assets/a77b4eaa-f1a1-4a89-83ab-30ecea57110e)
-
-You provide a `statefulBanner` function. This function receives a `setState` function which can be called at will. The string sent to `setState` is shown above the select prompt. `statefulBanner` can also return a cleanup function.
+![](https://github.com/user-attachments/assets/a77b4eaa-f1a1-4a89-83ab-30ecea57110e)
 
 ## Install
 
@@ -31,10 +27,4 @@ const answer = await form({
 })
 ```
 
-### Return value
-
-If your banner has any side effects (e.g. timeouts), you can return a cleanup function which will be called when the prompt quits.
-
-### Example
-
-See `src/example.ts` for a full example using `async`/`await`.
+See `src/example.ts` for a more thorough example.

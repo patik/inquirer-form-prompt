@@ -1,6 +1,6 @@
 {
     "name": "inquirer-form-prompt",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "scripts": {
         "start": "tsx ./src/main.ts",
         "build": "tsc",
@@ -41,5 +41,5 @@
         "email": "craig@patik.com",
         "url": "https://github.com/patik/inquirer-form-prompt"
     },
-    "license": "ISC"
+    "license": "MIT"
 }
