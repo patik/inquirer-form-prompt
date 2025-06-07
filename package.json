@@ -1,0 +1,51 @@
+{
+    "name": "gin",
+    "version": "1.0.0",
+    "description": "gin",
+    "main": "./dist/main.js",
+    "bin": {
+        "gin": "./dist/main.js"
+    },
+    "scripts": {
+        "start": "tsx ./src/main.ts",
+        "build": "tsc",
+        "dev": "tsx watch ./src/main.ts",
+        "test": "vitest .",
+        "test:once": "vitest run",
+        "format": "prettier --write --list-different .",
+        "check-format": "prettier --check --list-different .",
+        "lint": "tsc --noEmit && eslint . --fix && pnpm run format"
+    },
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@inquirer/core": "^10.1.13",
+        "@inquirer/figures": "^1.0.12",
+        "@inquirer/prompts": "^7.5.3",
+        "@types/cli-table": "^0.3.4",
+        "ansi-escapes": "^7.0.0",
+        "cli-table": "^0.3.11",
+        "cli-table3": "^0.6.5",
+        "clipboardy": "^4.0.0",
+        "commander": "^14.0.0",
+        "date-fns": "^4.1.0",
+        "inquirer-interactive-list-prompt": "^1.0.4",
+        "inquirer-select-with-state": "^0.1.3",
+        "yoctocolors": "^2.1.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.28.0",
+        "@inquirer/type": "^3.0.7",
+        "@types/node": "^22.15.29",
+        "eslint": "^9.28.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.4.1",
+        "prettier": "3.5.3",
+        "tsx": "^4.19.4",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.33.0",
+        "vitest": "^3.1.4"
+    }
+}
