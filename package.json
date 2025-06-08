@@ -3,18 +3,18 @@
     "version": "0.1.0",
     "scripts": {
         "start": "tsx ./src/main.ts",
-        "demo": "tsx ./src/demo.ts --run",
         "build": "tsc",
         "dev": "tsx watch ./src/main.ts",
         "test": "vitest .",
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",
-        "check-format": "prettier --check --list-different .",
+        "check-format": "prettier --check .",
         "lint": "tsc --noEmit && eslint . --fix && pnpm run format",
         "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
         "ci": "pnpm build && pnpm check-format && pnpm check-exports",
         "prepublishOnly": "pnpm run ci",
-        "prepare": "husky"
+        "prepare": "husky",
+        "demo": "tsx ./src/demo.ts --run"
     },
     "type": "module",
     "main": "./dist/index.js",
