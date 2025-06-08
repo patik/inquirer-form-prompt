@@ -1,5 +1,5 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { InquirerReadline, InternalFields, RadioField } from '../types.js'
+import type { InquirerReadline, InternalFields, RadioField } from '../util/types.js'
 
 /**
  * Updates the entire `fields` array when one radio field is being edited

@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { isDownKey, isUpKey, Separator } from '@inquirer/core'
-import type { Fields, InquirerReadline } from '../types.js'
+import type { Fields, InquirerReadline } from '../util/types.js'
 
 function nextNonSeparatorIndex(fields: Fields, searchFromIndex: number): number {
     let nextIndex = searchFromIndex + 1
@@ -9,7 +9,7 @@ function nextNonSeparatorIndex(fields: Fields, searchFromIndex: number): number 
         nextIndex += 1
     }
 
-    return nextIndex < fields.length ? nextIndex : -1
+    return nextIndex < fields.length ? nextIndex : 0
 }
 
 function previousNonSeparatorIndex(fields: Fields, searchFromIndex: number): number {
@@ -64,6 +64,11 @@ export const handleNavigation = ({
         rl.clearLine(0)
     }
 
+    if (fields.length === 0) {
+        setSelectedIndex(0)
+        return true
+    }
+
     if (goToPrevious) {
         if (selectedIndex === 0) {
             setSelectedIndex(previousNonSeparatorIndex(fields, 0))
@@ -76,7 +81,7 @@ export const handleNavigation = ({
 
     if (goToNext) {
         if (selectedIndex === fields.length - 1) {
-            setSelectedIndex(nextNonSeparatorIndex(fields, 0))
+            setSelectedIndex(nextNonSeparatorIndex(fields, -1))
             return true
         }
 

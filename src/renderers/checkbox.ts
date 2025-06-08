@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
 import { bgGray, bold, underline, white } from 'yoctocolors'
-import type { InternalCheckboxField } from '../types.js'
+import type { InternalCheckboxField } from '../util/types.js'
 
 export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: boolean): string {
     const formatter = isFieldSelected ? (x: string) => bgGray(white(x)) : (x: string) => x

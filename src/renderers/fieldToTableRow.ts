@@ -1,9 +1,10 @@
+import { Separator } from '@inquirer/core'
 import { bgGray, green, white } from 'yoctocolors'
-import type { InternalField } from '../types.js'
+import type { InternalField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
-import { Separator } from '@inquirer/core'
+import figures from '@inquirer/figures'
 
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
@@ -21,7 +22,7 @@ export function fieldToTableRow(
 
         const isSelected = selectedIndex === index
         const { name, type, value } = field
-        const left = isSelected ? green(name) : name
+        const left = isSelected ? green(`${figures.arrowRight} ${name}`) : `  ${name}`
 
         if (type === 'radio') {
             const right = renderRadio(field, isSelected)

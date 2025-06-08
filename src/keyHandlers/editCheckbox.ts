@@ -1,5 +1,5 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { InquirerReadline, InternalCheckboxField, InternalFields } from '../types.js'
+import type { InquirerReadline, InternalCheckboxField, InternalFields } from '../util/types.js'
 
 /**
  * Updates the entire `fields` array when one checkbox field is being edited
@@ -59,7 +59,7 @@ export const editCheckboxField = ({
             if (currentValue.includes(highlightedValue)) {
                 nextField.value = currentValue.filter((x) => x !== highlightedValue)
             } else {
-                nextField.value.push(highlightedValue)
+                nextField.value = [...currentValue, highlightedValue]
             }
         }
 

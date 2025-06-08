@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
 import { bgGray, bold, underline, white } from 'yoctocolors'
-import type { RadioField } from '../types.js'
+import type { RadioField } from '../util/types.js'
 
 export function renderRadio(field: RadioField, isFieldSelected: boolean): string {
     const formatter = isFieldSelected ? (s: string) => bgGray(white(s)) : (s: string) => s

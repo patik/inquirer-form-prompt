@@ -1,5 +1,5 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { BooleanField, InquirerReadline, InternalFields } from '../types.js'
+import type { BooleanField, InquirerReadline, InternalFields } from '../util/types.js'
 
 /**
  * Updates the entire `fields` array when one boolean field is being edited
