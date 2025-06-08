@@ -23,7 +23,7 @@ export type RadioField = FieldBase & {
 type CheckboxField = FieldBase & {
     type: 'checkbox'
     choices: Array<string>
-    value: Array<string>
+    value?: Array<string>
 }
 /**
  * With additional prop for internal use

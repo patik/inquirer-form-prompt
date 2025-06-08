@@ -59,7 +59,7 @@ description?: string // Help text that will appear when the field is focused
 
 ### Text
 
-Use this field for strings, numbers, and free entry.
+Use this field for strings, numbers, and free entry. Users may also paste from the clipboard when this field is focused.
 
 ```tsx
 type: 'text'
@@ -80,6 +80,8 @@ Example:
 
 Use this field for true-or-false entry.
 
+The left and right arrow keys move between the two options. Pressing the spacebar selects or deselects that option.
+
 ```tsx
 type: 'boolean'
 value?: boolean // Optional default value
@@ -98,9 +100,12 @@ Example:
 
 Use this field when the user must choose exactly one option.
 
+The left and right arrow keys move between options. Pressing the spacebar selects or deselects an option.
+
 ```tsx
-type: 'boolean'
-value?: boolean // Optional default value
+type: 'radio'
+choices: Array<string>
+value?: boolean // Optional default value, must match one of the choices
 ```
 
 Example:
@@ -113,3 +118,30 @@ Example:
     description: 'In years, on the first day of travel'
 }
 ```
+
+### Check box options (multiple selection)
+
+Use this field when the user may choose multiple options.
+
+The left and right arrow keys move between options. Pressing the spacebar selects or deselects an option. When the form is submitted, only the selected values will be returned.
+
+```tsx
+type: 'checkbox'
+choices: Array<string>
+value?: Array<string> // Optional default value, each string must match one of the choices
+```
+
+Example:
+
+```tsx
+{
+    name: 'Activities of Interest',
+    type: 'checkbox',
+    choices: ['Museums & Art', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
+    value: ['Museums & Art', 'Local Cuisine'],
+}
+```
+
+## Grouping fields
+
+Fields may be split into groups by placing separators between them.
