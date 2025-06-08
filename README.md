@@ -106,7 +106,7 @@ Example:
 
 Use this field when the user must choose exactly one option.
 
-The left and right arrow keys moves the selection.
+The left and right arrow keys move the selection.
 
 <img src="https://github.com/user-attachments/assets/f19a738b-95f1-4868-a443-e23f02be5ef7" alt="Moving the selection among radio button options" width="640">
 
