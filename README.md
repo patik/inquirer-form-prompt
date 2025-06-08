@@ -14,17 +14,102 @@ npm add inquirer-form-prompt
 
 ## Usage
 
+At minimum, the prompt config must include a `message: string` and a `choices: Array<Field>`
+
+Example:
+
 ```tsx
 import form from 'inquirer-form-prompt'
 
 const answer = await form({
-    message: 'Choose an option',
+    message: 'Trip Details',
     choices: [
-        { name: '1', value: '1' },
-        { name: '2', value: '2' },
-        { name: '3', value: '3' },
+        {
+            name: 'Full name',
+            type: 'text',
+        },
+        {
+            name: 'Transport type',
+            type: 'radio',
+            choices: ['Train', 'Flight', 'Bus'],
+            value: 'Train',
+        },
+        {
+            name: 'Activities',
+            type: 'checkbox',
+            choices: ['Museums', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
+            value: ['Museums', 'Local Cuisine'],
+            description: 'What activities interest you most? (Select all that apply)',
+        },
     ],
 })
 ```
 
-See `src/example.ts` for a more thorough example.
+> [!tip]
+> See `src/demo.ts` for a more thorough example.
+
+## Fields
+
+All fields take the following properties:
+
+```tsx
+name: string // The field's label
+description?: string // Help text that will appear when the field is focused
+```
+
+### Text
+
+Use this field for strings, numbers, and free entry.
+
+```tsx
+type: 'text'
+value?: string // Optional default value
+```
+
+Example:
+
+```tsx
+{
+    name: 'Full name',
+    type: 'text',
+    description: 'As it appears on your passport'
+}
+```
+
+### Boolean
+
+Use this field for true-or-false entry.
+
+```tsx
+type: 'boolean'
+value?: boolean // Optional default value
+```
+
+Example:
+
+```tsx
+{
+    name: 'Do you need a visa?',
+    type: 'boolean',
+}
+```
+
+### Radio button options (select one)
+
+Use this field when the user must choose exactly one option.
+
+```tsx
+type: 'boolean'
+value?: boolean // Optional default value
+```
+
+Example:
+
+```tsx
+{
+    name: 'Age group',
+    type: 'radio',
+    choices: ['0-25', '26-50', '51-75', '76-100']
+    description: 'In years, on the first day of travel'
+}
+```

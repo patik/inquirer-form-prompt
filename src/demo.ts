@@ -17,7 +17,7 @@ export const demo = async (): Promise<void> => {
     console.log()
     try {
         const answers = await form({
-            message: 'Plan Your European Adventure',
+            message: 'Plan Your Adventure',
             submessage: 'Tell us about your dream trip!',
             fields: [
                 new Separator('✈️ Trip Details'),
