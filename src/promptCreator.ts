@@ -29,6 +29,50 @@ function getInitialIndex(fields: Fields): number {
     return firstNonSeparatorIndex >= 0 ? firstNonSeparatorIndex : 0
 }
 
+function toTable(fields: InternalFields, selectedIndex: number): string {
+    const tables: string[] = []
+    let currentTable = new Table()
+    let currentRows: Array<[string, string]> = []
+    let tableFooter = ''
+
+    fields.forEach((field, index) => {
+        if (field instanceof Separator) {
+            if (currentRows.length > 0) {
+                currentTable.push(...currentRows)
+                tables.push(currentTable.toString())
+                currentRows = []
+            }
+
+            tables.push(tableFooter)
+            tables.push('')
+            tables.push(field.separator)
+            currentTable = new Table()
+            tableFooter = ''
+
+            return
+        }
+
+        const result = fieldToTableRow(selectedIndex)(field, index)
+        if (!(result instanceof Separator)) {
+            currentRows.push(result)
+        }
+
+        const isSelected = selectedIndex === index
+        if (isSelected && !(field instanceof Separator) && field.description) {
+            tableFooter = dim(`  ${field.description}`)
+        }
+    })
+
+    // Push the last table if it has rows
+    if (currentRows.length > 0) {
+        currentTable.push(...currentRows)
+        tables.push(currentTable.toString())
+        tables.push(tableFooter)
+    }
+
+    return tables.join('\n')
+}
+
 /**
  * Exported for testing purposes
  */
@@ -85,48 +129,9 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
 
     const message = config.message ? bold(config.message) : ''
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
-    const tables: string[] = []
-    let currentTable = new Table()
-    let currentRows: Array<[string, string]> = []
-    let tableFooter = ''
-
-    fields.forEach((field, index) => {
-        if (field instanceof Separator) {
-            if (currentRows.length > 0) {
-                currentTable.push(...currentRows)
-                tables.push(currentTable.toString())
-                currentRows = []
-            }
-
-            tables.push(tableFooter)
-            tables.push('')
-            tables.push(field.separator)
-            currentTable = new Table()
-            tableFooter = ''
-
-            return
-        }
-
-        const result = fieldToTableRow(selectedIndex)(field, index)
-        if (!(result instanceof Separator)) {
-            currentRows.push(result)
-        }
-
-        const isSelected = selectedIndex === index
-
-        if (isSelected && !(field instanceof Separator) && field.description) {
-            tableFooter = dim(`  ${field.description}`)
-        }
-    })
-
-    // Push the last table if it has rows
-    if (currentRows.length > 0) {
-        currentTable.push(...currentRows)
-        tables.push(currentTable.toString())
-        tables.push(tableFooter)
-    }
+    const tables = toTable(fields, selectedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-${tables.join('\n')}${ansiEscapes.cursorHide}
+${tables}${ansiEscapes.cursorHide}
 `
 }
