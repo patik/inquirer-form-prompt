@@ -30,6 +30,108 @@ function getInitialIndex(fields: Fields): number {
     return firstNonSeparatorIndex >= 0 ? firstNonSeparatorIndex : 0
 }
 
+/**
+ * Exported for testing only
+ */
+export const promptCreator = (config: Config, done: (value: ReturnedItems) => void): string => {
+    const [fields, setFields] = useState<InternalFields>(toInternalFields(config.fields))
+    const [selectedIndex, setSelectedIndex] = useState(() => getInitialIndex(config.fields))
+    const prefix = usePrefix({})
+
+    useKeypress((key, rl) => {
+        if (isEnterKey(key)) {
+            done(fields)
+            return
+        }
+
+        if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
+            return
+        }
+
+        if (key.name === 'escape') {
+            // @ts-expect-error Only way I know how to signal that the user pressed escape
+            done(Symbol('Escape key pressed'))
+            return
+        }
+
+        const currentField = fields[selectedIndex]
+
+        if (!currentField || currentField instanceof Separator) {
+            return
+        }
+
+        if (currentField.type === 'text') {
+            const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
+            setFields(nextFields)
+            return
+        }
+
+        if (currentField.type === 'radio') {
+            const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
+            setFields(nextFields)
+            return
+        }
+
+        if (currentField.type === 'checkbox') {
+            const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
+            setFields(nextFields)
+            return
+        }
+
+        const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
+
+        setFields(nextFields)
+        return
+    })
+
+    const message = config.message ? bold(config.message) : ''
+    const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
+    const tables: string[] = []
+    let currentTable = new Table()
+    let currentRows: Array<[string, string]> = []
+    let tableFooter = ''
+
+    fields.forEach((field, index) => {
+        if (field instanceof Separator) {
+            if (currentRows.length > 0) {
+                currentTable.push(...currentRows)
+                tables.push(currentTable.toString())
+                currentRows = []
+            }
+
+            tables.push(tableFooter)
+            tables.push('')
+            tables.push(field.separator)
+            currentTable = new Table()
+            tableFooter = ''
+
+            return
+        }
+
+        const result = fieldToTableRow(selectedIndex)(field, index)
+        if (!(result instanceof Separator)) {
+            currentRows.push(result)
+        }
+
+        const isSelected = selectedIndex === index
+
+        if (isSelected && !(field instanceof Separator) && field.description) {
+            tableFooter = dim(`  ${field.description}`)
+        }
+    })
+
+    // Push the last table if it has rows
+    if (currentRows.length > 0) {
+        currentTable.push(...currentRows)
+        tables.push(currentTable.toString())
+        tables.push(tableFooter)
+    }
+
+    return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
+${tables.join('\n')}${ansiEscapes.cursorHide}
+`
+}
+
 export default async function form(options: Config): Promise<ReturnedItems> {
     const rl = readline.createInterface({
         input: process.stdin,
@@ -40,104 +142,7 @@ export default async function form(options: Config): Promise<ReturnedItems> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     rl.output.write('\x1B[?25l')
 
-    const answer = await createPrompt<ReturnedItems, Config>((config, done) => {
-        const [fields, setFields] = useState<InternalFields>(toInternalFields(config.fields))
-        const [selectedIndex, setSelectedIndex] = useState(() => getInitialIndex(config.fields))
-        const prefix = usePrefix({})
-
-        useKeypress((key, rl) => {
-            if (isEnterKey(key)) {
-                done(fields)
-                return
-            }
-
-            if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
-                return
-            }
-
-            if (key.name === 'escape') {
-                // @ts-expect-error Only way I know how to signal that the user pressed escape
-                done(Symbol('Escape key pressed'))
-                return
-            }
-
-            const currentField = fields[selectedIndex]
-
-            if (!currentField || currentField instanceof Separator) {
-                return
-            }
-
-            if (currentField.type === 'text') {
-                const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
-                setFields(nextFields)
-                return
-            }
-
-            if (currentField.type === 'radio') {
-                const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
-                setFields(nextFields)
-                return
-            }
-
-            if (currentField.type === 'checkbox') {
-                const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
-                setFields(nextFields)
-                return
-            }
-
-            const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
-
-            setFields(nextFields)
-            return
-        })
-
-        const message = config.message ? bold(config.message) : ''
-        const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
-        const tables: string[] = []
-        let currentTable = new Table()
-        let currentRows: Array<[string, string]> = []
-        let tableFooter = ''
-
-        fields.forEach((field, index) => {
-            if (field instanceof Separator) {
-                if (currentRows.length > 0) {
-                    currentTable.push(...currentRows)
-                    tables.push(currentTable.toString())
-                    currentRows = []
-                }
-
-                tables.push(tableFooter)
-                tables.push('')
-                tables.push(field.separator)
-                currentTable = new Table()
-                tableFooter = ''
-
-                return
-            }
-
-            const result = fieldToTableRow(selectedIndex)(field, index)
-            if (!(result instanceof Separator)) {
-                currentRows.push(result)
-            }
-
-            const isSelected = selectedIndex === index
-
-            if (isSelected && !(field instanceof Separator) && field.description) {
-                tableFooter = dim(`  ${field.description}`)
-            }
-        })
-
-        // Push the last table if it has rows
-        if (currentRows.length > 0) {
-            currentTable.push(...currentRows)
-            tables.push(currentTable.toString())
-            tables.push(tableFooter)
-        }
-
-        return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-${tables.join('\n')}${ansiEscapes.cursorHide}
-`
-    })(options)
+    const answer = await createPrompt<ReturnedItems, Config>(promptCreator)(options)
 
     // @ts-expect-error Only way I know how to show the cursor
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access

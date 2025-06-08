@@ -85,3 +85,15 @@ export const example = async (): Promise<void> => {
         }
     }
 }
+
+// If the --run flag was used, run it immediately
+if (process.argv.includes('--run')) {
+    example()
+        .then(() => {
+            console.log('\n✨ Form completed successfully')
+        })
+        .catch((error) => {
+            errorHander(error)
+        })
+}
+// This file is part of the Inquirer package.

@@ -1,0 +1,36 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`formPrompt > Snapshots > should match snapshot for basic form 1`] = `
+"? User Information (tab/arrows to move between fields, enter to finish)
+┌──────────────┬───────────────────┐
+│ → First Name │ John              │
+├──────────────┼───────────────────┤
+│   Last Name  │ Doe               │
+├──────────────┼───────────────────┤
+│   Subscribe  │  ◉ true  ◯ false  │
+└──────────────┴───────────────────┘
+  Enter your first name"
+`;
+
+exports[`formPrompt > Snapshots > should match snapshot for complex form with separators 1`] = `
+"? Complete Profile
+
+Fill out all sections
+ (tab/arrows to move between fields, enter to finish)
+
+
+Personal Information
+┌─────────┬──────────────────┐
+│ → Name  │ Jane Smith       │
+├─────────┼──────────────────┤
+│   Email │ jane@example.com │
+└─────────┴──────────────────┘
+
+
+Preferences
+┌─────────────┬────────────────────────────────────────┐
+│   Theme     │  ◯ light  ◉ dark  ◯ auto               │
+├─────────────┼────────────────────────────────────────┤
+│   Languages │  ✔ JavaScript  ✔ TypeScript  ☐ Python  │
+└─────────────┴────────────────────────────────────────┘"
+`;

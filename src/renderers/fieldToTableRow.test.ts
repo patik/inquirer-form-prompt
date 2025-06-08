@@ -52,7 +52,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual([green('Text Field'), bgGray(white('Sample text'))])
+            expect(result).toEqual([green('→ Text Field'), bgGray(white('Sample text'))])
         })
 
         it('should render text field with empty value as single space', () => {
@@ -64,7 +64,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(emptyTextField, 0)
 
-            expect(result).toEqual([green('Empty Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Empty Field'), bgGray(white(' '))])
         })
 
         it('should render text field with undefined value as single space', () => {
@@ -75,28 +75,28 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(undefinedTextField, 0)
 
-            expect(result).toEqual([green('Undefined Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Undefined Field'), bgGray(white(' '))])
         })
 
         it('should render boolean field with mocked renderer', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(booleanField, 0)
 
-            expect(result).toEqual([green('Boolean Field'), 'mocked-boolean-selected'])
+            expect(result).toEqual([green('→ Boolean Field'), 'mocked-boolean-selected'])
         })
 
         it('should render radio field with mocked renderer', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(radioField, 0)
 
-            expect(result).toEqual([green('Radio Field'), 'mocked-radio-selected'])
+            expect(result).toEqual([green('→ Radio Field'), 'mocked-radio-selected'])
         })
 
         it('should render checkbox field with mocked renderer', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(checkboxField, 0)
 
-            expect(result).toEqual([green('Checkbox Field'), 'mocked-checkbox-selected'])
+            expect(result).toEqual([green('→ Checkbox Field'), 'mocked-checkbox-selected'])
         })
     })
 
@@ -105,7 +105,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual(['Text Field', 'Sample text'])
+            expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
         it('should render text field with empty value as single space', () => {
@@ -117,7 +117,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(emptyTextField, 0)
 
-            expect(result).toEqual(['Empty Field', ' '])
+            expect(result).toEqual(['  Empty Field', ' '])
         })
 
         it('should render text field with undefined value as single space', () => {
@@ -128,28 +128,28 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(undefinedTextField, 0)
 
-            expect(result).toEqual(['Undefined Field', ' '])
+            expect(result).toEqual(['  Undefined Field', ' '])
         })
 
         it('should render boolean field with mocked renderer', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(booleanField, 0)
 
-            expect(result).toEqual(['Boolean Field', 'mocked-boolean-unselected'])
+            expect(result).toEqual(['  Boolean Field', 'mocked-boolean-unselected'])
         })
 
         it('should render radio field with mocked renderer', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(radioField, 0)
 
-            expect(result).toEqual(['Radio Field', 'mocked-radio-unselected'])
+            expect(result).toEqual(['  Radio Field', 'mocked-radio-unselected'])
         })
 
         it('should render checkbox field with mocked renderer', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(checkboxField, 0)
 
-            expect(result).toEqual(['Checkbox Field', 'mocked-checkbox-unselected'])
+            expect(result).toEqual(['  Checkbox Field', 'mocked-checkbox-unselected'])
         })
     })
 
@@ -179,10 +179,10 @@ describe('fieldToTableRow', () => {
             const results = fields.map((field, index) => renderField(field, index))
 
             expect(results).toEqual([
-                ['Text Field', 'Sample text'], // Not selected
-                ['Boolean Field', 'mocked-boolean-unselected'], // Not selected
-                [green('Radio Field'), 'mocked-radio-selected'], // Selected
-                ['Checkbox Field', 'mocked-checkbox-unselected'], // Not selected
+                ['  Text Field', 'Sample text'], // Not selected
+                ['  Boolean Field', 'mocked-boolean-unselected'], // Not selected
+                [green('→ Radio Field'), 'mocked-radio-selected'], // Selected
+                ['  Checkbox Field', 'mocked-checkbox-unselected'], // Not selected
             ])
         })
 
@@ -195,11 +195,11 @@ describe('fieldToTableRow', () => {
             const results = fieldsWithSeparators.map((field, index) => renderField(field, index))
 
             expect(results).toEqual([
-                ['Text Field', 'Sample text'], // Index 0, not selected
+                ['  Text Field', 'Sample text'], // Index 0, not selected
                 separator1, // Index 1, separator
-                [green('Boolean Field'), 'mocked-boolean-selected'], // Index 2, selected
+                [green('→ Boolean Field'), 'mocked-boolean-selected'], // Index 2, selected
                 separator2, // Index 3, separator
-                ['Radio Field', 'mocked-radio-unselected'], // Index 4, not selected
+                ['  Radio Field', 'mocked-radio-unselected'], // Index 4, not selected
             ])
         })
     })
@@ -209,14 +209,14 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(-1)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual(['Text Field', 'Sample text'])
+            expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
         it('should handle selectedIndex larger than array', () => {
             const renderField = fieldToTableRow(100)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual(['Text Field', 'Sample text'])
+            expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
         it('should handle field with special characters in name', () => {
@@ -228,7 +228,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(specialField, 0)
 
-            expect(result).toEqual([green('Field with émojis 🎉 and "quotes"'), bgGray(white('Special value'))])
+            expect(result).toEqual([green('→ Field with émojis 🎉 and "quotes"'), bgGray(white('Special value'))])
         })
 
         it('should handle field with very long values', () => {
@@ -241,7 +241,7 @@ describe('fieldToTableRow', () => {
             const result = renderField(longValueField, 0)
 
             expect(result).toEqual([
-                green('Long Field'),
+                green('→ Long Field'),
                 bgGray(
                     white(
                         'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
@@ -266,9 +266,9 @@ describe('fieldToTableRow', () => {
             const results = fields.map(renderField)
 
             expect(results).toHaveLength(3)
-            expect(results[0]).toEqual(['Text Field', 'Sample text'])
-            expect(results[1]).toEqual([green('Boolean Field'), 'mocked-boolean-selected'])
-            expect(results[2]).toEqual(['Radio Field', 'mocked-radio-unselected'])
+            expect(results[0]).toEqual(['  Text Field', 'Sample text'])
+            expect(results[1]).toEqual([green('→ Boolean Field'), 'mocked-boolean-selected'])
+            expect(results[2]).toEqual(['  Radio Field', 'mocked-radio-unselected'])
         })
     })
 })
