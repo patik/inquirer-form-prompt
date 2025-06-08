@@ -30,7 +30,7 @@ function getInitialIndex(fields: Fields): number {
 }
 
 /**
- * Exported for testing only
+ * Exported for testing purposes
  */
 export const promptCreator = (config: Config, done: (value: ReturnedItems) => void): string => {
     const [fields, setFields] = useState<InternalFields>(toInternalFields(config.fields))

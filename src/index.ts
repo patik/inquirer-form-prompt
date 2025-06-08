@@ -27,3 +27,16 @@ export default async function form(options: Config): Promise<ReturnedItems> {
 
     return answer
 }
+
+export type {
+    BooleanField,
+    Config,
+    Field,
+    Fields,
+    FormField,
+    RadioField,
+    ReturnedField,
+    ReturnedItem,
+    ReturnedItems,
+    TextField,
+} from './util/types.js'
