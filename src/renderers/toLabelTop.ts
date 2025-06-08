@@ -1,10 +1,10 @@
 import { Separator } from '@inquirer/core'
 import Table from 'cli-table3'
 import { dim } from 'yoctocolors'
-import { fieldToTableRow } from '../renderers/fieldToTableRow.js'
+import { fieldToTableRow } from './fieldToTableRow.js'
 import type { InternalFields } from '../util/types.js'
 
-export function toTable(fields: InternalFields, selectedIndex: number): string {
+export function toLabelTop(fields: InternalFields, selectedIndex: number): string {
     const tables: string[] = []
     let currentTable = new Table()
     let currentRows: Array<[string, string]> = []

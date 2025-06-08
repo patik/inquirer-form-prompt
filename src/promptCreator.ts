@@ -1,13 +1,13 @@
 import { isEnterKey, Separator, useKeypress, usePrefix, useState } from '@inquirer/core'
 import ansiEscapes from 'ansi-escapes'
 import { bold, dim } from 'yoctocolors'
-import { editBooleanField } from '../keyHandlers/editBoolean.js'
-import { editCheckboxField } from '../keyHandlers/editCheckbox.js'
-import { editRadioField } from '../keyHandlers/editRadio.js'
-import { editTextField } from '../keyHandlers/editText.js'
-import { handleNavigation } from '../keyHandlers/handleNavigation.js'
-import type { Config, Fields, InternalFields, ReturnedItems } from '../util/types.js'
-import { toTable } from './toTable.js'
+import { editBooleanField } from './keyHandlers/editBoolean.js'
+import { editCheckboxField } from './keyHandlers/editCheckbox.js'
+import { editRadioField } from './keyHandlers/editRadio.js'
+import { editTextField } from './keyHandlers/editText.js'
+import { handleNavigation } from './keyHandlers/handleNavigation.js'
+import type { Config, Fields, InternalFields, ReturnedItems } from './util/types.js'
+import { toLabelTop } from './renderers/toLabelTop.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {
@@ -84,7 +84,7 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
 
     const message = config.message ? bold(config.message) : ''
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
-    const tables = toTable(fields, selectedIndex)
+    const tables = toLabelTop(fields, selectedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
 ${tables}${ansiEscapes.cursorHide}
