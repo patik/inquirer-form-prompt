@@ -6,7 +6,7 @@ export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: bo
     const formatter = isFieldSelected ? (x: string) => bgGray(white(x)) : (x: string) => x
     const { highlightIndex = 0 } = field
     const list = field.choices.map((choice, i) => {
-        const isChoiceSelected = field.value.includes(choice)
+        const isChoiceSelected = field.value?.includes(choice)
         const icon = isChoiceSelected ? figures.tick : figures.checkboxOff
 
         if (!isFieldSelected) {
