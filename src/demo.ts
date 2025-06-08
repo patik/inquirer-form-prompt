@@ -13,7 +13,7 @@ const errorHander = (error: unknown): void => {
 
 process.on('uncaughtException', errorHander)
 
-export const example = async (): Promise<void> => {
+export const demo = async (): Promise<void> => {
     console.log()
     try {
         const answers = await form({
@@ -89,5 +89,5 @@ export const example = async (): Promise<void> => {
 
 // If the --run flag was used, run it immediately
 if (process.argv.includes('--run')) {
-    await example()
+    await demo()
 }

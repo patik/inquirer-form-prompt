@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "scripts": {
         "start": "tsx ./src/main.ts",
+        "demo": "tsx ./src/demo.ts --run",
         "build": "tsc",
         "dev": "tsx watch ./src/main.ts",
         "test": "vitest .",
