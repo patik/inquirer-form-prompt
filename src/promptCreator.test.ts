@@ -1,8 +1,7 @@
+import { createPrompt, Separator } from '@inquirer/core'
 import { render } from '@inquirer/testing'
-import { Separator } from '@inquirer/core'
 import { describe, expect, it } from 'vitest'
-import { createPrompt } from '@inquirer/core'
-import { promptCreator } from './index.js'
+import { promptCreator } from './promptCreator.js'
 import type { Config, ReturnedItems } from './util/types.js'
 
 // Create a proper prompt function compatible with @inquirer/testing
