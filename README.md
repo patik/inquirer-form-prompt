@@ -2,7 +2,7 @@
 
 A prompt for [inquirer](https://github.com/SBoudrias/Inquirer.js) that presents a form with multiple fields and form-like interaction
 
-<img src="https://github.com/user-attachments/assets/a19048db-24c2-4039-80dc-dd023463f0aa" alt="" width="920">
+<img src="https://github.com/user-attachments/assets/a19048db-24c2-4039-80dc-dd023463f0aa" alt="Screencast of filling all fields in the demo" width="920">
 
 <!-- ![](https://github.com/user-attachments/assets/a77b4eaa-f1a1-4a89-83ab-30ecea57110e) -->
 
@@ -63,7 +63,7 @@ description?: string // Help text that will appear when the field is focused
 
 Use this field for strings, numbers, and free entry. Users may also paste from the clipboard when this field is focused.
 
-<img src="https://github.com/user-attachments/assets/aa269f31-c1dd-4fb3-a890-2ec52b080389" alt="" width="360">
+<img src="https://github.com/user-attachments/assets/aa269f31-c1dd-4fb3-a890-2ec52b080389" alt="Filled in two text fields with the user's name and destination city" width="360">
 
 ```tsx
 type: 'text'
@@ -86,7 +86,7 @@ Use this field for true-or-false entry.
 
 The left and right arrow keys move between the two options. Pressing the spacebar selects or deselects that option.
 
-<img src="https://github.com/user-attachments/assets/e0a864c8-9cd1-42ab-bd8e-3df9f36d6962" alt="" width="480">
+<img src="https://github.com/user-attachments/assets/e0a864c8-9cd1-42ab-bd8e-3df9f36d6962" alt="Moving the selection around in a field" width="480">
 
 ```tsx
 type: 'boolean'
@@ -108,7 +108,7 @@ Use this field when the user must choose exactly one option.
 
 The left and right arrow keys moves the selection.
 
-<img src="https://github.com/user-attachments/assets/f19a738b-95f1-4868-a443-e23f02be5ef7" alt="" width="640">
+<img src="https://github.com/user-attachments/assets/f19a738b-95f1-4868-a443-e23f02be5ef7" alt="Moving the selection among radio button options" width="640">
 
 ```tsx
 type: 'radio'
@@ -133,7 +133,7 @@ Use this field when the user may choose multiple options.
 
 The left and right arrow keys move between options. Pressing the spacebar selects or deselects an option. When the form is submitted, only the selected values will be returned.
 
-<img src="https://github.com/user-attachments/assets/e9118f0e-4c36-424b-9ee0-b1a513da4057" alt="" width="920">
+<img src="https://github.com/user-attachments/assets/e9118f0e-4c36-424b-9ee0-b1a513da4057" alt="Moving the cursor among checkbox options and changing the selection" width="920">
 
 ```tsx
 type: 'checkbox'
