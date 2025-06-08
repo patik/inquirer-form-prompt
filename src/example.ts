@@ -17,58 +17,59 @@ export const example = async (): Promise<void> => {
     console.log()
     try {
         const answers = await form({
-            message: 'Fill in the form',
+            message: 'Plan Your European Adventure',
+            submessage: 'Tell us about your dream trip!',
             fields: [
-                new Separator('Text fields'),
+                new Separator('✈️ Trip Details'),
                 {
-                    name: 'Alpha',
+                    name: 'Traveler Name',
                     type: 'text',
-                    value: 'Hello, world',
-                    description: 'This is a simple text field.',
+                    value: 'Firstname Lastname',
+                    description: 'Your full name as it appears on your passport.',
                 },
                 {
-                    name: 'Bravo',
+                    name: 'Destination City',
                     type: 'text',
                     value: '',
-                    description: 'Another simple text field.',
+                    description: 'Which city would you like to visit?',
                 },
-                new Separator('Boolean fields'),
+                new Separator('🏨 Preferences'),
                 {
-                    name: 'Charlie',
+                    name: 'Include Hotels',
                     type: 'boolean',
                     value: true,
-                    description: 'This is a boolean field with a description.',
+                    description: 'Should we include hotel recommendations in your itinerary?',
                 },
                 {
-                    name: 'Delta',
+                    name: 'Train pass needed',
                     type: 'boolean',
                     value: false,
-                    description: 'This is another boolean field with a description.',
+                    description: 'Will you need a train pass for your trip?',
                 },
-                new Separator('Multiple choice'),
+                new Separator('🚂 Transportation'),
                 {
-                    name: 'Echo',
+                    name: 'Preferred Transport',
                     type: 'radio',
-                    choices: ['foxtrot', 'golf', 'hotel'],
-                    value: 'golf',
-                    description: 'This is a radio field with a description.',
+                    choices: ['High-speed Train', 'Budget Flight', 'Scenic Bus Route'],
+                    value: 'High-speed Train',
+                    description: 'How would you like to travel between cities?',
                 },
                 {
-                    name: 'India',
+                    name: 'Activities of Interest',
                     type: 'checkbox',
-                    choices: ['juliet', 'kilo', 'lima'],
-                    value: ['juliet', 'lima'],
-                    description: 'This is a checkbox field with a description.',
+                    choices: ['Museums & Art', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
+                    value: ['Museums & Art', 'Local Cuisine'],
+                    description: 'What activities interest you most? (Select all that apply)',
                 },
             ],
         })
 
-        console.log('\n\nForm values:\n')
+        console.log('\n🎯 Your Travel Preferences:\n')
         console.log(
             answers
                 .map((a) =>
                     a instanceof Separator
-                        ? '---------------'
+                        ? '─'.repeat(40)
                         : `${a.name}: ${
                               // It's preferred for the demo to print the value, warts and all
                               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -79,7 +80,7 @@ export const example = async (): Promise<void> => {
         )
     } catch (error) {
         if (error instanceof Error && error.message === 'Escape key pressed') {
-            console.log('\n❌ Form cancelled by user')
+            console.log('\n✈️ Trip planning cancelled - maybe next time!')
         } else {
             throw error
         }
@@ -88,12 +89,5 @@ export const example = async (): Promise<void> => {
 
 // If the --run flag was used, run it immediately
 if (process.argv.includes('--run')) {
-    example()
-        .then(() => {
-            console.log('\n✨ Form completed successfully')
-        })
-        .catch((error) => {
-            errorHander(error)
-        })
+    await example()
 }
-// This file is part of the Inquirer package.
