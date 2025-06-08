@@ -16,7 +16,7 @@ npm add inquirer-form-prompt
 
 ## Usage
 
-At minimum, the prompt config must include a `message: string` and a `choices: Array<Field>`
+At minimum, the prompt config must include `message: string` and `fields: Array<Field>`
 
 Example:
 
@@ -25,7 +25,7 @@ import form from 'inquirer-form-prompt'
 
 const answer = await form({
     message: 'Trip Details',
-    choices: [
+    fields: [
         {
             name: 'Full name',
             type: 'text',

@@ -1,7 +1,11 @@
 import type { useKeypress, Separator } from '@inquirer/core'
 
-// Because Inquirer doesn't export this type
-export type InquirerReadline = Parameters<Parameters<typeof useKeypress>[0]>[1]
+export type Config = {
+    message?: string
+    submessage?: string
+    default?: boolean
+    fields: Fields
+}
 
 type FieldBase = {
     name: string
@@ -66,9 +70,5 @@ export type ReturnedItem = ReturnedField | Separator
  */
 export type ReturnedItems = Array<ReturnedItem>
 
-export type Config = {
-    message?: string
-    submessage?: string
-    default?: boolean
-    fields: Fields
-}
+// Because Inquirer doesn't export this type
+export type InquirerReadline = Parameters<Parameters<typeof useKeypress>[0]>[1]
