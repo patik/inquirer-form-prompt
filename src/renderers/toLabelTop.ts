@@ -1,49 +1,47 @@
 import { Separator } from '@inquirer/core'
-import Table from 'cli-table3'
-import { dim } from 'yoctocolors'
-import { fieldToTableRow } from './fieldToTableRow.js'
 import type { InternalFields } from '../util/types.js'
+import { fieldToLabelTop } from './fieldToLabelTop.js'
 
 export function toLabelTop(fields: InternalFields, selectedIndex: number): string {
-    const tables: string[] = []
-    let currentTable = new Table()
-    let currentRows: Array<[string, string]> = []
-    let tableFooter = ''
+    const sections: string[] = []
+    let currentSection: Array<string> = []
+    let currentSectionFields: Array<string> = []
+    // let tableFooter = ''
 
     fields.forEach((field, index) => {
         if (field instanceof Separator) {
-            if (currentRows.length > 0) {
-                currentTable.push(...currentRows)
-                tables.push(currentTable.toString())
-                currentRows = []
+            if (currentSectionFields.length > 0) {
+                currentSection.push(...currentSectionFields)
+                sections.push(currentSection.join('\n\n'))
+                currentSectionFields = []
             }
 
-            tables.push(tableFooter)
-            tables.push('')
-            tables.push(field.separator)
-            currentTable = new Table()
-            tableFooter = ''
+            // sections.push(tableFooter)
+            sections.push('')
+            sections.push(field.separator)
+            currentSection = []
+            // tableFooter = ''
 
             return
         }
 
-        const result = fieldToTableRow(selectedIndex)(field, index)
+        const result = fieldToLabelTop(field, index === selectedIndex)
         if (!(result instanceof Separator)) {
-            currentRows.push(result)
+            currentSectionFields.push(result)
         }
 
         const isSelected = selectedIndex === index
         if (isSelected && !(field instanceof Separator) && field.description) {
-            tableFooter = dim(`  ${field.description}`)
+            // tableFooter = dim(`  ${field.description}`)
         }
     })
 
     // Push the last table if it has rows
-    if (currentRows.length > 0) {
-        currentTable.push(...currentRows)
-        tables.push(currentTable.toString())
-        tables.push(tableFooter)
+    if (currentSectionFields.length > 0) {
+        currentSection.push(...currentSectionFields)
+        sections.push(currentSection.join('\n\n'))
+        // sections.push(tableFooter)
     }
 
-    return tables.join('\n')
+    return sections.join('\n\n')
 }

@@ -3,7 +3,7 @@
     "version": "0.3.0",
     "scripts": {
         "build": "tsc",
-        "demo": "tsx ./src/demo.ts --run",
+        "demo": "tsx --watch ./src/demo.ts --run",
         "test": "vitest .",
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",
@@ -23,6 +23,7 @@
         "@inquirer/core": "^10.1.13",
         "@inquirer/figures": "^1.0.12",
         "ansi-escapes": "^7.0.0",
+        "boxen": "^8.0.1",
         "cli-table3": "^0.6.5",
         "clipboardy": "^4.0.0",
         "yoctocolors": "^2.1.1"

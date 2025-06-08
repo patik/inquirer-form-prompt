@@ -51,7 +51,8 @@ export type Fields = Array<Field>
 /**
  * Field with some additional data that is only used internally.
  */
-export type InternalField = TextField | BooleanField | RadioField | InternalCheckboxField | Separator
+export type InternalFormField = TextField | BooleanField | RadioField | InternalCheckboxField
+export type InternalField = InternalFormField | Separator
 
 /**
  * Fields with some additional data that is only used internally.
