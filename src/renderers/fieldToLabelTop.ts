@@ -1,10 +1,11 @@
 import { Separator } from '@inquirer/core'
 import boxen from 'boxen'
-import { bgGray, dim, white } from 'yoctocolors'
+import { dim } from 'yoctocolors'
 import type { InternalField, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
+import { renderText } from './text.js'
 
 function displayField(field: InternalFormField, isFocused: boolean, value: string): string | Separator {
     const { name } = field
@@ -27,7 +28,7 @@ ${footer}`
 }
 
 function renderValue(field: InternalFormField, isFocused: boolean): string {
-    const { type, value } = field
+    const { type } = field
 
     if (type === 'radio') {
         return renderRadio(field, isFocused)
@@ -41,7 +42,7 @@ function renderValue(field: InternalFormField, isFocused: boolean): string {
         return renderBoolean(field, isFocused)
     }
 
-    return isFocused ? bgGray(white(value || ' ')) : value || ' '
+    return renderText(field, isFocused)
 }
 
 /**
