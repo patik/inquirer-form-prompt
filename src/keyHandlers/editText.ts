@@ -2,16 +2,7 @@ import type { KeypressEvent } from '@inquirer/core'
 import clipboard from 'clipboardy'
 import type { InquirerReadline, InternalFields, TextField } from '../util/types.js'
 
-/**
- * Updates the entire `fields` array when one text field is being edited
- */
-export const editTextField = ({
-    fields,
-    currentField,
-    key,
-    selectedIndex,
-    rl,
-}: {
+type Props = {
     /**
      * All fields (i.e. in the current state)
      */
@@ -36,7 +27,12 @@ export const editTextField = ({
      * Readline instance
      */
     rl: InquirerReadline
-}): InternalFields => {
+}
+
+/**
+ * Updates the entire `fields` array when one text field is being edited
+ */
+export function editTextField({ fields, currentField, key, selectedIndex, rl }: Props): InternalFields {
     // Ignore left/right arrow keys for text fields, since we don't support a cursor, otherwise the value
     // would be overwritten with the last typed value, even if it was entered for a different field.
     if (key.name === 'left' || key.name === 'right') {

@@ -90,7 +90,7 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
         }
 
         if (key.name === 'escape') {
-            // @ts-expect-error Only way I know how to signal that the user pressed escape
+            // @ts-expect-error This is the only way I know how to signal that the user pressed escape
             done(Symbol('Escape key pressed'))
             return
         }

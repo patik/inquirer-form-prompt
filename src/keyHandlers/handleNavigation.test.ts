@@ -499,7 +499,7 @@ describe('handleNavigation', () => {
 
             expect(result).toBe(true)
             expect(mockSetSelectedIndex).toHaveBeenCalledWith(0)
-            expect(mockRl.clearLine).toHaveBeenCalledWith(0)
+            expect(mockRl.clearLine).not.toHaveBeenCalled()
         })
 
         it('should handle empty fields array gracefully for up key', () => {
@@ -517,7 +517,7 @@ describe('handleNavigation', () => {
 
             expect(result).toBe(true)
             expect(mockSetSelectedIndex).toHaveBeenCalledWith(0)
-            expect(mockRl.clearLine).toHaveBeenCalledWith(0)
+            expect(mockRl.clearLine).not.toHaveBeenCalled()
         })
     })
 

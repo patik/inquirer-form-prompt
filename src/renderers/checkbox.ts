@@ -2,10 +2,13 @@ import figures from '@inquirer/figures'
 import { bgGray, bold, underline, white } from 'yoctocolors'
 import type { InternalCheckboxField } from '../util/types.js'
 
-export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: boolean): string {
-    const formatter = isFieldSelected ? (x: string) => bgGray(white(x)) : (x: string) => x
+function createChoiceRenderer(
+    field: InternalCheckboxField,
+    isFieldSelected: boolean,
+): (choice: string, i: number) => string {
     const { highlightIndex = 0 } = field
-    const list = field.choices.map((choice, i) => {
+
+    return function renderChoice(choice: string, i: number): string {
         const isChoiceSelected = field.value?.includes(choice)
         const icon = isChoiceSelected ? figures.tick : figures.checkboxOff
 
@@ -28,7 +31,13 @@ export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: bo
         }
 
         return `${icon} ${choice}`
-    })
+    }
+}
+
+export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: boolean): string {
+    const formatter = isFieldSelected ? (x: string) => bgGray(white(x)) : (x: string) => x
+    const renderChoice = createChoiceRenderer(field, isFieldSelected)
+    const list = field.choices.map(renderChoice)
 
     return formatter(` ${list.join('  ')} `)
 }
