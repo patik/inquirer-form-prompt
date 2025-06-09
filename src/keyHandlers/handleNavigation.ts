@@ -2,6 +2,11 @@ import type { KeypressEvent } from '@inquirer/core'
 import { isDownKey, isUpKey, Separator } from '@inquirer/core'
 import type { Fields, InquirerReadline } from '../util/types.js'
 
+/**
+ * In reality, the shift key is included.
+ */
+type ActualKeypressEvent = KeypressEvent & { shift?: boolean }
+
 type Props = {
     /**
      * All fields (i.e. in the current state)
@@ -11,7 +16,7 @@ type Props = {
     /**
      * Key pressed by the user
      */
-    key: KeypressEvent & { shift?: boolean }
+    key: ActualKeypressEvent
 
     /**
      * Index of the currently highlighted field
