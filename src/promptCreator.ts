@@ -118,7 +118,9 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
     const message = config.message ? bold(config.message) : ''
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
     const fieldOutput =
-        config.theme?.variant === 'label-top' ? toLabelTop(fields, selectedIndex) : toTable(fields, selectedIndex)
+        config.theme?.variant === 'label-top'
+            ? toLabelTop(fields, selectedIndex, config.theme.dense)
+            : toTable(fields, selectedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
 ${fieldOutput}${ansiEscapes.cursorHide}

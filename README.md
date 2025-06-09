@@ -154,9 +154,9 @@ Example:
 
 ## Grouping fields
 
-Fields may be split into groups by placing separators between them.
+Fields may be split into groups by placing separators between them in the `fields` array. See examples below.
 
-## Themes
+## Theming
 
 The config object accepts a `theme` prop which can be used to specify a variant.
 
@@ -168,8 +168,12 @@ theme?: 'table' | 'label-top'
 
 This is the default theme. Each field label and input is displayed in a table row. If a separator is included, it will split the fields into separate tables.
 
+In this example, "Trip Details" and "Preferences" are both separators:
+
+<img src="https://github.com/user-attachments/assets/4a4f19f9-c40c-47fb-bd2b-10b30079d655" width="480" alt="">
+
 ### Label Top
 
-With this variant, the label is displayed above the input field.
+With this variant, the label is displayed above the input field. If a separator is included, it will split the fields into separate tables.
 
 <img src="https://github.com/user-attachments/assets/db8e6a02-ce9e-4b57-b1cb-2f361fda4ee9" width="920" alt="">

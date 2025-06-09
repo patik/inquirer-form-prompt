@@ -3,6 +3,7 @@ import type { PartialDeep } from '@inquirer/type'
 
 export type FormTheme = {
     variant?: 'table' | 'label-top'
+    dense?: boolean
 }
 
 export type Config = {

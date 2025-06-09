@@ -1,11 +1,13 @@
 import { Separator } from '@inquirer/core'
-import type { InternalFields } from '../util/types.js'
+import type { FormTheme, InternalFields } from '../util/types.js'
 import { fieldToLabelTop } from './fieldToLabelTop.js'
 
 const rowSpacer = '\n\n'
+const rowSpacerDense = '\n'
 const sectionSpacer = '\n'
+const sectionSpacerDense = '\n'
 
-export function toLabelTop(fields: InternalFields, selectedIndex: number): string {
+export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?: FormTheme['dense']): string {
     const outputRows: string[] = []
     let currentSection: Array<string> = []
     let currentSectionRows: Array<string> = []
@@ -14,7 +16,7 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number): strin
         if (field instanceof Separator) {
             if (currentSectionRows.length > 0) {
                 currentSection.push(...currentSectionRows)
-                outputRows.push(currentSection.join(rowSpacer))
+                outputRows.push(currentSection.join(dense ? rowSpacerDense : rowSpacer))
                 currentSectionRows = []
             }
 
@@ -25,15 +27,15 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number): strin
             return
         }
 
-        const result = fieldToLabelTop(field, index === selectedIndex)
+        const result = fieldToLabelTop(field, index === selectedIndex, dense)
         currentSectionRows.push(result)
     })
 
     // Push the last section if it's not empty
     if (currentSectionRows.length > 0) {
         currentSection.push(...currentSectionRows)
-        outputRows.push(currentSection.join(rowSpacer))
+        outputRows.push(currentSection.join(dense ? rowSpacerDense : rowSpacer))
     }
 
-    return outputRows.join(sectionSpacer)
+    return outputRows.join(dense ? sectionSpacerDense : sectionSpacer)
 }

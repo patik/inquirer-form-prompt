@@ -1,7 +1,7 @@
 import boxen from 'boxen'
 import stripAnsi from 'strip-ansi'
-import { dim } from 'yoctocolors'
-import type { InternalFormField } from '../util/types.js'
+import { dim, whiteBright } from 'yoctocolors'
+import type { FormTheme, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
@@ -16,14 +16,14 @@ const staticOptions = {
     },
 } as const
 
-function displayField(field: InternalFormField, isFocused: boolean, value: string): string {
+function displayField(field: InternalFormField, isFocused: boolean, value: string, dense?: FormTheme['dense']): string {
     const { label } = field
     const borderColor = isFocused ? 'blue' : undefined
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
-    const valueLength = stripAnsi(value).length + 8
-    const fieldLength = Math.max(50, valueLength)
+    const valueLength = stripAnsi(value).length + 2
+    const fieldLength = Math.max(dense ? 20 : 50, valueLength)
 
-    return `${boxen(value, {
+    return `${boxen(whiteBright(value), {
         ...staticOptions,
         title: label,
         borderColor,
@@ -53,6 +53,6 @@ function renderValue(field: InternalFormField, isFocused: boolean): string {
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
  */
-export function fieldToLabelTop(field: InternalFormField, isFocused: boolean): string {
-    return displayField(field, isFocused, renderValue(field, isFocused))
+export function fieldToLabelTop(field: InternalFormField, isFocused: boolean, dense?: FormTheme['dense']): string {
+    return displayField(field, isFocused, renderValue(field, isFocused), dense)
 }

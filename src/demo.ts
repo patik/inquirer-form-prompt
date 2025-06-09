@@ -62,7 +62,7 @@ export const demo = async (): Promise<void> => {
                     description: 'What activities interest you most? (Select all that apply)',
                 },
             ],
-            theme: { variant: 'label-top' },
+            theme: { variant: 'label-top', dense: true },
         })
 
         console.log('\n🎯 Your Travel Preferences:\n')
