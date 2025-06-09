@@ -15,12 +15,12 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Full Name',
+                        label: 'Full Name',
                         value: 'John Doe',
                     },
                     {
                         type: 'text',
-                        name: 'Email',
+                        label: 'Email',
                         value: 'john@example.com',
                     },
                 ],
@@ -41,12 +41,12 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'boolean',
-                        name: 'Enable notifications',
+                        label: 'Enable notifications',
                         value: true,
                     },
                     {
                         type: 'boolean',
-                        name: 'Auto-save',
+                        label: 'Auto-save',
                         value: false,
                     },
                 ],
@@ -66,7 +66,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'radio',
-                        name: 'Preferred language',
+                        label: 'Preferred language',
                         choices: ['JavaScript', 'TypeScript', 'Python'],
                         value: 'TypeScript',
                     },
@@ -85,7 +85,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'checkbox',
-                        name: 'Technologies',
+                        label: 'Technologies',
                         choices: ['React', 'Vue', 'Angular', 'Svelte'],
                         value: ['React', 'Vue'],
                     },
@@ -104,18 +104,18 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Name',
+                        label: 'Name',
                         value: 'John',
                     },
                     new Separator('--- Contact Information ---'),
                     {
                         type: 'text',
-                        name: 'Email',
+                        label: 'Email',
                         value: 'john@example.com',
                     },
                     {
                         type: 'text',
-                        name: 'Phone',
+                        label: 'Phone',
                         value: '+1234567890',
                     },
                 ],
@@ -136,7 +136,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Field',
+                        label: 'Field',
                         value: '',
                     },
                 ],
@@ -152,7 +152,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Field',
+                        label: 'Field',
                         value: 'value',
                     },
                 ],
@@ -172,12 +172,12 @@ describe('formPrompt', () => {
                     new Separator('--- Header ---'),
                     {
                         type: 'text',
-                        name: 'First selectable field',
+                        label: 'First selectable field',
                         value: '',
                     },
                     {
                         type: 'text',
-                        name: 'Second field',
+                        label: 'Second field',
                         value: '',
                     },
                 ],
@@ -195,13 +195,13 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'API Key',
+                        label: 'API Key',
                         value: '',
                         description: 'Enter your API key from the dashboard',
                     },
                     {
                         type: 'boolean',
-                        name: 'Debug mode',
+                        label: 'Debug mode',
                         value: false,
                     },
                 ],
@@ -220,17 +220,17 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'First Field',
+                        label: 'First Field',
                         value: 'value1',
                     },
                     {
                         type: 'text',
-                        name: 'Second Field',
+                        label: 'Second Field',
                         value: 'value2',
                     },
                     {
                         type: 'boolean',
-                        name: 'Third Field',
+                        label: 'Third Field',
                         value: true,
                     },
                 ],
@@ -258,12 +258,12 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Username',
+                        label: 'Username',
                         value: 'testuser',
                     },
                     {
                         type: 'boolean',
-                        name: 'Active',
+                        label: 'Active',
                         value: true,
                     },
                 ],
@@ -275,12 +275,12 @@ describe('formPrompt', () => {
             await expect(answer).resolves.toEqual([
                 {
                     type: 'text',
-                    name: 'Username',
+                    label: 'Username',
                     value: 'testuser',
                 },
                 {
                     type: 'boolean',
-                    name: 'Active',
+                    label: 'Active',
                     value: true,
                 },
             ])
@@ -292,7 +292,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Field',
+                        label: 'Field',
                         value: 'value',
                     },
                 ],
@@ -315,29 +315,29 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Full Name',
+                        label: 'Full Name',
                         value: 'Jane Doe',
                     },
                     {
                         type: 'text',
-                        name: 'Email',
+                        label: 'Email',
                         value: 'jane@example.com',
                     },
                     new Separator('--- Preferences ---'),
                     {
                         type: 'boolean',
-                        name: 'Subscribe to newsletter',
+                        label: 'Subscribe to newsletter',
                         value: true,
                     },
                     {
                         type: 'radio',
-                        name: 'Preferred contact method',
+                        label: 'Preferred contact method',
                         choices: ['Email', 'Phone', 'SMS'],
                         value: 'Email',
                     },
                     {
                         type: 'checkbox',
-                        name: 'Topics of interest',
+                        label: 'Topics of interest',
                         choices: ['Technology', 'Sports', 'Music', 'Travel'],
                         value: ['Technology', 'Music'],
                     },
@@ -363,17 +363,17 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'Optional field',
+                        label: 'Optional field',
                         value: undefined,
                     },
                     {
                         type: 'boolean',
-                        name: 'Optional boolean',
+                        label: 'Optional boolean',
                         value: undefined,
                     },
                     {
                         type: 'radio',
-                        name: 'Optional radio',
+                        label: 'Optional radio',
                         choices: ['A', 'B'],
                         value: undefined,
                     },
@@ -392,7 +392,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'checkbox',
-                        name: 'Empty choices',
+                        label: 'Empty choices',
                         choices: [],
                         value: [],
                     },
@@ -408,7 +408,7 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'This is a very long field name that should be handled properly by the form renderer without breaking the layout',
+                        label: 'This is a very long field name that should be handled properly by the form renderer without breaking the layout',
                         value: 'test value',
                     },
                 ],
@@ -455,18 +455,18 @@ describe('formPrompt', () => {
                 fields: [
                     {
                         type: 'text',
-                        name: 'First Name',
+                        label: 'First Name',
                         value: 'John',
                         description: 'Enter your first name',
                     },
                     {
                         type: 'text',
-                        name: 'Last Name',
+                        label: 'Last Name',
                         value: 'Doe',
                     },
                     {
                         type: 'boolean',
-                        name: 'Subscribe',
+                        label: 'Subscribe',
                         value: true,
                     },
                 ],
@@ -483,24 +483,24 @@ describe('formPrompt', () => {
                     new Separator('Personal Information'),
                     {
                         type: 'text',
-                        name: 'Name',
+                        label: 'Name',
                         value: 'Jane Smith',
                     },
                     {
                         type: 'text',
-                        name: 'Email',
+                        label: 'Email',
                         value: 'jane@example.com',
                     },
                     new Separator('Preferences'),
                     {
                         type: 'radio',
-                        name: 'Theme',
+                        label: 'Theme',
                         choices: ['light', 'dark', 'auto'],
                         value: 'dark',
                     },
                     {
                         type: 'checkbox',
-                        name: 'Languages',
+                        label: 'Languages',
                         choices: ['JavaScript', 'TypeScript', 'Python'],
                         value: ['JavaScript', 'TypeScript'],
                     },

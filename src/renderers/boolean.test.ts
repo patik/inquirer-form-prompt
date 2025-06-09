@@ -9,7 +9,7 @@ import { renderBoolean } from './boolean.js'
 describe('renderBoolean', () => {
     const baseField: BooleanField = {
         type: 'boolean',
-        name: 'test',
+        label: 'test',
     }
 
     describe('when field is not selected', () => {
@@ -198,7 +198,7 @@ describe('renderBoolean', () => {
         it('should handle field with additional properties', () => {
             const field: BooleanField = {
                 type: 'boolean',
-                name: 'complex field',
+                label: 'complex field',
                 description: 'A complex boolean field',
                 value: true,
             }
@@ -210,7 +210,7 @@ describe('renderBoolean', () => {
         it('should handle field with different name', () => {
             const field: BooleanField = {
                 type: 'boolean',
-                name: 'different name',
+                label: 'different name',
                 value: false,
             }
             const result = renderBoolean(field, false)
@@ -222,7 +222,7 @@ describe('renderBoolean', () => {
             const field1 = { ...baseField, value: true }
             const field2: BooleanField = {
                 type: 'boolean',
-                name: 'different',
+                label: 'different',
                 value: true,
             }
 

@@ -14,7 +14,7 @@ export type Config = {
 }
 
 type FieldBase = {
-    name: string
+    label: string
     description?: string
 }
 export type TextField = FieldBase & {
@@ -65,7 +65,7 @@ export type InternalField = InternalFormField | Separator
  */
 export type InternalFields = Array<InternalField>
 
-export type ReturnedField = Pick<FormField, 'type' | 'name' | 'value'>
+export type ReturnedField = Pick<FormField, 'type' | 'label' | 'value'>
 
 /**
  * Response that is returned to the user.

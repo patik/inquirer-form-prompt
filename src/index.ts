@@ -34,6 +34,7 @@ export type {
     Field,
     Fields,
     FormField,
+    FormTheme,
     RadioField,
     ReturnedField,
     ReturnedItem,

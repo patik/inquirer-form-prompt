@@ -16,20 +16,20 @@ describe('handleNavigation', () => {
     // Sample fields for testing
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'sample',
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2', 'Option 3'],
         value: 'Option 1',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: true,
     }
 
@@ -753,7 +753,7 @@ describe('handleNavigation', () => {
         it('should navigate between different field types', () => {
             const checkboxField = {
                 type: 'checkbox' as const,
-                name: 'Test Checkbox',
+                label: 'Test Checkbox',
                 choices: ['Choice 1', 'Choice 2'],
                 value: ['Choice 1'],
                 highlightIndex: 0,
@@ -779,7 +779,7 @@ describe('handleNavigation', () => {
         it('should handle navigation from checkbox field', () => {
             const checkboxField = {
                 type: 'checkbox' as const,
-                name: 'Test Checkbox',
+                label: 'Test Checkbox',
                 choices: ['Choice 1', 'Choice 2'],
                 value: ['Choice 1'],
                 highlightIndex: 0,

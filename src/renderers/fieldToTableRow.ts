@@ -39,8 +39,8 @@ export function fieldToTableRow(
         }
 
         const isSelected = selectedIndex === index
-        const { name } = field
-        const left = isSelected ? green(`${figures.arrowRight} ${name}`) : `  ${name}`
+        const { label } = field
+        const left = isSelected ? green(`${figures.arrowRight} ${label}`) : `  ${label}`
 
         return [left, renderRightColumn(field, isSelected)]
     }

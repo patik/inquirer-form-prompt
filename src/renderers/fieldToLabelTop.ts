@@ -21,13 +21,13 @@ function numSelected(field: InternalCheckboxField): number {
 }
 
 function displayField(field: InternalFormField, isFocused: boolean, value: string): string {
-    const { name } = field
+    const { label } = field
     const borderColor = isFocused ? 'blue' : undefined
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
 
     return `${boxen(value, {
         ...staticOptions,
-        title: name,
+        title: label,
         borderColor,
         fullscreen: () => [
             Math.max(50, stripAnsi(value).length + (field.type === 'checkbox' ? numSelected(field) * 2 : 10)),

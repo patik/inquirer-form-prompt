@@ -10,7 +10,7 @@ import { renderCheckbox } from './checkbox.js'
 describe('renderCheckbox', () => {
     const baseField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'test',
+        label: 'test',
         choices: ['Option 1', 'Option 2', 'Option 3'],
         value: [],
         highlightIndex: 0,

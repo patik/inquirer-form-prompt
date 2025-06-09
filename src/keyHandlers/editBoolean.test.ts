@@ -20,26 +20,26 @@ describe('editBooleanField', () => {
     // Sample fields for testing
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: false,
     }
 
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'sample',
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const checkboxField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'Test Checkbox',
+        label: 'Test Checkbox',
         choices: ['Choice 1', 'Choice 2'],
         value: ['Choice 1'],
         highlightIndex: 0,
@@ -127,7 +127,7 @@ describe('editBooleanField', () => {
         it('should toggle missing value to true when right key is pressed', () => {
             const noValueBooleanField: BooleanField = {
                 type: 'boolean',
-                name: 'No Value Field',
+                label: 'No Value Field',
             }
             const fields: InternalFields = [noValueBooleanField]
             const selectedIndex = 0
@@ -487,7 +487,7 @@ describe('editBooleanField', () => {
         it('should handle boolean field with additional properties', () => {
             const complexBooleanField: BooleanField = {
                 type: 'boolean',
-                name: 'Complex Boolean',
+                label: 'Complex Boolean',
                 description: 'A boolean field with description',
                 value: false,
             }
@@ -503,7 +503,7 @@ describe('editBooleanField', () => {
 
             expect(result[0]).toEqual({
                 type: 'boolean',
-                name: 'Complex Boolean',
+                label: 'Complex Boolean',
                 description: 'A boolean field with description',
                 value: true,
             })

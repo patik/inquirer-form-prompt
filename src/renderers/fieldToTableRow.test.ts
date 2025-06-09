@@ -22,33 +22,33 @@ vi.mock('./radio.js', () => ({
 describe('fieldToTableRow', () => {
     const textField: TextField = {
         type: 'text',
-        name: 'Text Field',
+        label: 'Text Field',
         value: 'Sample text',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Boolean Field',
+        label: 'Boolean Field',
         value: true,
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Radio Field',
+        label: 'Radio Field',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const checkboxField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'Checkbox Field',
+        label: 'Checkbox Field',
         choices: ['Option 1', 'Option 2'],
         value: ['Option 1'],
         highlightIndex: 0,
     }
 
     describe('when field is selected (highlighted)', () => {
-        it('should render text field with green name and bgGray white value', () => {
+        it('should render text field with green label and bgGray white value', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(textField, 0)
 
@@ -58,7 +58,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with empty value as single space', () => {
             const emptyTextField: TextField = {
                 type: 'text',
-                name: 'Empty Field',
+                label: 'Empty Field',
                 value: '',
             }
             const renderField = fieldToTableRow(0)
@@ -70,7 +70,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with undefined value as single space', () => {
             const undefinedTextField: TextField = {
                 type: 'text',
-                name: 'Undefined Field',
+                label: 'Undefined Field',
             }
             const renderField = fieldToTableRow(0)
             const result = renderField(undefinedTextField, 0)
@@ -101,7 +101,7 @@ describe('fieldToTableRow', () => {
     })
 
     describe('when field is not selected', () => {
-        it('should render text field with normal name and plain value', () => {
+        it('should render text field with normal label and plain value', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(textField, 0)
 
@@ -111,7 +111,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with empty value as single space', () => {
             const emptyTextField: TextField = {
                 type: 'text',
-                name: 'Empty Field',
+                label: 'Empty Field',
                 value: '',
             }
             const renderField = fieldToTableRow(1)
@@ -123,7 +123,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with undefined value as single space', () => {
             const undefinedTextField: TextField = {
                 type: 'text',
-                name: 'Undefined Field',
+                label: 'Undefined Field',
             }
             const renderField = fieldToTableRow(1)
             const result = renderField(undefinedTextField, 0)
@@ -219,10 +219,10 @@ describe('fieldToTableRow', () => {
             expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
-        it('should handle field with special characters in name', () => {
+        it('should handle field with special characters in label', () => {
             const specialField: TextField = {
                 type: 'text',
-                name: 'Field with émojis 🎉 and "quotes"',
+                label: 'Field with émojis 🎉 and "quotes"',
                 value: 'Special value',
             }
             const renderField = fieldToTableRow(0)
@@ -234,7 +234,7 @@ describe('fieldToTableRow', () => {
         it('should handle field with very long values', () => {
             const longValueField: TextField = {
                 type: 'text',
-                name: 'Long Field',
+                label: 'Long Field',
                 value: 'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
             }
             const renderField = fieldToTableRow(0)

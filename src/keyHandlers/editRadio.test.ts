@@ -13,20 +13,20 @@ describe('editRadioField', () => {
     // Sample fields for testing
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2', 'Option 3'],
         value: 'Option 1',
     }
 
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'sample',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: true,
     }
 
@@ -651,7 +651,7 @@ describe('editRadioField', () => {
         it('should preserve all field properties except value', () => {
             const complexField: RadioField = {
                 type: 'radio',
-                name: 'Complex Field',
+                label: 'Complex Field',
                 description: 'A field with description',
                 choices: ['A', 'B', 'C'],
                 value: 'B',
@@ -668,7 +668,7 @@ describe('editRadioField', () => {
 
             expect(result[0]).toEqual({
                 type: 'radio',
-                name: 'Complex Field',
+                label: 'Complex Field',
                 description: 'A field with description',
                 choices: ['A', 'B', 'C'],
                 value: 'A', // Only value should change

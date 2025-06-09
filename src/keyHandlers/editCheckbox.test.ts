@@ -21,7 +21,7 @@ describe('editCheckboxField', () => {
     // Sample fields for testing
     const checkboxField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'Test Checkbox',
+        label: 'Test Checkbox',
         choices: ['Option 1', 'Option 2', 'Option 3'],
         value: [],
         highlightIndex: 0,
@@ -29,19 +29,19 @@ describe('editCheckboxField', () => {
 
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'sample',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: false,
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Radio 1', 'Radio 2'],
         value: 'Radio 1',
     }
@@ -363,7 +363,7 @@ describe('editCheckboxField', () => {
         it('should use default highlightIndex of 0 when not provided', () => {
             const fieldWithoutHighlight: InternalCheckboxField = {
                 type: 'checkbox',
-                name: 'Test',
+                label: 'Test',
                 choices: ['A', 'B', 'C'],
                 value: [],
                 highlightIndex: 0, // This will be destructured as 0 due to default
@@ -426,9 +426,9 @@ describe('editCheckboxField', () => {
 
     describe('multiple fields scenarios', () => {
         it('should only modify the field at selectedIndex', () => {
-            const field1 = { ...checkboxField, name: 'Field 1' }
-            const field2 = { ...checkboxField, name: 'Field 2', highlightIndex: 1 }
-            const field3 = { ...checkboxField, name: 'Field 3' }
+            const field1 = { ...checkboxField, label: 'Field 1' }
+            const field2 = { ...checkboxField, label: 'Field 2', highlightIndex: 1 }
+            const field3 = { ...checkboxField, label: 'Field 3' }
             const fields = [field1, field2, field3]
 
             const key: KeypressEvent = { name: 'right', ctrl: false }

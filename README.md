@@ -27,17 +27,17 @@ const answer = await form({
     message: 'Trip Details',
     fields: [
         {
-            name: 'Full name',
+            label: 'Full name',
             type: 'text',
         },
         {
-            name: 'Transport type',
+            label: 'Transport type',
             type: 'radio',
             choices: ['Train', 'Flight', 'Bus'],
             value: 'Train',
         },
         {
-            name: 'Activities',
+            label: 'Activities',
             type: 'checkbox',
             choices: ['Museums', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
             value: ['Museums', 'Local Cuisine'],
@@ -55,7 +55,7 @@ const answer = await form({
 All fields take the following properties:
 
 ```tsx
-name: string // The field's label
+label: string // The input field's label
 description?: string // Help text that will appear when the field is focused
 ```
 
@@ -74,7 +74,7 @@ Example:
 
 ```tsx
 {
-    name: 'Full name',
+    label: 'Full name',
     type: 'text',
     description: 'As it appears on your passport'
 }
@@ -97,7 +97,7 @@ Example:
 
 ```tsx
 {
-    name: 'Do you need a visa?',
+    label: 'Do you need a visa?',
     type: 'boolean',
 }
 ```
@@ -120,7 +120,7 @@ Example:
 
 ```tsx
 {
-    name: 'Age group',
+    label: 'Age group',
     type: 'radio',
     choices: ['0-25', '26-50', '51-75', '76-100']
     description: 'In years, on the first day of travel'
@@ -145,7 +145,7 @@ Example:
 
 ```tsx
 {
-    name: 'Activities of Interest',
+    label: 'Activities of Interest',
     type: 'checkbox',
     choices: ['Museums & Art', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
     value: ['Museums & Art', 'Local Cuisine'],

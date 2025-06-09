@@ -7,7 +7,7 @@ import { renderRadio } from './radio.js'
 describe('renderRadio', () => {
     const baseField: RadioField = {
         type: 'radio',
-        name: 'test',
+        label: 'test',
         choices: ['Option 1', 'Option 2', 'Option 3'],
     }
 
@@ -81,7 +81,7 @@ describe('renderRadio', () => {
         it('should handle choices with special characters', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'special',
+                label: 'special',
                 choices: ['Option with "quotes"', 'Option with émojis 🎉', 'Option with <tags>'],
                 value: 'Option with émojis 🎉',
             }
@@ -95,7 +95,7 @@ describe('renderRadio', () => {
         it('should handle very long choice names', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'long',
+                label: 'long',
                 choices: [
                     'Short',
                     'This is a very long option name that might wrap in some terminals but should be handled gracefully',
@@ -186,7 +186,7 @@ describe('renderRadio', () => {
         it('should format selected choice with special characters', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'special',
+                label: 'special',
                 choices: ['Option with "quotes"', 'Option with émojis 🎉', 'Option with <tags>'],
                 value: 'Option with émojis 🎉',
             }
@@ -200,7 +200,7 @@ describe('renderRadio', () => {
         it('should handle multiple choices with same radioOn icon for selected', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'multi',
+                label: 'multi',
                 choices: ['A', 'B', 'C', 'D', 'E'],
                 value: 'C',
             }
@@ -244,7 +244,7 @@ describe('renderRadio', () => {
         it('should handle whitespace in choices and values', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'whitespace',
+                label: 'whitespace',
                 choices: [' Leading space', 'Trailing space ', '  Both spaces  '],
                 value: 'Trailing space ',
             }
@@ -260,7 +260,7 @@ describe('renderRadio', () => {
         it('should handle undefined value gracefully', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'test',
+                label: 'test',
                 choices: ['Option 1', 'Option 2'],
                 value: undefined,
             }
@@ -281,7 +281,7 @@ describe('renderRadio', () => {
         it('should handle choices with empty strings', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'empty',
+                label: 'empty',
                 choices: ['', 'Option 2', ''],
                 value: '',
             }
@@ -293,7 +293,7 @@ describe('renderRadio', () => {
         it('should handle numeric-like strings in choices', () => {
             const field: RadioField = {
                 type: 'radio',
-                name: 'numbers',
+                label: 'numbers',
                 choices: ['1', '2', '3'],
                 value: '2',
             }

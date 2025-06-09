@@ -23,20 +23,20 @@ describe('editTextField', async () => {
     // Sample fields for testing
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'initial value',
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: true,
     }
 
@@ -363,9 +363,9 @@ describe('editTextField', async () => {
         })
 
         it('should handle multiple text fields correctly', () => {
-            const textField1 = { ...textField, name: 'Text 1', value: 'value 1' }
-            const textField2 = { ...textField, name: 'Text 2', value: 'value 2' }
-            const textField3 = { ...textField, name: 'Text 3', value: 'value 3' }
+            const textField1 = { ...textField, label: 'Text 1', value: 'value 1' }
+            const textField2 = { ...textField, label: 'Text 2', value: 'value 2' }
+            const textField3 = { ...textField, label: 'Text 3', value: 'value 3' }
             const fields = [textField1, textField2, textField3]
             const key: KeypressEvent = { name: 'b' } as KeypressEvent
             mockRl.line = 'middle field updated'
@@ -381,7 +381,7 @@ describe('editTextField', async () => {
             expect(result[0]).toBe(textField1) // Unchanged
             expect(result[2]).toBe(textField3) // Unchanged
             expect((result[1] as TextField).value).toBe('middle field updated')
-            expect((result[1] as TextField).name).toBe('Text 2')
+            expect((result[1] as TextField).label).toBe('Text 2')
         })
 
         it('should work with separators in fields array', () => {
@@ -422,7 +422,7 @@ describe('editTextField', async () => {
         })
 
         it('should update last field when selectedIndex is last', () => {
-            const lastTextField = { ...textField, name: 'Last Text' }
+            const lastTextField = { ...textField, label: 'Last Text' }
             const fields = [radioField, booleanField, lastTextField]
             const key: KeypressEvent = { name: 'l' } as KeypressEvent
             mockRl.line = 'last field'
@@ -445,7 +445,7 @@ describe('editTextField', async () => {
         it('should preserve all original field properties except value', () => {
             const complexTextField: TextField = {
                 type: 'text',
-                name: 'Complex Text Field',
+                label: 'Complex Text Field',
                 value: 'original',
                 // Add any other properties that might exist
             }
@@ -463,7 +463,7 @@ describe('editTextField', async () => {
 
             const updatedField = result[0] as TextField
             expect(updatedField.type).toBe('text')
-            expect(updatedField.name).toBe('Complex Text Field')
+            expect(updatedField.label).toBe('Complex Text Field')
             expect(updatedField.value).toBe('new value')
         })
 
