@@ -155,3 +155,21 @@ Example:
 ## Grouping fields
 
 Fields may be split into groups by placing separators between them.
+
+## Themes
+
+The config object accepts a `theme` prop which can be used to specify a variant.
+
+```tsx
+theme?: 'table' | 'label-top'
+```
+
+### Table
+
+This is the default theme. Each field label and input is displayed in a table row. If a separator is included, it will split the fields into separate tables.
+
+### Label Top
+
+With this variant, the label is displayed above the input field.
+
+<img src="https://github.com/user-attachments/assets/db8e6a02-ce9e-4b57-b1cb-2f361fda4ee9" width="920" alt="">
