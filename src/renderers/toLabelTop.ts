@@ -27,7 +27,8 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?
             return
         }
 
-        const result = fieldToLabelTop(field, index === selectedIndex, dense)
+        const isFocused = index === selectedIndex
+        const result = fieldToLabelTop({ field, isFocused, dense })
         currentSectionRows.push(result)
     })
 

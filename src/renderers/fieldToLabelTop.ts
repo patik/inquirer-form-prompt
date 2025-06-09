@@ -1,6 +1,6 @@
 import boxen from 'boxen'
 import stripAnsi from 'strip-ansi'
-import { dim, whiteBright } from 'yoctocolors'
+import { dim } from 'yoctocolors'
 import type { FormTheme, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
@@ -16,14 +16,24 @@ const staticOptions = {
     },
 } as const
 
-function displayField(field: InternalFormField, isFocused: boolean, value: string, dense?: FormTheme['dense']): string {
+function displayField({
+    field,
+    isFocused,
+    value,
+    dense,
+}: {
+    field: InternalFormField
+    isFocused: boolean
+    value: string
+    dense?: FormTheme['dense']
+}): string {
     const { label } = field
-    const borderColor = isFocused ? 'blue' : undefined
+    const borderColor = isFocused ? 'green' : undefined
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
     const valueLength = stripAnsi(value).length + 2
     const fieldLength = Math.max(dense ? 20 : 50, valueLength)
 
-    return `${boxen(whiteBright(value), {
+    return `${boxen(value, {
         ...staticOptions,
         title: label,
         borderColor,
@@ -32,7 +42,7 @@ function displayField(field: InternalFormField, isFocused: boolean, value: strin
 ${footer}`
 }
 
-function renderValue(field: InternalFormField, isFocused: boolean): string {
+function renderValue({ field, isFocused }: { field: InternalFormField; isFocused: boolean }): string {
     const { type } = field
 
     if (type === 'radio') {
@@ -53,6 +63,16 @@ function renderValue(field: InternalFormField, isFocused: boolean): string {
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
  */
-export function fieldToLabelTop(field: InternalFormField, isFocused: boolean, dense?: FormTheme['dense']): string {
-    return displayField(field, isFocused, renderValue(field, isFocused), dense)
+export function fieldToLabelTop({
+    field,
+    isFocused,
+    dense,
+}: {
+    field: InternalFormField
+    isFocused: boolean
+    dense?: FormTheme['dense']
+}): string {
+    const value = renderValue({ field, isFocused })
+
+    return displayField({ field, isFocused, value, dense })
 }
