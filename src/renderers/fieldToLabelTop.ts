@@ -1,8 +1,7 @@
-import { Separator } from '@inquirer/core'
 import boxen from 'boxen'
 import stripAnsi from 'strip-ansi'
 import { dim } from 'yoctocolors'
-import type { InternalCheckboxField, InternalField, InternalFormField } from '../util/types.js'
+import type { InternalCheckboxField, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
@@ -21,7 +20,7 @@ function numSelected(field: InternalCheckboxField): number {
     return field.choices.filter((choice) => field.value?.includes(choice)).length
 }
 
-function displayField(field: InternalFormField, isFocused: boolean, value: string): string | Separator {
+function displayField(field: InternalFormField, isFocused: boolean, value: string): string {
     const { name } = field
     const borderColor = isFocused ? 'blue' : undefined
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
@@ -59,10 +58,6 @@ function renderValue(field: InternalFormField, isFocused: boolean): string {
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
  */
-export function fieldToLabelTop(field: InternalField, isFocused: boolean): string | Separator {
-    if (field instanceof Separator) {
-        return field
-    }
-
+export function fieldToLabelTop(field: InternalFormField, isFocused: boolean): string {
     return displayField(field, isFocused, renderValue(field, isFocused))
 }

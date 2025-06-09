@@ -89,13 +89,13 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
             return
         }
 
-        if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
-            return
-        }
-
         if (key.name === 'escape') {
             // @ts-expect-error Only way I know how to signal that the user pressed escape
             done(Symbol('Escape key pressed'))
+            return
+        }
+
+        if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
             return
         }
 

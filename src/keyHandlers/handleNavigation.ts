@@ -40,7 +40,7 @@ export const handleNavigation = ({
     /**
      * Key pressed by the user
      */
-    key: KeypressEvent
+    key: KeypressEvent & { shift?: boolean }
 
     /**
      * Index of the currently highlighted field
@@ -57,8 +57,8 @@ export const handleNavigation = ({
      */
     rl: InquirerReadline
 }): boolean => {
-    const goToNext = isDownKey(key) || key.name === 'tab'
-    const goToPrevious = isUpKey(key)
+    const goToNext = isDownKey(key) || (key.name === 'tab' && !key.shift)
+    const goToPrevious = isUpKey(key) || (key.name === 'tab' && key.shift)
 
     if (goToNext || goToPrevious) {
         rl.clearLine(0)

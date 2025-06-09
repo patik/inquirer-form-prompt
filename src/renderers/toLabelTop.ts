@@ -2,46 +2,38 @@ import { Separator } from '@inquirer/core'
 import type { InternalFields } from '../util/types.js'
 import { fieldToLabelTop } from './fieldToLabelTop.js'
 
+const rowSpacer = '\n\n'
+const sectionSpacer = '\n'
+
 export function toLabelTop(fields: InternalFields, selectedIndex: number): string {
-    const sections: string[] = []
+    const outputRows: string[] = []
     let currentSection: Array<string> = []
-    let currentSectionFields: Array<string> = []
-    // let tableFooter = ''
+    let currentSectionRows: Array<string> = []
 
     fields.forEach((field, index) => {
         if (field instanceof Separator) {
-            if (currentSectionFields.length > 0) {
-                currentSection.push(...currentSectionFields)
-                sections.push(currentSection.join('\n\n'))
-                currentSectionFields = []
+            if (currentSectionRows.length > 0) {
+                currentSection.push(...currentSectionRows)
+                outputRows.push(currentSection.join(rowSpacer))
+                currentSectionRows = []
             }
 
-            // sections.push(tableFooter)
-            sections.push('')
-            sections.push(field.separator)
+            outputRows.push('')
+            outputRows.push(field.separator)
             currentSection = []
-            // tableFooter = ''
 
             return
         }
 
         const result = fieldToLabelTop(field, index === selectedIndex)
-        if (!(result instanceof Separator)) {
-            currentSectionFields.push(result)
-        }
-
-        const isSelected = selectedIndex === index
-        if (isSelected && !(field instanceof Separator) && field.description) {
-            // tableFooter = dim(`  ${field.description}`)
-        }
+        currentSectionRows.push(result)
     })
 
-    // Push the last table if it has rows
-    if (currentSectionFields.length > 0) {
-        currentSection.push(...currentSectionFields)
-        sections.push(currentSection.join('\n\n'))
-        // sections.push(tableFooter)
+    // Push the last section if it's not empty
+    if (currentSectionRows.length > 0) {
+        currentSection.push(...currentSectionRows)
+        outputRows.push(currentSection.join(rowSpacer))
     }
 
-    return sections.join('\n\n')
+    return outputRows.join(sectionSpacer)
 }
