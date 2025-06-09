@@ -1,6 +1,6 @@
 import { Separator } from '@inquirer/core'
 import figures from '@inquirer/figures'
-import { bgGray, green, white } from 'yoctocolors'
+import { bgGray, green } from 'yoctocolors'
 import type { InternalField, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
@@ -21,7 +21,7 @@ function renderRightColumn(field: InternalFormField, isSelected: boolean): strin
         return renderBoolean(field, isSelected)
     }
 
-    return isSelected ? bgGray(white(value || ' ')) : value || ' '
+    return isSelected && value ? bgGray(value) : value || ' '
 }
 
 /**

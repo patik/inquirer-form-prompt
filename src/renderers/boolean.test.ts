@@ -2,7 +2,7 @@
 
 import figures from '@inquirer/figures'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline, white } from 'yoctocolors'
+import { bgGray, bold, underline } from 'yoctocolors'
 import type { BooleanField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 
@@ -47,7 +47,7 @@ describe('renderBoolean', () => {
             const field = { ...baseField, value: true }
             const result = renderBoolean(field, true)
             const expectedContent = ` ${figures.radioOn} ${bold(underline('true'))}  ${figures.radioOff} false `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -56,7 +56,7 @@ describe('renderBoolean', () => {
             const field = { ...baseField, value: false }
             const result = renderBoolean(field, true)
             const expectedContent = ` ${figures.radioOff} true  ${figures.radioOn} ${bold(underline('false'))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -65,7 +65,7 @@ describe('renderBoolean', () => {
             const field = { ...baseField, value: undefined }
             const result = renderBoolean(field, true)
             const expectedContent = ` ${figures.radioOff} true  ${figures.radioOn} ${bold(underline('false'))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -74,7 +74,7 @@ describe('renderBoolean', () => {
             const field = { ...baseField }
             const result = renderBoolean(field, true)
             const expectedContent = ` ${figures.radioOff} true  ${figures.radioOn} ${bold(underline('false'))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -89,7 +89,7 @@ describe('renderBoolean', () => {
             // Both should have the same base content structure
             const expectedContent = ` ${figures.radioOn} ${bold(underline('true'))}  ${figures.radioOff} false `
             expect(unselectedResult).toBe(expectedContent)
-            expect(selectedResult).toBe(bgGray(white(expectedContent)))
+            expect(selectedResult).toBe(bgGray(expectedContent))
         })
 
         it('should apply formatting only to selected option text, not the icon', () => {
@@ -181,7 +181,7 @@ describe('renderBoolean', () => {
             const selectedResult = renderBoolean(field, true)
             const unselectedResult = renderBoolean(field, false)
 
-            expect(selectedResult).toBe(bgGray(white(unselectedResult)))
+            expect(selectedResult).toBe(bgGray(unselectedResult))
         })
 
         it('should not apply background styling when field is not selected', () => {

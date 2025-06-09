@@ -3,7 +3,7 @@
     "version": "0.4.0",
     "scripts": {
         "build": "tsc",
-        "demo": "tsx --watch ./src/demo.ts --run",
+        "demo": "tsx ./src/demo.ts --run",
         "test": "vitest .",
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",

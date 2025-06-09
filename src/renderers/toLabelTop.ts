@@ -22,6 +22,11 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?
 
             outputRows.push('')
             outputRows.push(field.separator)
+
+            if (!dense) {
+                outputRows.push('')
+            }
+
             currentSection = []
 
             return

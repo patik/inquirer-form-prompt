@@ -52,7 +52,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual([green('→ Text Field'), bgGray(white('Sample text'))])
+            expect(result).toEqual([green('→ Text Field'), bgGray('Sample text')])
         })
 
         it('should render text field with empty value as single space', () => {
@@ -64,7 +64,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(emptyTextField, 0)
 
-            expect(result).toEqual([green('→ Empty Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Empty Field'), bgGray(' ')])
         })
 
         it('should render text field with undefined value as single space', () => {
@@ -75,7 +75,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(undefinedTextField, 0)
 
-            expect(result).toEqual([green('→ Undefined Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Undefined Field'), bgGray(' ')])
         })
 
         it('should render boolean field with mocked renderer', () => {
@@ -228,7 +228,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(specialField, 0)
 
-            expect(result).toEqual([green('→ Field with émojis 🎉 and "quotes"'), bgGray(white('Special value'))])
+            expect(result).toEqual([green('→ Field with émojis 🎉 and "quotes"'), bgGray('Special value')])
         })
 
         it('should handle field with very long values', () => {

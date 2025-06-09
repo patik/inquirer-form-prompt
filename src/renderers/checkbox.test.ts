@@ -83,7 +83,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, highlightIndex: 0 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -92,7 +92,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, highlightIndex: 1 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${figures.checkboxOff} Option 1  ${underline(bold(`${figures.checkboxOff} Option 2`))}  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -101,7 +101,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, highlightIndex: 2 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${figures.checkboxOff} Option 1  ${figures.checkboxOff} Option 2  ${underline(bold(`${figures.checkboxOff} Option 3`))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -110,7 +110,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 1'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOn} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -119,7 +119,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 2'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOn} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -128,7 +128,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 3'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${figures.checkboxOn} Option 1  ${underline(bold(`${figures.checkboxOff} Option 2`))}  ${figures.checkboxOn} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -137,7 +137,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 2', 'Option 3'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${figures.checkboxOn} Option 1  ${underline(bold(`${figures.checkboxOn} Option 2`))}  ${figures.checkboxOn} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -146,7 +146,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 2'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${figures.checkboxOff} Option 1  ${underline(bold(`${figures.checkboxOn} Option 2`))}  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -156,7 +156,7 @@ describe('renderCheckbox', () => {
             // delete field.highlightIndex
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -164,7 +164,7 @@ describe('renderCheckbox', () => {
         it('should handle empty choices array when selected', () => {
             const field = { ...baseField, choices: [] }
             const result = renderCheckbox(field, true)
-            const expected = bgGray(white('  '))
+            const expected = bgGray('  ')
 
             expect(result).toBe(expected)
         })
@@ -173,7 +173,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, choices: ['Single Option'], value: [], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Single Option`))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -182,7 +182,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, choices: ['Single Option'], value: ['Single Option'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
             const expectedContent = ` ${underline(bold(`${figures.checkboxOn} Single Option`))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -243,7 +243,7 @@ describe('renderCheckbox', () => {
             const result = renderCheckbox(field, true)
             // Should not highlight anything since index is out of bounds
             const expectedContent = ` ${figures.checkboxOff} Option 1  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -253,7 +253,7 @@ describe('renderCheckbox', () => {
             const result = renderCheckbox(field, true)
             // Should not highlight anything since index is out of bounds
             const expectedContent = ` ${figures.checkboxOff} Option 1  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })

@@ -1,5 +1,5 @@
 import figures from '@inquirer/figures'
-import { bgGray, bold, underline, white } from 'yoctocolors'
+import { bgGray, bold, underline } from 'yoctocolors'
 import type { InternalCheckboxField } from '../util/types.js'
 
 function createChoiceRenderer(
@@ -35,7 +35,7 @@ function createChoiceRenderer(
 }
 
 export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: boolean): string {
-    const formatter = isFieldSelected ? (x: string) => bgGray(white(x)) : (x: string) => x
+    const formatter = isFieldSelected ? (x: string) => bgGray(x) : (x: string) => x
     const renderChoice = createChoiceRenderer(field, isFieldSelected)
     const list = field.choices.map(renderChoice)
 

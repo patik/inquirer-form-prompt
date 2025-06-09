@@ -125,7 +125,7 @@ describe('renderRadio', () => {
             const field = { ...baseField, value: 'Option 2' }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOff} Option 1  ${figures.radioOn} ${bold(underline('Option 2'))}  ${figures.radioOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -134,7 +134,7 @@ describe('renderRadio', () => {
             const field = { ...baseField, value: 'Option 1' }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOn} ${bold(underline('Option 1'))}  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -143,7 +143,7 @@ describe('renderRadio', () => {
             const field = { ...baseField, value: 'Option 3' }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOff} Option 1  ${figures.radioOff} Option 2  ${figures.radioOn} ${bold(underline('Option 3'))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -151,7 +151,7 @@ describe('renderRadio', () => {
         it('should handle empty choices array with bgGray background', () => {
             const field = { ...baseField, choices: [] }
             const result = renderRadio(field, true)
-            const expected = bgGray(white('  '))
+            const expected = bgGray('  ')
 
             expect(result).toBe(expected)
         })
@@ -160,7 +160,7 @@ describe('renderRadio', () => {
             const field = { ...baseField, choices: ['Single Option'], value: 'Single Option' }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOn} ${bold(underline('Single Option'))} `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -168,7 +168,7 @@ describe('renderRadio', () => {
         it('should handle single choice without selection', () => {
             const field = { ...baseField, choices: ['Single Option'] }
             const result = renderRadio(field, true)
-            const expected = bgGray(white(` ${figures.radioOff} Single Option `))
+            const expected = bgGray(` ${figures.radioOff} Single Option `)
 
             expect(result).toBe(expected)
         })
@@ -192,7 +192,7 @@ describe('renderRadio', () => {
             }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOff} Option with "quotes"  ${figures.radioOn} ${bold(underline('Option with émojis 🎉'))}  ${figures.radioOff} Option with <tags> `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -206,7 +206,7 @@ describe('renderRadio', () => {
             }
             const result = renderRadio(field, true)
             const expectedContent = ` ${figures.radioOff} A  ${figures.radioOff} B  ${figures.radioOn} ${bold(underline('C'))}  ${figures.radioOff} D  ${figures.radioOff} E `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
@@ -220,7 +220,7 @@ describe('renderRadio', () => {
 
             // Both should have the same base structure with consistent spacing
             expect(unselectedResult).toBe(` ${figures.radioOff} A  ${figures.radioOff} B `)
-            expect(selectedResult).toBe(bgGray(white(` ${figures.radioOff} A  ${figures.radioOff} B `)))
+            expect(selectedResult).toBe(bgGray(` ${figures.radioOff} A  ${figures.radioOff} B `))
         })
 
         it('should apply formatting only to selected choice text, not the icon', () => {
@@ -229,7 +229,7 @@ describe('renderRadio', () => {
 
             // The bold/underline should only apply to the text, not the icon
             const expectedContent = ` ${figures.radioOn} ${bold(underline('Option 1'))}  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `
-            const expected = bgGray(white(expectedContent))
+            const expected = bgGray(expectedContent)
 
             expect(result).toBe(expected)
         })
