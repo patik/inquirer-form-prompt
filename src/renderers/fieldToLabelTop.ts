@@ -1,7 +1,7 @@
 import boxen from 'boxen'
 import stripAnsi from 'strip-ansi'
 import { dim } from 'yoctocolors'
-import type { InternalCheckboxField, InternalFormField } from '../util/types.js'
+import type { InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
@@ -16,23 +16,18 @@ const staticOptions = {
     },
 } as const
 
-function numSelected(field: InternalCheckboxField): number {
-    return field.choices.filter((choice) => field.value?.includes(choice)).length
-}
-
 function displayField(field: InternalFormField, isFocused: boolean, value: string): string {
     const { label } = field
     const borderColor = isFocused ? 'blue' : undefined
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
+    const valueLength = stripAnsi(value).length + 8
+    const fieldLength = Math.max(50, valueLength)
 
     return `${boxen(value, {
         ...staticOptions,
         title: label,
         borderColor,
-        fullscreen: () => [
-            Math.max(50, stripAnsi(value).length + (field.type === 'checkbox' ? numSelected(field) * 2 : 10)),
-            1,
-        ],
+        fullscreen: () => [fieldLength, 1],
     })}
 ${footer}`
 }

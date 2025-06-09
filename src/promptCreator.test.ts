@@ -95,7 +95,7 @@ describe('formPrompt', () => {
             const screen = getScreen()
             expect(screen).toContain('Select technologies')
             expect(screen).toContain('Technologies')
-            expect(screen).toContain('✔ React  ✔ Vue  ☐ Angular  ☐ Svelte')
+            expect(screen).toContain('☒ React  ☒ Vue  ☐ Angular  ☐ Svelte')
         })
 
         it('should render a form with separators', async () => {

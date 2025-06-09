@@ -10,7 +10,7 @@ function createChoiceRenderer(
 
     return function renderChoice(choice: string, i: number): string {
         const isChoiceSelected = field.value?.includes(choice)
-        const icon = isChoiceSelected ? figures.tick : figures.checkboxOff
+        const icon = isChoiceSelected ? figures.checkboxOn : figures.checkboxOff
 
         if (!isFieldSelected) {
             return `${icon} ${choice}`

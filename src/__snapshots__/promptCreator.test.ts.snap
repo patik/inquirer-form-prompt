@@ -31,6 +31,6 @@ Preferences
 ┌─────────────┬────────────────────────────────────────┐
 │   Theme     │  ◯ light  ◉ dark  ◯ auto               │
 ├─────────────┼────────────────────────────────────────┤
-│   Languages │  ✔ JavaScript  ✔ TypeScript  ☐ Python  │
+│   Languages │  ☒ JavaScript  ☒ TypeScript  ☐ Python  │
 └─────────────┴────────────────────────────────────────┘"
 `;

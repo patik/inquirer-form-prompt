@@ -30,14 +30,18 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 3'] }
             const result = renderCheckbox(field, false)
 
-            expect(result).toBe(` ${figures.tick} Option 1  ${figures.checkboxOff} Option 2  ${figures.tick} Option 3 `)
+            expect(result).toBe(
+                ` ${figures.checkboxOn} Option 1  ${figures.checkboxOff} Option 2  ${figures.checkboxOn} Option 3 `,
+            )
         })
 
         it('should render all choices with tick icons when all are selected', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 2', 'Option 3'] }
             const result = renderCheckbox(field, false)
 
-            expect(result).toBe(` ${figures.tick} Option 1  ${figures.tick} Option 2  ${figures.tick} Option 3 `)
+            expect(result).toBe(
+                ` ${figures.checkboxOn} Option 1  ${figures.checkboxOn} Option 2  ${figures.checkboxOn} Option 3 `,
+            )
         })
 
         it('should handle empty choices array', () => {
@@ -58,7 +62,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField, choices: ['Single Option'], value: ['Single Option'] }
             const result = renderCheckbox(field, false)
 
-            expect(result).toBe(` ${figures.tick} Single Option `)
+            expect(result).toBe(` ${figures.checkboxOn} Single Option `)
         })
     })
 
@@ -105,7 +109,7 @@ describe('renderCheckbox', () => {
         it('should highlight selected choices with tick icons', () => {
             const field = { ...baseField, value: ['Option 1'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${underline(bold(`${figures.tick} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
+            const expectedContent = ` ${underline(bold(`${figures.checkboxOn} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -114,7 +118,7 @@ describe('renderCheckbox', () => {
         it('should highlight non-selected choices with checkboxOff icons', () => {
             const field = { ...baseField, value: ['Option 2'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.tick} Option 2  ${figures.checkboxOff} Option 3 `
+            const expectedContent = ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOn} Option 2  ${figures.checkboxOff} Option 3 `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -123,7 +127,7 @@ describe('renderCheckbox', () => {
         it('should handle multiple selected choices with highlighting', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 3'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${figures.tick} Option 1  ${underline(bold(`${figures.checkboxOff} Option 2`))}  ${figures.tick} Option 3 `
+            const expectedContent = ` ${figures.checkboxOn} Option 1  ${underline(bold(`${figures.checkboxOff} Option 2`))}  ${figures.checkboxOn} Option 3 `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -132,7 +136,7 @@ describe('renderCheckbox', () => {
         it('should handle highlighting when all choices are selected', () => {
             const field = { ...baseField, value: ['Option 1', 'Option 2', 'Option 3'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${figures.tick} Option 1  ${underline(bold(`${figures.tick} Option 2`))}  ${figures.tick} Option 3 `
+            const expectedContent = ` ${figures.checkboxOn} Option 1  ${underline(bold(`${figures.checkboxOn} Option 2`))}  ${figures.checkboxOn} Option 3 `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -141,7 +145,7 @@ describe('renderCheckbox', () => {
         it('should handle highlighting when highlighted choice is selected', () => {
             const field = { ...baseField, value: ['Option 2'], highlightIndex: 1 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${figures.checkboxOff} Option 1  ${underline(bold(`${figures.tick} Option 2`))}  ${figures.checkboxOff} Option 3 `
+            const expectedContent = ` ${figures.checkboxOff} Option 1  ${underline(bold(`${figures.checkboxOn} Option 2`))}  ${figures.checkboxOff} Option 3 `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -177,7 +181,7 @@ describe('renderCheckbox', () => {
         it('should handle single selected choice when highlighted', () => {
             const field = { ...baseField, choices: ['Single Option'], value: ['Single Option'], highlightIndex: 0 }
             const result = renderCheckbox(field, true)
-            const expectedContent = ` ${underline(bold(`${figures.tick} Single Option`))} `
+            const expectedContent = ` ${underline(bold(`${figures.checkboxOn} Single Option`))} `
             const expected = bgGray(white(expectedContent))
 
             expect(result).toBe(expected)
@@ -194,7 +198,7 @@ describe('renderCheckbox', () => {
             const result = renderCheckbox(field, false)
 
             expect(result).toBe(
-                ` ${figures.tick} Option & Ampersand  ${figures.checkboxOff} Option "Quotes"  ${figures.checkboxOff} Option <Tags> `,
+                ` ${figures.checkboxOn} Option & Ampersand  ${figures.checkboxOff} Option "Quotes"  ${figures.checkboxOff} Option <Tags> `,
             )
         })
 
@@ -207,7 +211,7 @@ describe('renderCheckbox', () => {
             }
             const result = renderCheckbox(field, false)
 
-            expect(result).toBe(` ${figures.tick} ${longChoice}  ${figures.checkboxOff} Short `)
+            expect(result).toBe(` ${figures.checkboxOn} ${longChoice}  ${figures.checkboxOff} Short `)
         })
 
         it('should handle choices with whitespace', () => {
@@ -219,7 +223,7 @@ describe('renderCheckbox', () => {
             const result = renderCheckbox(field, false)
 
             expect(result).toBe(
-                ` ${figures.tick}   Leading spaces  ${figures.checkboxOff} Trailing spaces    ${figures.checkboxOff}   Both sides   `,
+                ` ${figures.checkboxOn}   Leading spaces  ${figures.checkboxOff} Trailing spaces    ${figures.checkboxOff}   Both sides   `,
             )
         })
 
@@ -231,7 +235,7 @@ describe('renderCheckbox', () => {
             }
             const result = renderCheckbox(field, false)
 
-            expect(result).toBe(` ${figures.tick}   ${figures.checkboxOff} Non-empty `)
+            expect(result).toBe(` ${figures.checkboxOn}   ${figures.checkboxOff} Non-empty `)
         })
 
         it('should handle highlightIndex out of bounds (negative)', () => {
@@ -261,7 +265,9 @@ describe('renderCheckbox', () => {
             }
             const result = renderCheckbox(field, false)
             // Should only show ticks for choices that actually exist
-            expect(result).toBe(` ${figures.tick} Option 1  ${figures.checkboxOff} Option 2  ${figures.tick} Option 3 `)
+            expect(result).toBe(
+                ` ${figures.checkboxOn} Option 1  ${figures.checkboxOff} Option 2  ${figures.checkboxOn} Option 3 `,
+            )
         })
 
         it('should handle duplicate choices', () => {
@@ -272,7 +278,9 @@ describe('renderCheckbox', () => {
             }
             const result = renderCheckbox(field, false)
             // Both instances of "Option 1" should be checked
-            expect(result).toBe(` ${figures.tick} Option 1  ${figures.tick} Option 1  ${figures.checkboxOff} Option 2 `)
+            expect(result).toBe(
+                ` ${figures.checkboxOn} Option 1  ${figures.checkboxOn} Option 1  ${figures.checkboxOff} Option 2 `,
+            )
         })
 
         it('should handle Unicode characters in choices', () => {
@@ -284,7 +292,7 @@ describe('renderCheckbox', () => {
             const result = renderCheckbox(field, false)
 
             expect(result).toBe(
-                ` ${figures.tick} 🚀 Rocket  ${figures.checkboxOff} 🎯 Target  ${figures.checkboxOff} 💡 Idea `,
+                ` ${figures.checkboxOn} 🚀 Rocket  ${figures.checkboxOff} 🎯 Target  ${figures.checkboxOff} 💡 Idea `,
             )
         })
     })
