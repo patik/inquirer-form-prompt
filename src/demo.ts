@@ -1,6 +1,6 @@
 import { Separator } from '@inquirer/core'
-import form from './index.js'
 import { exit } from 'node:process'
+import form from './index.js'
 
 const errorHander = (error: unknown): void => {
     if (error instanceof Error && error.name === 'ExitPromptError') {
@@ -90,4 +90,5 @@ export const demo = async (): Promise<void> => {
 // If the --run flag was used, run it immediately
 if (process.argv.includes('--run')) {
     await demo()
+    exit(0)
 }

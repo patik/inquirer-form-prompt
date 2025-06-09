@@ -8,6 +8,7 @@ import { editRadioField } from './keyHandlers/editRadio.js'
 import { editTextField } from './keyHandlers/editText.js'
 import { handleNavigation } from './keyHandlers/handleNavigation.js'
 import { toLabelTop } from './renderers/toLabelTop.js'
+import { toTable } from './renderers/toTable.js'
 import type {
     Config,
     Fields,
@@ -116,9 +117,10 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
 
     const message = config.message ? bold(config.message) : ''
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
-    const tables = toLabelTop(fields, selectedIndex)
+    const fieldOutput =
+        config.theme?.variant === 'label-top' ? toLabelTop(fields, selectedIndex) : toTable(fields, selectedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-${tables}${ansiEscapes.cursorHide}
+${fieldOutput}${ansiEscapes.cursorHide}
 `
 }
