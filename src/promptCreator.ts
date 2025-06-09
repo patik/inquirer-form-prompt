@@ -42,35 +42,35 @@ const updateFields = ({
     currentField,
     key,
     setFields,
-    selectedIndex,
+    focusedIndex,
     rl,
 }: {
     fields: InternalFields
     setFields: (newFields: InternalFields) => void
     currentField: InternalFormField
     key: KeypressEvent
-    selectedIndex: number
+    focusedIndex: number
     rl: InquirerReadline
 }): void => {
     if (currentField.type === 'boolean') {
-        const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
+        const nextFields = editBooleanField({ fields, currentField, focusedIndex, key, rl })
         setFields(nextFields)
         return
     }
 
     if (currentField.type === 'radio') {
-        const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
+        const nextFields = editRadioField({ fields, currentField, focusedIndex, key, rl })
         setFields(nextFields)
         return
     }
 
     if (currentField.type === 'checkbox') {
-        const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
+        const nextFields = editCheckboxField({ fields, currentField, key, focusedIndex, rl })
         setFields(nextFields)
         return
     }
 
-    const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
+    const nextFields = editTextField({ fields, currentField, key, focusedIndex, rl })
     setFields(nextFields)
     return
 }
@@ -80,7 +80,7 @@ const updateFields = ({
  */
 export const promptCreator = (config: Config, done: (value: ReturnedItems) => void): string => {
     const [fields, setFields] = useState<InternalFields>(toInternalFields(config.fields))
-    const [selectedIndex, setSelectedIndex] = useState(() => getInitialIndex(config.fields))
+    const [focusedIndex, setFocusedIndex] = useState(() => getInitialIndex(config.fields))
     const prefix = usePrefix({})
 
     useKeypress((key, rl) => {
@@ -95,11 +95,11 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
             return
         }
 
-        if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
+        if (handleNavigation({ fields, key, focusedIndex, setFocusedIndex, rl })) {
             return
         }
 
-        const currentField = fields[selectedIndex]
+        const currentField = fields[focusedIndex]
 
         if (!currentField || currentField instanceof Separator) {
             return
@@ -110,7 +110,7 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
             currentField,
             key,
             setFields,
-            selectedIndex,
+            focusedIndex,
             rl,
         })
     })
@@ -119,8 +119,8 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
     const fieldOutput =
         config.theme?.variant === 'label-top'
-            ? toLabelTop(fields, selectedIndex, config.theme.dense)
-            : toTable(fields, selectedIndex)
+            ? toLabelTop(fields, focusedIndex, config.theme.dense)
+            : toTable(fields, focusedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
 ${fieldOutput}${ansiEscapes.cursorHide}

@@ -42,7 +42,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -60,7 +60,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -78,7 +78,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -96,7 +96,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -114,7 +114,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -136,7 +136,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [singleChoiceField],
                 currentField: singleChoiceField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -156,7 +156,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -174,7 +174,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -192,7 +192,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -210,7 +210,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -228,7 +228,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -250,7 +250,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [singleChoiceField],
                 currentField: singleChoiceField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -271,7 +271,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -288,7 +288,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -305,7 +305,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -322,7 +322,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -339,7 +339,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -356,7 +356,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -373,7 +373,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -392,7 +392,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key,
                 rl: mockRl,
             })
@@ -414,7 +414,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -436,7 +436,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 2,
+                focusedIndex: 2,
                 key,
                 rl: mockRl,
             })
@@ -459,7 +459,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields,
                 currentField: field,
-                selectedIndex: 2,
+                focusedIndex: 2,
                 key,
                 rl: mockRl,
             })
@@ -487,7 +487,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [emptyChoicesField],
                 currentField: emptyChoicesField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -509,7 +509,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [specialField],
                 currentField: specialField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -531,7 +531,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [whitespaceField],
                 currentField: whitespaceField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -553,7 +553,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [emptyStringField],
                 currentField: emptyStringField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -575,7 +575,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [numericField],
                 currentField: numericField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -600,7 +600,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [longField],
                 currentField: longField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -621,7 +621,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: originalFields,
                 currentField: field,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key,
                 rl: mockRl,
             })
@@ -638,7 +638,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [originalField],
                 currentField: originalField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -661,7 +661,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [complexField],
                 currentField: complexField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -684,7 +684,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -702,7 +702,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -720,7 +720,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -738,7 +738,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -762,7 +762,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [caseField],
                 currentField: caseField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -784,7 +784,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [caseField],
                 currentField: caseField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -804,7 +804,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -822,7 +822,7 @@ describe('editRadioField', () => {
             const result = editRadioField({
                 fields: [field],
                 currentField: field,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -845,7 +845,7 @@ describe('editRadioField', () => {
             const leftResult = editRadioField({
                 fields: [singleField],
                 currentField: singleField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: leftKey,
                 rl: mockRl,
             })
@@ -853,7 +853,7 @@ describe('editRadioField', () => {
             const rightResult = editRadioField({
                 fields: [singleField],
                 currentField: singleField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: rightKey,
                 rl: mockRl,
             })

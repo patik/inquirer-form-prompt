@@ -15,7 +15,7 @@ type Props = {
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Key pressed by the user
@@ -56,7 +56,7 @@ function updateField({ currentField, key }: Pick<Props, 'currentField' | 'key'>)
 /**
  * Updates the entire `fields` array when one radio field is being edited
  */
-export function editRadioField({ fields, currentField, selectedIndex, key, rl }: Props): InternalFields {
+export function editRadioField({ fields, currentField, focusedIndex, key, rl }: Props): InternalFields {
     if (key.name !== 'left' && key.name !== 'right') {
         rl.clearLine(0)
         return fields
@@ -64,7 +64,7 @@ export function editRadioField({ fields, currentField, selectedIndex, key, rl }:
 
     const nextFields = [...fields]
     const nextField = updateField({ currentField, key })
-    nextFields[selectedIndex] = nextField
+    nextFields[focusedIndex] = nextField
 
     return nextFields
 }

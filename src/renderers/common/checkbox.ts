@@ -4,21 +4,21 @@ import type { InternalCheckboxField } from '../../util/types.js'
 
 function createChoiceRenderer(
     field: InternalCheckboxField,
-    isFieldSelected: boolean,
+    isFieldFocused: boolean,
 ): (choice: string, i: number) => string {
     const { highlightIndex = 0 } = field
 
     return function renderChoice(choice: string, i: number): string {
-        const isChoiceSelected = field.value?.includes(choice)
-        const icon = isChoiceSelected ? figures.checkboxOn : figures.checkboxOff
+        const isChoiceFocused = field.value?.includes(choice)
+        const icon = isChoiceFocused ? figures.checkboxOn : figures.checkboxOff
 
-        if (!isFieldSelected) {
+        if (!isFieldFocused) {
             return `${icon} ${choice}`
         }
 
         const isChoiceHighlighted = i === highlightIndex
 
-        if (isChoiceSelected) {
+        if (isChoiceFocused) {
             if (isChoiceHighlighted) {
                 return underline(bold(`${icon} ${choice}`))
             }
@@ -34,9 +34,9 @@ function createChoiceRenderer(
     }
 }
 
-export function renderCheckbox(field: InternalCheckboxField, isFieldSelected: boolean): string {
-    const formatter = isFieldSelected ? (x: string) => bgGray(x) : (x: string) => x
-    const renderChoice = createChoiceRenderer(field, isFieldSelected)
+export function renderCheckbox(field: InternalCheckboxField, isFieldFocused: boolean): string {
+    const formatter = isFieldFocused ? (x: string) => bgGray(x) : (x: string) => x
+    const renderChoice = createChoiceRenderer(field, isFieldFocused)
     const list = field.choices.map(renderChoice)
 
     return formatter(` ${list.join('  ')} `)

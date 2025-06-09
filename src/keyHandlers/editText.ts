@@ -21,7 +21,7 @@ type Props = {
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Readline instance
@@ -32,7 +32,7 @@ type Props = {
 /**
  * Updates the entire `fields` array when one text field is being edited
  */
-export function editTextField({ fields, currentField, key, selectedIndex, rl }: Props): InternalFields {
+export function editTextField({ fields, currentField, key, focusedIndex, rl }: Props): InternalFields {
     // Ignore left/right arrow keys for text fields, since we don't support a cursor, otherwise the value
     // would be overwritten with the last typed value, even if it was entered for a different field.
     if (key.name === 'left' || key.name === 'right') {
@@ -43,7 +43,7 @@ export function editTextField({ fields, currentField, key, selectedIndex, rl }: 
     const value = isPasting ? clipboard.readSync() : rl.line
     const nextFields = [...fields]
 
-    nextFields[selectedIndex] = {
+    nextFields[focusedIndex] = {
         ...currentField,
         value,
     }

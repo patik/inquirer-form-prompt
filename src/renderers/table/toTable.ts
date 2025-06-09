@@ -4,7 +4,7 @@ import { dim } from 'yoctocolors'
 import { fieldToTableRow } from './fieldToTableRow.js'
 import type { InternalFields } from '../../util/types.js'
 
-export function toTable(fields: InternalFields, selectedIndex: number): string {
+export function toTable(fields: InternalFields, focusedIndex: number): string {
     const tables: string[] = []
     let currentTable = new Table()
     let currentRows: Array<[string, string]> = []
@@ -27,13 +27,13 @@ export function toTable(fields: InternalFields, selectedIndex: number): string {
             return
         }
 
-        const result = fieldToTableRow(selectedIndex)(field, index)
+        const result = fieldToTableRow(focusedIndex)(field, index)
         if (!(result instanceof Separator)) {
             currentRows.push(result)
         }
 
-        const isSelected = selectedIndex === index
-        if (isSelected && !(field instanceof Separator) && field.description) {
+        const isFocused = focusedIndex === index
+        if (isFocused && !(field instanceof Separator) && field.description) {
             tableFooter = dim(`  ${field.description}`)
         }
     })

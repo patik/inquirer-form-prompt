@@ -51,18 +51,18 @@ describe('toLabelTop', () => {
     describe('Basic functionality', () => {
         it('should render a single field correctly', () => {
             const fields = [textField1]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] First Name: text"`)
         })
 
         it('should render multiple fields with correct focus state', () => {
             const fields = [textField1, textField2, booleanField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -77,18 +77,18 @@ describe('toLabelTop', () => {
 
         it('should handle empty fields array', () => {
             const fields: InternalFormField[] = []
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toBe('')
         })
 
-        it('should handle selectedIndex out of bounds', () => {
+        it('should handle focusedIndex out of bounds', () => {
             const fields = [textField1, textField2]
-            const selectedIndex = 5
+            const focusedIndex = 5
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -99,11 +99,11 @@ describe('toLabelTop', () => {
             )
         })
 
-        it('should handle negative selectedIndex', () => {
+        it('should handle negative focusedIndex', () => {
             const fields = [textField1, textField2]
-            const selectedIndex = -1
+            const focusedIndex = -1
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -118,45 +118,45 @@ describe('toLabelTop', () => {
     describe('Field types', () => {
         it('should render text fields correctly', () => {
             const fields = [textField1]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] First Name: text"`)
         })
 
         it('should render boolean fields correctly', () => {
             const fields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] Subscribe to newsletter: boolean"`)
         })
 
         it('should render radio fields correctly', () => {
             const fields = [radioField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] Preferred contact: radio"`)
         })
 
         it('should render checkbox fields correctly', () => {
             const fields = [checkboxField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] Interests: checkbox"`)
         })
 
         it('should render mixed field types correctly', () => {
             const fields = [textField1, booleanField, radioField, checkboxField]
-            const selectedIndex = 2
+            const focusedIndex = 2
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -176,9 +176,9 @@ describe('toLabelTop', () => {
         it('should render a single separator correctly', () => {
             const separator = new Separator('--- Personal Info ---')
             const fields = [separator]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`
               "
@@ -191,9 +191,9 @@ describe('toLabelTop', () => {
             const separator1 = new Separator('--- Personal Info ---')
             const separator2 = new Separator('--- Preferences ---')
             const fields = [separator1, textField1, textField2, separator2, booleanField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -216,9 +216,9 @@ describe('toLabelTop', () => {
             const separator2 = new Separator('--- Section 2 ---')
             const separator3 = new Separator('--- Section 3 ---')
             const fields = [separator1, separator2, separator3, textField1]
-            const selectedIndex = 3
+            const focusedIndex = 3
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -239,9 +239,9 @@ describe('toLabelTop', () => {
         it('should handle separator at the end', () => {
             const separator = new Separator('--- End ---')
             const fields = [textField1, separator]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`
               "[FOCUSED][NORMAL] First Name: text
@@ -255,9 +255,9 @@ describe('toLabelTop', () => {
             const separator1 = new Separator('--- Section 1 ---')
             const separator2 = new Separator('--- Section 2 ---')
             const fields = [separator1, separator2]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`
               "
@@ -272,9 +272,9 @@ describe('toLabelTop', () => {
         it('should handle separators with empty string', () => {
             const separator = new Separator('')
             const fields = [textField1, separator, textField2]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`
               "[FOCUSED][NORMAL] First Name: text
@@ -289,10 +289,10 @@ describe('toLabelTop', () => {
     describe('Dense mode', () => {
         it('should render fields in dense mode correctly', () => {
             const fields = [textField1, textField2]
-            const selectedIndex = 0
+            const focusedIndex = 0
             const dense = true
 
-            const result = toLabelTop(fields, selectedIndex, dense)
+            const result = toLabelTop(fields, focusedIndex, dense)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -305,10 +305,10 @@ describe('toLabelTop', () => {
         it('should render fields with separators in dense mode', () => {
             const separator = new Separator('--- Personal Info ---')
             const fields = [separator, textField1, textField2]
-            const selectedIndex = 1
+            const focusedIndex = 1
             const dense = true
 
-            const result = toLabelTop(fields, selectedIndex, dense)
+            const result = toLabelTop(fields, focusedIndex, dense)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -322,10 +322,10 @@ describe('toLabelTop', () => {
 
         it('should use normal spacing when dense is false', () => {
             const fields = [textField1, textField2]
-            const selectedIndex = 0
+            const focusedIndex = 0
             const dense = false
 
-            const result = toLabelTop(fields, selectedIndex, dense)
+            const result = toLabelTop(fields, focusedIndex, dense)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -338,9 +338,9 @@ describe('toLabelTop', () => {
 
         it('should use normal spacing when dense is undefined', () => {
             const fields = [textField1, textField2]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -368,9 +368,9 @@ describe('toLabelTop', () => {
                 contactSeparator,
                 checkboxField,
             ]
-            const selectedIndex = 4
+            const focusedIndex = 4
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -397,9 +397,8 @@ describe('toLabelTop', () => {
         it('should handle form starting with fields before separators', () => {
             const separator = new Separator('--- Additional Info ---')
             const fields = [textField1, booleanField, separator, radioField]
-            const selectedIndex = 1
-
-            const result = toLabelTop(fields, selectedIndex)
+            const focusedIndex = 1
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -419,9 +418,9 @@ describe('toLabelTop', () => {
             const separator2 = new Separator('--- Empty Section ---')
             const separator3 = new Separator('--- Section 3 ---')
             const fields = [separator1, textField1, separator2, separator3, textField2]
-            const selectedIndex = 4
+            const focusedIndex = 4
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -444,10 +443,10 @@ describe('toLabelTop', () => {
             const separator1 = new Separator('--- Personal ---')
             const separator2 = new Separator('--- Settings ---')
             const fields = [separator1, textField1, textField2, separator2, booleanField]
-            const selectedIndex = 2
+            const focusedIndex = 2
             const dense = true
 
-            const result = toLabelTop(fields, selectedIndex, dense)
+            const result = toLabelTop(fields, focusedIndex, dense)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -471,9 +470,9 @@ describe('toLabelTop', () => {
                 value: 'test',
             }
             const fields = [specialField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(`"[FOCUSED][NORMAL] Field with "quotes" & symbols!: text"`)
         })
@@ -481,9 +480,9 @@ describe('toLabelTop', () => {
         it('should handle separators with special characters', () => {
             const separator = new Separator('=== Special: Chars & "Quotes" ===')
             const fields = [separator, textField1]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `
@@ -502,9 +501,9 @@ describe('toLabelTop', () => {
                 value: 'test',
             }
             const fields = [longField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `"[FOCUSED][NORMAL] This is a very long field label that might cause layout issues in some contexts but should be handled gracefully: text"`,
@@ -529,9 +528,9 @@ describe('toLabelTop', () => {
             const separator1 = new Separator('--- Section A ---')
             const separator2 = new Separator('--- Section B ---')
             const fields = [separator1, textField1, textField2, separator2, booleanField, radioField]
-            const selectedIndex = 4
+            const focusedIndex = 4
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             // Fields in the same section should be joined with normal row spacing
             // Different sections should be separated by section spacing
@@ -557,9 +556,9 @@ describe('toLabelTop', () => {
             const separator1 = new Separator('--- Single Field Section ---')
             const separator2 = new Separator('--- Another Section ---')
             const fields = [separator1, textField1, separator2, booleanField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
-            const result = toLabelTop(fields, selectedIndex)
+            const result = toLabelTop(fields, focusedIndex)
 
             expect(result).toMatchInlineSnapshot(
                 `

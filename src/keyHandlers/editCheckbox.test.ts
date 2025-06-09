@@ -62,7 +62,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -80,7 +80,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -102,7 +102,7 @@ describe('editCheckboxField', () => {
                 fields: [singleChoiceField],
                 currentField: singleChoiceField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -124,7 +124,7 @@ describe('editCheckboxField', () => {
                 fields: [emptyChoicesField],
                 currentField: emptyChoicesField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -144,7 +144,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -162,7 +162,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -184,7 +184,7 @@ describe('editCheckboxField', () => {
                 fields: [singleChoiceField],
                 currentField: singleChoiceField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -206,7 +206,7 @@ describe('editCheckboxField', () => {
                 fields: [emptyChoicesField],
                 currentField: emptyChoicesField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -226,7 +226,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -245,7 +245,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -264,7 +264,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -283,7 +283,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -302,7 +302,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -321,7 +321,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -346,7 +346,7 @@ describe('editCheckboxField', () => {
                 fields: [emptyChoicesField],
                 currentField: emptyChoicesField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -379,7 +379,7 @@ describe('editCheckboxField', () => {
                 fields: [fieldWithUndefinedHighlight],
                 currentField: fieldWithUndefinedHighlight as InternalCheckboxField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -399,7 +399,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -415,7 +415,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -425,7 +425,7 @@ describe('editCheckboxField', () => {
     })
 
     describe('multiple fields scenarios', () => {
-        it('should only modify the field at selectedIndex', () => {
+        it('should only modify the field at focusedIndex', () => {
             const field1 = { ...checkboxField, label: 'Field 1' }
             const field2 = { ...checkboxField, label: 'Field 2', highlightIndex: 1 }
             const field3 = { ...checkboxField, label: 'Field 3' }
@@ -437,7 +437,7 @@ describe('editCheckboxField', () => {
                 fields,
                 currentField: field2,
                 key,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 rl: mockRl,
             })
 
@@ -455,7 +455,7 @@ describe('editCheckboxField', () => {
                 fields,
                 currentField: checkboxField,
                 key,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 rl: mockRl,
             })
 
@@ -482,7 +482,7 @@ describe('editCheckboxField', () => {
                 fields: [specialField],
                 currentField: specialField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -505,7 +505,7 @@ describe('editCheckboxField', () => {
                 fields: [duplicateField],
                 currentField: duplicateField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -532,7 +532,7 @@ describe('editCheckboxField', () => {
                 fields: [longField],
                 currentField: longField,
                 key: leftKey,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -540,7 +540,7 @@ describe('editCheckboxField', () => {
                 fields: [longField],
                 currentField: longField,
                 key: rightKey,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -570,7 +570,7 @@ describe('editCheckboxField', () => {
                 fields: [fieldAtStart],
                 currentField: fieldAtStart,
                 key: leftKey,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -578,7 +578,7 @@ describe('editCheckboxField', () => {
                 fields: [fieldAtEnd],
                 currentField: fieldAtEnd,
                 key: rightKey,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -598,7 +598,7 @@ describe('editCheckboxField', () => {
                 fields: originalFields,
                 currentField: checkboxField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -615,7 +615,7 @@ describe('editCheckboxField', () => {
                 fields: [originalField],
                 currentField: originalField,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 
@@ -631,7 +631,7 @@ describe('editCheckboxField', () => {
                 fields: [field],
                 currentField: field,
                 key,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 rl: mockRl,
             })
 

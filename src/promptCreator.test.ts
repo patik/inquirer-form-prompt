@@ -186,11 +186,11 @@ describe('formPrompt', () => {
             const screen = getScreen()
             expect(screen).toContain('First selectable field')
             expect(screen).toContain('Second field')
-            // The first selectable field should be selected (indicated by arrow)
+            // The first selectable field should be focused (indicated by arrow)
             expect(screen).toContain('→')
         })
 
-        it('should show field description when field is selected', async () => {
+        it('should show field description when field is focused', async () => {
             const { getScreen } = await render(formPrompt, {
                 fields: [
                     {
@@ -236,7 +236,7 @@ describe('formPrompt', () => {
                 ],
             })
 
-            // Initially, first field should be selected
+            // Initially, first field should be focused
             expect(getScreen()).toContain('→ First Field')
 
             // Navigate down to second field

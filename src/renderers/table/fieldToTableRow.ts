@@ -6,29 +6,29 @@ import { renderBoolean } from '../common/boolean.js'
 import { renderCheckbox } from '../common/checkbox.js'
 import { renderRadio } from '../common/radio.js'
 
-function renderRightColumn(field: InternalFormField, isSelected: boolean): string {
+function renderRightColumn(field: InternalFormField, isFocused: boolean): string {
     const { type, value } = field
 
     if (type === 'radio') {
-        return renderRadio(field, isSelected)
+        return renderRadio(field, isFocused)
     }
 
     if (type === 'checkbox') {
-        return renderCheckbox(field, isSelected)
+        return renderCheckbox(field, isFocused)
     }
 
     if (type === 'boolean') {
-        return renderBoolean(field, isSelected)
+        return renderBoolean(field, isFocused)
     }
 
-    return isSelected && value ? bgGray(value) : value || ' '
+    return isFocused && value ? bgGray(value) : value || ' '
 }
 
 /**
- * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
+ * Generates a `renderField()` function when a particular field is focused. The function can be passed to array.map for the entire list of fields in order to build a table.
  */
 export function fieldToTableRow(
-    selectedIndex: number,
+    focusedIndex: number,
 ): (field: InternalField, index: number) => [string, string] | Separator {
     /**
      * Takes a `Field` and returns a two-column row to be used in a table
@@ -38,10 +38,10 @@ export function fieldToTableRow(
             return field
         }
 
-        const isSelected = selectedIndex === index
+        const isFocused = focusedIndex === index
         const { label } = field
-        const left = isSelected ? green(`${figures.arrowRight} ${label}`) : `  ${label}`
+        const left = isFocused ? green(`${figures.arrowRight} ${label}`) : `  ${label}`
 
-        return [left, renderRightColumn(field, isSelected)]
+        return [left, renderRightColumn(field, isFocused)]
     }
 }

@@ -21,12 +21,12 @@ type Props = {
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
-     * State setter for selectedIndex
+     * State setter for focusedIndex
      */
-    setSelectedIndex: (newValue: number) => void
+    setFocusedIndex: (newValue: number) => void
 
     /**
      * Readline instance
@@ -57,9 +57,9 @@ function previousNonSeparatorIndex(fields: Fields, searchFromIndex: number): num
 /**
  * Handles navigation of the field list. Returns true if it took action, or false if it didn't take action (which means some other handler needs to do something)
  */
-export function handleNavigation({ fields, selectedIndex, setSelectedIndex, key, rl }: Props): boolean {
+export function handleNavigation({ fields, focusedIndex, setFocusedIndex, key, rl }: Props): boolean {
     if (fields.length === 0) {
-        setSelectedIndex(0)
+        setFocusedIndex(0)
         return true
     }
 
@@ -68,23 +68,23 @@ export function handleNavigation({ fields, selectedIndex, setSelectedIndex, key,
 
     if (goToPrevious) {
         rl.clearLine(0)
-        if (selectedIndex === 0) {
-            setSelectedIndex(previousNonSeparatorIndex(fields, 0))
+        if (focusedIndex === 0) {
+            setFocusedIndex(previousNonSeparatorIndex(fields, 0))
             return true
         }
 
-        setSelectedIndex(previousNonSeparatorIndex(fields, selectedIndex))
+        setFocusedIndex(previousNonSeparatorIndex(fields, focusedIndex))
         return true
     }
 
     if (goToNext) {
         rl.clearLine(0)
-        if (selectedIndex === fields.length - 1) {
-            setSelectedIndex(nextNonSeparatorIndex(fields, -1))
+        if (focusedIndex === fields.length - 1) {
+            setFocusedIndex(nextNonSeparatorIndex(fields, -1))
             return true
         }
 
-        setSelectedIndex(nextNonSeparatorIndex(fields, selectedIndex))
+        setFocusedIndex(nextNonSeparatorIndex(fields, focusedIndex))
         return true
     }
 

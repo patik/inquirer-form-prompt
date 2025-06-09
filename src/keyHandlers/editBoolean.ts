@@ -15,7 +15,7 @@ type Props = {
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Key pressed by the user
@@ -31,7 +31,7 @@ type Props = {
 /**
  * Updates the entire `fields` array when one boolean field is being edited
  */
-export function editBooleanField({ fields, currentField, selectedIndex, key, rl }: Props): InternalFields {
+export function editBooleanField({ fields, currentField, focusedIndex, key, rl }: Props): InternalFields {
     if (key.name !== 'left' && key.name !== 'right') {
         rl.clearLine(0)
         return fields
@@ -39,7 +39,7 @@ export function editBooleanField({ fields, currentField, selectedIndex, key, rl 
 
     const nextFields = [...fields]
 
-    nextFields[selectedIndex] = {
+    nextFields[focusedIndex] = {
         ...currentField,
         value: !currentField.value,
     }

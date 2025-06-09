@@ -15,7 +15,7 @@ type Props = {
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Key pressed by the user
@@ -65,14 +65,14 @@ function updateField({ currentField, key, rl }: Pick<Props, 'currentField' | 'ke
 /**
  * Updates the entire `fields` array when one checkbox field is being edited
  */
-export function editCheckboxField({ fields, currentField, key, selectedIndex, rl }: Props): InternalFields {
+export function editCheckboxField({ fields, currentField, key, focusedIndex, rl }: Props): InternalFields {
     if (key.name !== 'left' && key.name !== 'right' && key.name !== 'space') {
         return fields
     }
 
     const nextFields = [...fields]
     const nextField = updateField({ currentField, key, rl })
-    nextFields[selectedIndex] = nextField
+    nextFields[focusedIndex] = nextField
 
     return nextFields
 }

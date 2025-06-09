@@ -2,12 +2,10 @@ import { Separator } from '@inquirer/core'
 import type { FormTheme, InternalFields } from '../../util/types.js'
 import { fieldToLabelTop } from './fieldToLabelTop.js'
 
-const rowSpacer = '\n\n'
-const rowSpacerDense = '\n'
-const sectionSpacer = '\n'
-const sectionSpacerDense = '\n'
+const rowSpacer = (dense?: boolean): string => (dense ? '\n' : '\n\n')
+const sectionSpacer = (dense?: boolean): string => (dense ? '\n' : '\n')
 
-export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?: FormTheme['dense']): string {
+export function toLabelTop(fields: InternalFields, focusedIndex: number, dense?: FormTheme['dense']): string {
     const outputRows: string[] = []
     let currentSection: Array<string> = []
     let currentSectionRows: Array<string> = []
@@ -16,7 +14,7 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?
         if (field instanceof Separator) {
             if (currentSectionRows.length > 0) {
                 currentSection.push(...currentSectionRows)
-                outputRows.push(currentSection.join(dense ? rowSpacerDense : rowSpacer))
+                outputRows.push(currentSection.join(rowSpacer(dense)))
                 currentSectionRows = []
             }
 
@@ -32,7 +30,7 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?
             return
         }
 
-        const isFocused = index === selectedIndex
+        const isFocused = index === focusedIndex
         const result = fieldToLabelTop({ field, isFocused, dense })
         currentSectionRows.push(result)
     })
@@ -40,8 +38,8 @@ export function toLabelTop(fields: InternalFields, selectedIndex: number, dense?
     // Push the last section if it's not empty
     if (currentSectionRows.length > 0) {
         currentSection.push(...currentSectionRows)
-        outputRows.push(currentSection.join(dense ? rowSpacerDense : rowSpacer))
+        outputRows.push(currentSection.join(rowSpacer(dense)))
     }
 
-    return outputRows.join(dense ? sectionSpacerDense : sectionSpacer)
+    return outputRows.join(sectionSpacer(dense))
 }

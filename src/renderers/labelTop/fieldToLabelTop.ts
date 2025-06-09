@@ -62,7 +62,7 @@ function renderValue({ field, isFocused }: { field: InternalFormField; isFocused
 }
 
 /**
- * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
+ * Generates a `renderField()` function when a particular field is focused. The function can be passed to array.map for the entire list of fields in order to build a table.
  */
 export function fieldToLabelTop({
     field,

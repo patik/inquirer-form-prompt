@@ -6,17 +6,17 @@ import { fieldToTableRow } from './fieldToTableRow.js'
 
 // Mock the renderer functions
 vi.mock('../common/boolean.js', () => ({
-    renderBoolean: vi.fn((field, isSelected) => (isSelected ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
+    renderBoolean: vi.fn((_field, isFocused) => (isFocused ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
 }))
 
 vi.mock('../common/checkbox.js', () => ({
-    renderCheckbox: vi.fn((field, isSelected) =>
-        isSelected ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
+    renderCheckbox: vi.fn((_field, isFocused) =>
+        isFocused ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
     ),
 }))
 
 vi.mock('../common/radio.js', () => ({
-    renderRadio: vi.fn((field, isSelected) => (isSelected ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
+    renderRadio: vi.fn((_field, isFocused) => (isFocused ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
 }))
 
 describe('fieldToTableRow', () => {
@@ -205,14 +205,14 @@ describe('fieldToTableRow', () => {
     })
 
     describe('edge cases', () => {
-        it('should handle negative selectedIndex', () => {
+        it('should handle negative focusedIndex', () => {
             const renderField = fieldToTableRow(-1)
             const result = renderField(textField, 0)
 
             expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
-        it('should handle selectedIndex larger than array', () => {
+        it('should handle focusedIndex larger than array', () => {
             const renderField = fieldToTableRow(100)
             const result = renderField(textField, 0)
 
