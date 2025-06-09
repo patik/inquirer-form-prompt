@@ -1,5 +1,5 @@
 import { Separator } from '@inquirer/core'
-import type { FormTheme, InternalFields } from '../util/types.js'
+import type { FormTheme, InternalFields } from '../../util/types.js'
 import { fieldToLabelTop } from './fieldToLabelTop.js'
 
 const rowSpacer = '\n\n'

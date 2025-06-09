@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
 import { bgGray, bold, underline } from 'yoctocolors'
-import type { BooleanField } from '../util/types.js'
+import type { BooleanField } from '../../util/types.js'
 
 export function renderBoolean(field: BooleanField, isFieldSelected: boolean): string {
     const { value } = field

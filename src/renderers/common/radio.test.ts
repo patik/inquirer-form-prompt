@@ -1,7 +1,7 @@
 import figures from '@inquirer/figures'
 import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline, white } from 'yoctocolors'
-import type { RadioField } from '../util/types.js'
+import type { RadioField } from '../../util/types.js'
 import { renderRadio } from './radio.js'
 
 describe('renderRadio', () => {

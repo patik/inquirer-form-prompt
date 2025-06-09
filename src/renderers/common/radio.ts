@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
 import { bgGray, bold, underline } from 'yoctocolors'
-import type { RadioField } from '../util/types.js'
+import type { RadioField } from '../../util/types.js'
 
 function createChoiceRenderer(field: RadioField, isFieldSelected: boolean): (choice: string) => string {
     return function renderChoice(choice: string): string {

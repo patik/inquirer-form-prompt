@@ -7,8 +7,8 @@ import { editCheckboxField } from './keyHandlers/editCheckbox.js'
 import { editRadioField } from './keyHandlers/editRadio.js'
 import { editTextField } from './keyHandlers/editText.js'
 import { handleNavigation } from './keyHandlers/handleNavigation.js'
-import { toLabelTop } from './renderers/toLabelTop.js'
-import { toTable } from './renderers/toTable.js'
+import { toLabelTop } from './renderers/labelTop/toLabelTop.js'
+import { toTable } from './renderers/table/toTable.js'
 import type {
     Config,
     Fields,
