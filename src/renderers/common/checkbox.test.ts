@@ -3,7 +3,7 @@
 
 import figures from '@inquirer/figures'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline, white } from 'yoctocolors'
+import { bgGray, bold, underline } from 'yoctocolors'
 import type { InternalCheckboxField } from '../../util/types.js'
 import { renderCheckbox } from './checkbox.js'
 
@@ -71,9 +71,7 @@ describe('renderCheckbox', () => {
             const field = { ...baseField }
             const result = renderCheckbox(field, true)
             const expected = bgGray(
-                white(
-                    ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `,
-                ),
+                ` ${underline(bold(`${figures.checkboxOff} Option 1`))}  ${figures.checkboxOff} Option 2  ${figures.checkboxOff} Option 3 `,
             )
 
             expect(result).toBe(expected)

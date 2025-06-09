@@ -1,21 +1,21 @@
 import { Separator } from '@inquirer/core'
 import { describe, expect, it, vi } from 'vitest'
-import { bgGray, green, white } from 'yoctocolors'
+import { bgGray, green } from 'yoctocolors'
 import type { BooleanField, InternalCheckboxField, RadioField, TextField } from '../../util/types.js'
 import { fieldToTableRow } from './fieldToTableRow.js'
 
 // Mock the renderer functions
-vi.mock('./boolean.js', () => ({
+vi.mock('../common/boolean.js', () => ({
     renderBoolean: vi.fn((field, isSelected) => (isSelected ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
 }))
 
-vi.mock('./checkbox.js', () => ({
+vi.mock('../common/checkbox.js', () => ({
     renderCheckbox: vi.fn((field, isSelected) =>
         isSelected ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
     ),
 }))
 
-vi.mock('./radio.js', () => ({
+vi.mock('../common/radio.js', () => ({
     renderRadio: vi.fn((field, isSelected) => (isSelected ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
 }))
 
@@ -64,7 +64,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(emptyTextField, 0)
 
-            expect(result).toEqual([green('→ Empty Field'), bgGray(' ')])
+            expect(result).toEqual([green('→ Empty Field'), ' '])
         })
 
         it('should render text field with undefined value as single space', () => {
@@ -75,7 +75,7 @@ describe('fieldToTableRow', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(undefinedTextField, 0)
 
-            expect(result).toEqual([green('→ Undefined Field'), bgGray(' ')])
+            expect(result).toEqual([green('→ Undefined Field'), ' '])
         })
 
         it('should render boolean field with mocked renderer', () => {
@@ -243,9 +243,7 @@ describe('fieldToTableRow', () => {
             expect(result).toEqual([
                 green('→ Long Field'),
                 bgGray(
-                    white(
-                        'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
-                    ),
+                    'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
                 ),
             ])
         })

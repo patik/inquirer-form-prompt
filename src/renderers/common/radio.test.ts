@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline, white } from 'yoctocolors'
+import { bgGray, bold, underline } from 'yoctocolors'
 import type { RadioField } from '../../util/types.js'
 import { renderRadio } from './radio.js'
 
@@ -115,7 +115,7 @@ describe('renderRadio', () => {
             const field = { ...baseField }
             const result = renderRadio(field, true)
             const expected = bgGray(
-                white(` ${figures.radioOff} Option 1  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `),
+                ` ${figures.radioOff} Option 1  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `,
             )
 
             expect(result).toBe(expected)
@@ -177,7 +177,7 @@ describe('renderRadio', () => {
             const field = { ...baseField, value: 'Non-existent Option' }
             const result = renderRadio(field, true)
             const expected = bgGray(
-                white(` ${figures.radioOff} Option 1  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `),
+                ` ${figures.radioOff} Option 1  ${figures.radioOff} Option 2  ${figures.radioOff} Option 3 `,
             )
 
             expect(result).toBe(expected)

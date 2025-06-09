@@ -182,7 +182,8 @@ describe('toLabelTop', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "
-              --- Personal Info ---"
+--- Personal Info ---
+"
             `)
         })
 
@@ -198,11 +199,13 @@ describe('toLabelTop', () => {
                 `
               "
               --- Personal Info ---
+
               [FOCUSED][NORMAL] First Name: text
 
               [UNFOCUSED][NORMAL] Last Name: text
 
               --- Preferences ---
+
               [UNFOCUSED][NORMAL] Subscribe to newsletter: boolean"
             `,
             )
@@ -222,9 +225,12 @@ describe('toLabelTop', () => {
               "
               --- Section 1 ---
 
+
               --- Section 2 ---
 
+
               --- Section 3 ---
+
               [FOCUSED][NORMAL] First Name: text"
             `,
             )
@@ -240,7 +246,8 @@ describe('toLabelTop', () => {
             expect(result).toMatchInlineSnapshot(`
               "[FOCUSED][NORMAL] First Name: text
 
-              --- End ---"
+--- End ---
+"
             `)
         })
 
@@ -254,9 +261,11 @@ describe('toLabelTop', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "
-              --- Section 1 ---
+--- Section 1 ---
 
-              --- Section 2 ---"
+
+--- Section 2 ---
+"
             `)
         })
 
@@ -271,6 +280,7 @@ describe('toLabelTop', () => {
               "[FOCUSED][NORMAL] First Name: text
 
               [2m──────────────[22m
+
               [UNFOCUSED][NORMAL] Last Name: text"
             `)
         })
@@ -366,16 +376,19 @@ describe('toLabelTop', () => {
                 `
               "
               --- Personal Information ---
+
               [UNFOCUSED][NORMAL] First Name: text
 
               [UNFOCUSED][NORMAL] Last Name: text
 
               --- Preferences ---
+
               [FOCUSED][NORMAL] Subscribe to newsletter: boolean
 
               [UNFOCUSED][NORMAL] Preferred contact: radio
 
               --- Contact ---
+
               [UNFOCUSED][NORMAL] Interests: checkbox"
             `,
             )
@@ -395,6 +408,7 @@ describe('toLabelTop', () => {
               [FOCUSED][NORMAL] Subscribe to newsletter: boolean
 
               --- Additional Info ---
+
               [UNFOCUSED][NORMAL] Preferred contact: radio"
             `,
             )
@@ -413,11 +427,14 @@ describe('toLabelTop', () => {
                 `
               "
               --- Section 1 ---
+
               [UNFOCUSED][NORMAL] First Name: text
 
               --- Empty Section ---
 
+
               --- Section 3 ---
+
               [FOCUSED][NORMAL] Last Name: text"
             `,
             )
@@ -472,6 +489,7 @@ describe('toLabelTop', () => {
                 `
               "
               === Special: Chars & "Quotes" ===
+
               [FOCUSED][NORMAL] First Name: text"
             `,
             )
@@ -521,11 +539,13 @@ describe('toLabelTop', () => {
                 `
               "
               --- Section A ---
+
               [UNFOCUSED][NORMAL] First Name: text
 
               [UNFOCUSED][NORMAL] Last Name: text
 
               --- Section B ---
+
               [FOCUSED][NORMAL] Subscribe to newsletter: boolean
 
               [UNFOCUSED][NORMAL] Preferred contact: radio"
@@ -545,9 +565,11 @@ describe('toLabelTop', () => {
                 `
               "
               --- Single Field Section ---
+
               [FOCUSED][NORMAL] First Name: text
 
               --- Another Section ---
+
               [UNFOCUSED][NORMAL] Subscribe to newsletter: boolean"
             `,
             )
