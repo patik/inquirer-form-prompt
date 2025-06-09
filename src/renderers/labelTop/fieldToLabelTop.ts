@@ -31,7 +31,8 @@ function displayField({
     const borderStyle = isFocused ? 'bold' : 'round'
     const footer = isFocused && field.description ? dim(`  ${field.description}`) : ''
     const valueLength = stripAnsi(value).length + 2
-    const fieldLength = Math.max(dense ? 20 : 50, valueLength)
+    const labelLength = label.length + 7 // Magic number assures that that label isn't truncated and all fields show the value starting at the same column
+    const fieldLength = Math.max(dense ? 20 : 50, labelLength, valueLength)
 
     return `${boxen(value, {
         ...staticOptions,

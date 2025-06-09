@@ -1,5 +1,6 @@
 import { Separator } from '@inquirer/core'
 import { exit } from 'node:process'
+import type { FormTheme } from './index.js'
 import form from './index.js'
 
 const errorHander = (error: unknown): void => {
@@ -13,7 +14,15 @@ const errorHander = (error: unknown): void => {
 
 process.on('uncaughtException', errorHander)
 
-export const demo = async (): Promise<void> => {
+export const demo = async (
+    {
+        variant = 'table',
+        dense = false,
+    }: {
+        variant: FormTheme['variant']
+        dense: FormTheme['dense']
+    } = { variant: 'table', dense: false },
+): Promise<void> => {
     console.log()
     try {
         const answers = await form({
@@ -62,7 +71,10 @@ export const demo = async (): Promise<void> => {
                     description: 'What activities interest you most? (Select all that apply)',
                 },
             ],
-            theme: { variant: 'label-top', dense: false },
+            theme: {
+                variant,
+                dense,
+            },
         })
 
         console.log('\n🎯 Your Travel Preferences:\n')
@@ -89,7 +101,12 @@ export const demo = async (): Promise<void> => {
 }
 
 // If the --run flag was used, run it immediately
+// Read --variant and --dense flags from arguments
 if (process.argv.includes('--run')) {
-    await demo()
+    await demo({
+        variant:
+            (process.argv.find((arg) => arg.startsWith('--variant='))?.slice(10) as FormTheme['variant']) || 'table',
+        dense: process.argv.includes('--dense'),
+    })
     exit(0)
 }

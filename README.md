@@ -177,3 +177,12 @@ In this example, "Trip Details" and "Preferences" are both separators:
 With this variant, the label is displayed above the input field. If a separator is included, it will split the fields into separate tables.
 
 <img src="https://github.com/user-attachments/assets/db8e6a02-ce9e-4b57-b1cb-2f361fda4ee9" width="920" alt="">
+
+This variant also supports a `dense` option which removes some of the extra spacing around the fields:
+
+```tsx
+theme: {
+    variant: 'label-top',
+    dense: true
+}
+```

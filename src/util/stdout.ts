@@ -9,7 +9,7 @@ export async function stdout(command: string): Promise<string> {
             if (err || stderr) {
                 reject(err || new Error(stderr))
             } else if (typeof stdout === 'string') {
-                resolve(stdout.trim())
+                resolve(stdout)
             }
         })
     })
