@@ -26,6 +26,7 @@
         "boxen": "^8.0.1",
         "cli-table3": "^0.6.5",
         "clipboardy": "^4.0.0",
+        "strip-ansi": "^7.1.0",
         "yoctocolors": "^2.1.1"
     },
     "devDependencies": {

@@ -1,10 +1,28 @@
 import { Separator } from '@inquirer/core'
+import figures from '@inquirer/figures'
 import { bgGray, green, white } from 'yoctocolors'
-import type { InternalField } from '../util/types.js'
+import type { InternalField, InternalFormField } from '../util/types.js'
 import { renderBoolean } from './boolean.js'
 import { renderCheckbox } from './checkbox.js'
 import { renderRadio } from './radio.js'
-import figures from '@inquirer/figures'
+
+function renderRightColumn(field: InternalFormField, isSelected: boolean): string {
+    const { type, value } = field
+
+    if (type === 'radio') {
+        return renderRadio(field, isSelected)
+    }
+
+    if (type === 'checkbox') {
+        return renderCheckbox(field, isSelected)
+    }
+
+    if (type === 'boolean') {
+        return renderBoolean(field, isSelected)
+    }
+
+    return isSelected ? bgGray(white(value || ' ')) : value || ' '
+}
 
 /**
  * Generates a `renderField()` function when a particular field is selected. The function can be passed to array.map for the entire list of fields in order to build a table.
@@ -21,29 +39,9 @@ export function fieldToTableRow(
         }
 
         const isSelected = selectedIndex === index
-        const { name, type, value } = field
+        const { name } = field
         const left = isSelected ? green(`${figures.arrowRight} ${name}`) : `  ${name}`
 
-        if (type === 'radio') {
-            const right = renderRadio(field, isSelected)
-
-            return [left, right]
-        }
-
-        if (type === 'checkbox') {
-            const right = renderCheckbox(field, isSelected)
-
-            return [left, right]
-        }
-
-        if (type === 'boolean') {
-            const right = renderBoolean(field, isSelected)
-
-            return [left, right]
-        }
-
-        const right = isSelected ? bgGray(white(value || ' ')) : value || ' '
-
-        return [left, right]
+        return [left, renderRightColumn(field, isSelected)]
     }
 }

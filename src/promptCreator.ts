@@ -1,3 +1,4 @@
+import type { KeypressEvent } from '@inquirer/core'
 import { isEnterKey, Separator, useKeypress, usePrefix, useState } from '@inquirer/core'
 import ansiEscapes from 'ansi-escapes'
 import { bold, dim } from 'yoctocolors'
@@ -6,8 +7,15 @@ import { editCheckboxField } from './keyHandlers/editCheckbox.js'
 import { editRadioField } from './keyHandlers/editRadio.js'
 import { editTextField } from './keyHandlers/editText.js'
 import { handleNavigation } from './keyHandlers/handleNavigation.js'
-import type { Config, Fields, InternalFields, ReturnedItems } from './util/types.js'
 import { toLabelTop } from './renderers/toLabelTop.js'
+import type {
+    Config,
+    Fields,
+    InquirerReadline,
+    InternalFields,
+    InternalFormField,
+    ReturnedItems,
+} from './util/types.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {
@@ -26,6 +34,44 @@ function getInitialIndex(fields: Fields): number {
     const firstNonSeparatorIndex = fields.findIndex((field) => !(field instanceof Separator))
 
     return firstNonSeparatorIndex >= 0 ? firstNonSeparatorIndex : 0
+}
+
+const updateFields = ({
+    fields,
+    currentField,
+    key,
+    setFields,
+    selectedIndex,
+    rl,
+}: {
+    fields: InternalFields
+    setFields: (newFields: InternalFields) => void
+    currentField: InternalFormField
+    key: KeypressEvent
+    selectedIndex: number
+    rl: InquirerReadline
+}): void => {
+    if (currentField.type === 'boolean') {
+        const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
+        setFields(nextFields)
+        return
+    }
+
+    if (currentField.type === 'radio') {
+        const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
+        setFields(nextFields)
+        return
+    }
+
+    if (currentField.type === 'checkbox') {
+        const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
+        setFields(nextFields)
+        return
+    }
+
+    const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
+    setFields(nextFields)
+    return
 }
 
 /**
@@ -58,28 +104,14 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
             return
         }
 
-        if (currentField.type === 'text') {
-            const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
-            setFields(nextFields)
-            return
-        }
-
-        if (currentField.type === 'radio') {
-            const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
-            setFields(nextFields)
-            return
-        }
-
-        if (currentField.type === 'checkbox') {
-            const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
-            setFields(nextFields)
-            return
-        }
-
-        const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
-
-        setFields(nextFields)
-        return
+        updateFields({
+            fields,
+            currentField,
+            key,
+            setFields,
+            selectedIndex,
+            rl,
+        })
     })
 
     const message = config.message ? bold(config.message) : ''
