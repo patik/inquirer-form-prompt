@@ -1,6 +1,3 @@
-import type { KeypressEvent } from '@inquirer/core'
-import { Separator } from '@inquirer/core'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type {
     BooleanField,
     InquirerReadline,
@@ -9,7 +6,10 @@ import type {
     InternalFields,
     RadioField,
     TextField,
-} from '../util/types.js'
+} from '@/util/types'
+import type { KeypressEvent } from '@inquirer/core'
+import { Separator } from '@inquirer/core'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { editCheckboxField } from './editCheckbox.js'
 
 describe('editCheckboxField', () => {

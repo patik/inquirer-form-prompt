@@ -1,7 +1,7 @@
+import type { InternalField, InternalFormField } from '@/util/types'
 import { Separator } from '@inquirer/core'
 import figures from '@inquirer/figures'
 import { bgGray, green } from 'yoctocolors'
-import type { InternalField, InternalFormField } from '../../util/types.js'
 import { renderBoolean } from '../common/boolean.js'
 import { renderCheckbox } from '../common/checkbox.js'
 import { renderRadio } from '../common/radio.js'

@@ -1,7 +1,7 @@
+import type { FormTheme, InternalFormField } from '@/util/types'
 import boxen from 'boxen'
 import stripAnsi from 'strip-ansi'
 import { dim } from 'yoctocolors'
-import type { FormTheme, InternalFormField } from '../../util/types.js'
 import { renderBoolean } from '../common/boolean.js'
 import { renderCheckbox } from '../common/checkbox.js'
 import { renderRadio } from '../common/radio.js'

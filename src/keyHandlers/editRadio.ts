@@ -1,5 +1,5 @@
+import type { InquirerReadline, InternalField, InternalFields, RadioField } from '@/util/types'
 import type { KeypressEvent } from '@inquirer/core'
-import type { InquirerReadline, InternalField, InternalFields, RadioField } from '../util/types.js'
 
 type Props = {
     /**

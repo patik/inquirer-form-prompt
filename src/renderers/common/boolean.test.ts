@@ -1,9 +1,9 @@
 /* eslint-disable no-control-regex */
 
+import type { BooleanField } from '@/util/types'
 import figures from '@inquirer/figures'
 import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline } from 'yoctocolors'
-import type { BooleanField } from '../../util/types.js'
 import { renderBoolean } from './boolean.js'
 
 describe('renderBoolean', () => {

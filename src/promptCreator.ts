@@ -1,3 +1,4 @@
+import type { Config, Fields, InquirerReadline, InternalFields, InternalFormField, ReturnedItems } from '@/util/types'
 import type { KeypressEvent } from '@inquirer/core'
 import { isEnterKey, Separator, useKeypress, usePrefix, useState } from '@inquirer/core'
 import ansiEscapes from 'ansi-escapes'
@@ -9,14 +10,6 @@ import { editTextField } from './keyHandlers/editText.js'
 import { handleNavigation } from './keyHandlers/handleNavigation.js'
 import { toLabelTop } from './renderers/labelTop/toLabelTop.js'
 import { toTable } from './renderers/table/toTable.js'
-import type {
-    Config,
-    Fields,
-    InquirerReadline,
-    InternalFields,
-    InternalFormField,
-    ReturnedItems,
-} from './util/types.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {
