@@ -1,6 +1,6 @@
 {
     "name": "inquirer-form-prompt",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "scripts": {
         "build": "tsc",
         "demo": "tsx ./src/demo.ts --run",
