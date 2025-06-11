@@ -845,7 +845,7 @@ describe('handleNavigation', () => {
         })
     })
 
-    describe('setfocusedIndex call patterns', () => {
+    describe('setFocusedIndex call patterns', () => {
         it('should only call setfocusedIndex once per navigation', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 1

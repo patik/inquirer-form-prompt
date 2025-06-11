@@ -161,7 +161,10 @@ Fields may be split into groups by placing separators between them in the `field
 The config object accepts a `theme` prop which can be used to specify a variant.
 
 ```tsx
-theme?: 'table' | 'label-top'
+theme?: {
+    variant: 'table' | 'label-top'
+    dense?: boolean
+}
 ```
 
 ### Table

@@ -3,7 +3,7 @@ import { exit } from 'node:process'
 import type { FormTheme } from './index.js'
 import form from './index.js'
 
-const errorHander = (error: unknown): void => {
+const errorHandler = (error: unknown): void => {
     if (error instanceof Error && error.name === 'ExitPromptError') {
         console.log('✨')
         exit(0)
@@ -12,7 +12,7 @@ const errorHander = (error: unknown): void => {
     }
 }
 
-process.on('uncaughtException', errorHander)
+process.on('uncaughtException', errorHandler)
 
 export const demo = async (
     {

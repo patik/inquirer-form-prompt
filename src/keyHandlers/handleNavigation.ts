@@ -3,7 +3,7 @@ import { isDownKey, isUpKey, Separator } from '@inquirer/core'
 import type { Fields, InquirerReadline } from '../util/types.js'
 
 /**
- * In reality, the shift key is included.
+ * Extend `KeypressEvent` to add the shift key, which is actually present at runtime.
  */
 type ActualKeypressEvent = KeypressEvent & { shift?: boolean }
 

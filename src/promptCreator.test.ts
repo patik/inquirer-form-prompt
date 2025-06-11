@@ -7,7 +7,7 @@ import { promptCreator } from './promptCreator.js'
 // Create a proper prompt function compatible with @inquirer/testing
 const formPrompt = createPrompt<ReturnedItems, Config>(promptCreator)
 
-describe('formPrompt', () => {
+describe('Form Prompt', () => {
     describe('Basic Rendering', () => {
         it('should render a form with text fields', async () => {
             const { getScreen } = await render(formPrompt, {
