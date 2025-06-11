@@ -1,5 +1,5 @@
-import type { BooleanField, InternalCheckboxField, RadioField, TextField } from '@/util/types'
 import { Separator } from '@inquirer/core'
+import type { BooleanField, InternalCheckboxField, RadioField, TextField } from 'src/util/types'
 import { describe, expect, it, vi } from 'vitest'
 import { bgGray, green } from 'yoctocolors'
 import { fieldToTableRow } from './fieldToTableRow.js'

@@ -1,8 +1,8 @@
-import type { Config, ReturnedItems } from '@/util/types'
 import { createPrompt, Separator } from '@inquirer/core'
 import { render } from '@inquirer/testing'
+import { promptCreator } from 'src/promptCreator'
+import type { Config, ReturnedItems } from 'src/util/types'
 import { describe, expect, it } from 'vitest'
-import { promptCreator } from './promptCreator.js'
 
 // Create a proper prompt function compatible with @inquirer/testing
 const formPrompt = createPrompt<ReturnedItems, Config>(promptCreator)

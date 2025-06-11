@@ -1,5 +1,5 @@
-import type { BooleanField, InternalCheckboxField, InternalFormField, RadioField, TextField } from '@/util/types'
 import { Separator } from '@inquirer/core'
+import type { BooleanField, InternalCheckboxField, InternalFormField, RadioField, TextField } from 'src/util/types'
 import { describe, expect, it, vi } from 'vitest'
 import { toLabelTop } from './toLabelTop.js'
 

@@ -1,6 +1,6 @@
-import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from '@/util/types'
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
+import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { editTextField } from './editText.js'
 

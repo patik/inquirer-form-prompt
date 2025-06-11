@@ -1,5 +1,5 @@
-import type { FormTheme, InternalFormField } from '@/util/types'
 import boxen from 'boxen'
+import type { FormTheme, InternalFormField } from 'src/util/types'
 import stripAnsi from 'strip-ansi'
 import { dim } from 'yoctocolors'
 import { renderBoolean } from '../common/boolean.js'

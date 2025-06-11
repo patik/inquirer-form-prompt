@@ -1,5 +1,5 @@
-import type { BooleanField, InquirerReadline, InternalFields } from '@/util/types'
 import type { KeypressEvent } from '@inquirer/core'
+import type { BooleanField, InquirerReadline, InternalFields } from 'src/util/types'
 
 type Props = {
     /**

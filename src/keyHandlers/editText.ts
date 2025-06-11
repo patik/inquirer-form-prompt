@@ -1,6 +1,6 @@
-import type { InquirerReadline, InternalFields, TextField } from '@/util/types'
 import type { KeypressEvent } from '@inquirer/core'
 import clipboard from 'clipboardy'
+import type { InquirerReadline, InternalFields, TextField } from 'src/util/types'
 
 type Props = {
     /**

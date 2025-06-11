@@ -1,6 +1,6 @@
-import type { InternalFields } from '@/util/types'
 import { Separator } from '@inquirer/core'
 import Table from 'cli-table3'
+import type { InternalFields } from 'src/util/types'
 import { dim } from 'yoctocolors'
 import { fieldToTableRow } from './fieldToTableRow.js'
 

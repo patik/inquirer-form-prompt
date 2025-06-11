@@ -1,5 +1,5 @@
-import type { RadioField } from '@/util/types'
 import figures from '@inquirer/figures'
+import type { RadioField } from 'src/util/types'
 import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline } from 'yoctocolors'
 import { renderRadio } from './radio.js'
