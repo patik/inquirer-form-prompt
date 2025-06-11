@@ -1,21 +1,21 @@
 import { Separator } from '@inquirer/core'
+import { fieldToTableRow } from 'src/renderers/table/fieldToTableRow'
 import type { BooleanField, InternalCheckboxField, RadioField, TextField } from 'src/util/types'
 import { describe, expect, it, vi } from 'vitest'
 import { bgGray, green } from 'yoctocolors'
-import { fieldToTableRow } from './fieldToTableRow.js'
 
 // Mock the renderer functions
-vi.mock('../common/boolean.js', () => ({
+vi.mock('src/renderers/common/boolean', () => ({
     renderBoolean: vi.fn((_field, isFocused) => (isFocused ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
 }))
 
-vi.mock('../common/checkbox.js', () => ({
+vi.mock('src/renderers/common/checkbox', () => ({
     renderCheckbox: vi.fn((_field, isFocused) =>
         isFocused ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
     ),
 }))
 
-vi.mock('../common/radio.js', () => ({
+vi.mock('src/renderers/common/radio', () => ({
     renderRadio: vi.fn((_field, isFocused) => (isFocused ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
 }))
 

@@ -1,11 +1,11 @@
 import boxen from 'boxen'
+import { renderBoolean } from 'src/renderers/common/boolean'
+import { renderCheckbox } from 'src/renderers/common/checkbox'
+import { renderRadio } from 'src/renderers/common/radio'
+import { renderText } from 'src/renderers/common/text'
 import type { FormTheme, InternalFormField } from 'src/util/types'
 import stripAnsi from 'strip-ansi'
 import { dim } from 'yoctocolors'
-import { renderBoolean } from '../common/boolean.js'
-import { renderCheckbox } from '../common/checkbox.js'
-import { renderRadio } from '../common/radio.js'
-import { renderText } from '../common/text.js'
 
 const staticOptions = {
     titleAlignment: 'left',

@@ -1,10 +1,10 @@
 /* eslint-disable no-control-regex */
 
 import figures from '@inquirer/figures'
+import { renderBoolean } from 'src/renderers/common/boolean'
 import type { BooleanField } from 'src/util/types'
 import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline } from 'yoctocolors'
-import { renderBoolean } from './boolean.js'
 
 describe('renderBoolean', () => {
     const baseField: BooleanField = {

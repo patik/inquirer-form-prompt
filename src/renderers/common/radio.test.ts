@@ -1,8 +1,8 @@
 import figures from '@inquirer/figures'
+import { renderRadio } from 'src/renderers/common/radio'
 import type { RadioField } from 'src/util/types'
 import { describe, expect, it } from 'vitest'
 import { bgGray, bold, underline } from 'yoctocolors'
-import { renderRadio } from './radio.js'
 
 describe('renderRadio', () => {
     const baseField: RadioField = {

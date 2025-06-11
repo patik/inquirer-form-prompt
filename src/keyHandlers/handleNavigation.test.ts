@@ -1,8 +1,8 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
+import { handleNavigation } from 'src/keyHandlers/handleNavigation'
 import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { handleNavigation } from './handleNavigation.js'
 
 describe('handleNavigation', () => {
     // Mock readline instance
