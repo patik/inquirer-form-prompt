@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { editBooleanField } from 'src/keyHandlers/editBoolean'
 import type {
     BooleanField,
     InquirerReadline,
@@ -8,8 +8,8 @@ import type {
     InternalFields,
     RadioField,
     TextField,
-} from '../util/types.js'
-import { editBooleanField } from './editBoolean.js'
+} from 'src/util/types'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 describe('editBooleanField', () => {
     // Mock readline instance
@@ -20,26 +20,26 @@ describe('editBooleanField', () => {
     // Sample fields for testing
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: false,
     }
 
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'sample',
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const checkboxField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'Test Checkbox',
+        label: 'Test Checkbox',
         choices: ['Choice 1', 'Choice 2'],
         value: ['Choice 1'],
         highlightIndex: 0,
@@ -54,12 +54,12 @@ describe('editBooleanField', () => {
     describe('when left or right arrow keys are pressed', () => {
         it('should toggle boolean value from false to true when left key is pressed', () => {
             const fields: InternalFields = [textField, booleanField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -80,12 +80,12 @@ describe('editBooleanField', () => {
                 value: true,
             }
             const fields: InternalFields = [textField, trueBooleanField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: trueBooleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'right' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -106,12 +106,12 @@ describe('editBooleanField', () => {
                 value: undefined,
             }
             const fields: InternalFields = [undefinedBooleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: undefinedBooleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -127,15 +127,15 @@ describe('editBooleanField', () => {
         it('should toggle missing value to true when right key is pressed', () => {
             const noValueBooleanField: BooleanField = {
                 type: 'boolean',
-                name: 'No Value Field',
+                label: 'No Value Field',
             }
             const fields: InternalFields = [noValueBooleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: noValueBooleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'right' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -150,12 +150,12 @@ describe('editBooleanField', () => {
 
         it('should work with fields containing separators', () => {
             const fields: InternalFields = [separator, booleanField, separator]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -172,12 +172,12 @@ describe('editBooleanField', () => {
 
         it('should work when boolean field is at the beginning of the array', () => {
             const fields: InternalFields = [booleanField, textField, radioField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -194,12 +194,12 @@ describe('editBooleanField', () => {
 
         it('should work when boolean field is at the end of the array', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
-            const selectedIndex = 2
+            const focusedIndex = 2
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'right' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -216,12 +216,12 @@ describe('editBooleanField', () => {
 
         it('should handle mixed field types correctly', () => {
             const fields: InternalFields = [textField, booleanField, checkboxField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -241,12 +241,12 @@ describe('editBooleanField', () => {
     describe('when other keys are pressed', () => {
         it('should return unchanged fields and call clearLine when enter key is pressed', () => {
             const fields: InternalFields = [textField, booleanField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'return' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -257,12 +257,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when up key is pressed', () => {
             const fields: InternalFields = [textField, booleanField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'up' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -273,12 +273,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when down key is pressed', () => {
             const fields: InternalFields = [textField, booleanField, radioField]
-            const selectedIndex = 1
+            const focusedIndex = 1
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'down' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -289,12 +289,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when space key is pressed', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'space' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -305,12 +305,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when tab key is pressed', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'tab' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -321,12 +321,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when escape key is pressed', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'escape' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -337,12 +337,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine for alphanumeric keys', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: 'a' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -353,12 +353,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine for special characters', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: '!' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -369,12 +369,12 @@ describe('editBooleanField', () => {
 
         it('should return unchanged fields and call clearLine when key name is undefined', () => {
             const fields: InternalFields = [booleanField]
-            const selectedIndex = 0
+            const focusedIndex = 0
 
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex,
+                focusedIndex,
                 key: { name: undefined } as unknown as KeypressEvent,
                 rl: mockRl,
             })
@@ -392,7 +392,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields: originalFields,
                 currentField: booleanField,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -408,7 +408,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -422,7 +422,7 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -436,7 +436,7 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -454,7 +454,7 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -472,7 +472,7 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'right' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -487,7 +487,7 @@ describe('editBooleanField', () => {
         it('should handle boolean field with additional properties', () => {
             const complexBooleanField: BooleanField = {
                 type: 'boolean',
-                name: 'Complex Boolean',
+                label: 'Complex Boolean',
                 description: 'A boolean field with description',
                 value: false,
             }
@@ -496,14 +496,14 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: complexBooleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
 
             expect(result[0]).toEqual({
                 type: 'boolean',
-                name: 'Complex Boolean',
+                label: 'Complex Boolean',
                 description: 'A boolean field with description',
                 value: true,
             })
@@ -517,7 +517,7 @@ describe('editBooleanField', () => {
             const result = editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -540,7 +540,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'left' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -549,7 +549,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'right' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -563,7 +563,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'invalid' } as KeypressEvent,
                 rl: mockRl,
             })
@@ -579,7 +579,7 @@ describe('editBooleanField', () => {
             editBooleanField({
                 fields,
                 currentField: booleanField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key: { name: 'enter' } as KeypressEvent,
                 rl: mockRl,
             })

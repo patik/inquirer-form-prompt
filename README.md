@@ -27,17 +27,17 @@ const answer = await form({
     message: 'Trip Details',
     fields: [
         {
-            name: 'Full name',
+            label: 'Full name',
             type: 'text',
         },
         {
-            name: 'Transport type',
+            label: 'Transport type',
             type: 'radio',
             choices: ['Train', 'Flight', 'Bus'],
             value: 'Train',
         },
         {
-            name: 'Activities',
+            label: 'Activities',
             type: 'checkbox',
             choices: ['Museums', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
             value: ['Museums', 'Local Cuisine'],
@@ -55,7 +55,7 @@ const answer = await form({
 All fields take the following properties:
 
 ```tsx
-name: string // The field's label
+label: string // The input field's label
 description?: string // Help text that will appear when the field is focused
 ```
 
@@ -74,7 +74,7 @@ Example:
 
 ```tsx
 {
-    name: 'Full name',
+    label: 'Full name',
     type: 'text',
     description: 'As it appears on your passport'
 }
@@ -97,7 +97,7 @@ Example:
 
 ```tsx
 {
-    name: 'Do you need a visa?',
+    label: 'Do you need a visa?',
     type: 'boolean',
 }
 ```
@@ -120,7 +120,7 @@ Example:
 
 ```tsx
 {
-    name: 'Age group',
+    label: 'Age group',
     type: 'radio',
     choices: ['0-25', '26-50', '51-75', '76-100']
     description: 'In years, on the first day of travel'
@@ -145,7 +145,7 @@ Example:
 
 ```tsx
 {
-    name: 'Activities of Interest',
+    label: 'Activities of Interest',
     type: 'checkbox',
     choices: ['Museums & Art', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
     value: ['Museums & Art', 'Local Cuisine'],
@@ -154,4 +154,38 @@ Example:
 
 ## Grouping fields
 
-Fields may be split into groups by placing separators between them.
+Fields may be split into groups by placing separators between them in the `fields` array. See examples below.
+
+## Theming
+
+The config object accepts a `theme` prop which can be used to specify a variant.
+
+```tsx
+theme?: {
+    variant: 'table' | 'label-top'
+    dense?: boolean
+}
+```
+
+### Table
+
+This is the default theme. Each field label and input is displayed in a table row. If a separator is included, it will split the fields into separate tables.
+
+In this example, "Trip Details" and "Preferences" are both separators:
+
+<img src="https://github.com/user-attachments/assets/4a4f19f9-c40c-47fb-bd2b-10b30079d655" width="480" alt="">
+
+### Label Top
+
+With this variant, the label is displayed above the input field. If a separator is included, it will split the fields into separate tables.
+
+<img src="https://github.com/user-attachments/assets/db8e6a02-ce9e-4b57-b1cb-2f361fda4ee9" width="920" alt="">
+
+This variant also supports a `dense` option which removes some of the extra spacing around the fields:
+
+```tsx
+theme: {
+    variant: 'label-top',
+    dense: true
+}
+```

@@ -1,16 +1,7 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { InquirerReadline, InternalCheckboxField, InternalFields } from '../util/types.js'
+import type { InquirerReadline, InternalCheckboxField, InternalField, InternalFields } from 'src/util/types'
 
-/**
- * Updates the entire `fields` array when one checkbox field is being edited
- */
-export const editCheckboxField = ({
-    fields,
-    currentField,
-    key,
-    selectedIndex,
-    rl,
-}: {
+type Props = {
     /**
      * All fields (i.e. in the current state)
      */
@@ -24,7 +15,7 @@ export const editCheckboxField = ({
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Key pressed by the user
@@ -35,7 +26,9 @@ export const editCheckboxField = ({
      * Readline instance
      */
     rl: InquirerReadline
-}): InternalFields => {
+}
+
+function updateField({ currentField, key, rl }: Pick<Props, 'currentField' | 'key' | 'rl'>): InternalField {
     const { choices, value: currentValue, highlightIndex: currentHighlightIndex = 0 } = currentField
     const lastChoiceIndex = currentField.choices.length - 1
     const nextField = { ...currentField }
@@ -66,8 +59,20 @@ export const editCheckboxField = ({
         rl.clearLine(0)
     }
 
+    return nextField
+}
+
+/**
+ * Updates the entire `fields` array when one checkbox field is being edited
+ */
+export function editCheckboxField({ fields, currentField, key, focusedIndex, rl }: Props): InternalFields {
+    if (key.name !== 'left' && key.name !== 'right' && key.name !== 'space') {
+        return fields
+    }
+
     const nextFields = [...fields]
-    nextFields[selectedIndex] = nextField
+    const nextField = updateField({ currentField, key, rl })
+    nextFields[focusedIndex] = nextField
 
     return nextFields
 }

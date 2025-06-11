@@ -1,14 +1,15 @@
+import type { KeypressEvent } from '@inquirer/core'
 import { isEnterKey, Separator, useKeypress, usePrefix, useState } from '@inquirer/core'
 import ansiEscapes from 'ansi-escapes'
-import Table from 'cli-table3'
+import { editBooleanField } from 'src/keyHandlers/editBoolean'
+import { editCheckboxField } from 'src/keyHandlers/editCheckbox'
+import { editRadioField } from 'src/keyHandlers/editRadio'
+import { editTextField } from 'src/keyHandlers/editText'
+import { handleNavigation } from 'src/keyHandlers/handleNavigation'
+import { toLabelTop } from 'src/renderers/labelTop/toLabelTop'
+import { toTable } from 'src/renderers/table/toTable'
+import type { Config, Fields, InquirerReadline, InternalFields, InternalFormField, ReturnedItems } from 'src/util/types'
 import { bold, dim } from 'yoctocolors'
-import { editBooleanField } from './keyHandlers/editBoolean.js'
-import { editCheckboxField } from './keyHandlers/editCheckbox.js'
-import { editRadioField } from './keyHandlers/editRadio.js'
-import { editTextField } from './keyHandlers/editText.js'
-import { handleNavigation } from './keyHandlers/handleNavigation.js'
-import { fieldToTableRow } from './renderers/fieldToTableRow.js'
-import type { Config, Fields, InternalFields, ReturnedItems } from './util/types.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {
@@ -29,12 +30,50 @@ function getInitialIndex(fields: Fields): number {
     return firstNonSeparatorIndex >= 0 ? firstNonSeparatorIndex : 0
 }
 
+const updateFields = ({
+    fields,
+    currentField,
+    key,
+    setFields,
+    focusedIndex,
+    rl,
+}: {
+    fields: InternalFields
+    setFields: (newFields: InternalFields) => void
+    currentField: InternalFormField
+    key: KeypressEvent
+    focusedIndex: number
+    rl: InquirerReadline
+}): void => {
+    if (currentField.type === 'boolean') {
+        const nextFields = editBooleanField({ fields, currentField, focusedIndex, key, rl })
+        setFields(nextFields)
+        return
+    }
+
+    if (currentField.type === 'radio') {
+        const nextFields = editRadioField({ fields, currentField, focusedIndex, key, rl })
+        setFields(nextFields)
+        return
+    }
+
+    if (currentField.type === 'checkbox') {
+        const nextFields = editCheckboxField({ fields, currentField, key, focusedIndex, rl })
+        setFields(nextFields)
+        return
+    }
+
+    const nextFields = editTextField({ fields, currentField, key, focusedIndex, rl })
+    setFields(nextFields)
+    return
+}
+
 /**
  * Exported for testing purposes
  */
 export const promptCreator = (config: Config, done: (value: ReturnedItems) => void): string => {
     const [fields, setFields] = useState<InternalFields>(toInternalFields(config.fields))
-    const [selectedIndex, setSelectedIndex] = useState(() => getInitialIndex(config.fields))
+    const [focusedIndex, setFocusedIndex] = useState(() => getInitialIndex(config.fields))
     const prefix = usePrefix({})
 
     useKeypress((key, rl) => {
@@ -43,90 +82,40 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
             return
         }
 
-        if (handleNavigation({ fields, key, selectedIndex, setSelectedIndex, rl })) {
-            return
-        }
-
         if (key.name === 'escape') {
-            // @ts-expect-error Only way I know how to signal that the user pressed escape
+            // @ts-expect-error This is the only way I know how to signal that the user pressed escape
             done(Symbol('Escape key pressed'))
             return
         }
 
-        const currentField = fields[selectedIndex]
+        if (handleNavigation({ fields, key, focusedIndex, setFocusedIndex, rl })) {
+            return
+        }
+
+        const currentField = fields[focusedIndex]
 
         if (!currentField || currentField instanceof Separator) {
             return
         }
 
-        if (currentField.type === 'text') {
-            const nextFields = editTextField({ fields, currentField, key, selectedIndex, rl })
-            setFields(nextFields)
-            return
-        }
-
-        if (currentField.type === 'radio') {
-            const nextFields = editRadioField({ fields, currentField, selectedIndex, key, rl })
-            setFields(nextFields)
-            return
-        }
-
-        if (currentField.type === 'checkbox') {
-            const nextFields = editCheckboxField({ fields, currentField, key, selectedIndex, rl })
-            setFields(nextFields)
-            return
-        }
-
-        const nextFields = editBooleanField({ fields, currentField, selectedIndex, key, rl })
-
-        setFields(nextFields)
-        return
+        updateFields({
+            fields,
+            currentField,
+            key,
+            setFields,
+            focusedIndex,
+            rl,
+        })
     })
 
     const message = config.message ? bold(config.message) : ''
     const submessage = config.submessage ? `\n\n${config.submessage}\n` : ''
-    const tables: string[] = []
-    let currentTable = new Table()
-    let currentRows: Array<[string, string]> = []
-    let tableFooter = ''
-
-    fields.forEach((field, index) => {
-        if (field instanceof Separator) {
-            if (currentRows.length > 0) {
-                currentTable.push(...currentRows)
-                tables.push(currentTable.toString())
-                currentRows = []
-            }
-
-            tables.push(tableFooter)
-            tables.push('')
-            tables.push(field.separator)
-            currentTable = new Table()
-            tableFooter = ''
-
-            return
-        }
-
-        const result = fieldToTableRow(selectedIndex)(field, index)
-        if (!(result instanceof Separator)) {
-            currentRows.push(result)
-        }
-
-        const isSelected = selectedIndex === index
-
-        if (isSelected && !(field instanceof Separator) && field.description) {
-            tableFooter = dim(`  ${field.description}`)
-        }
-    })
-
-    // Push the last table if it has rows
-    if (currentRows.length > 0) {
-        currentTable.push(...currentRows)
-        tables.push(currentTable.toString())
-        tables.push(tableFooter)
-    }
+    const fieldOutput =
+        config.theme?.variant === 'label-top'
+            ? toLabelTop(fields, focusedIndex, config.theme.dense)
+            : toTable(fields, focusedIndex)
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-${tables.join('\n')}${ansiEscapes.cursorHide}
+${fieldOutput}${ansiEscapes.cursorHide}
 `
 }

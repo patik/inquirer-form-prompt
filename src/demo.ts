@@ -1,8 +1,9 @@
 import { Separator } from '@inquirer/core'
-import form from './index.js'
 import { exit } from 'node:process'
+import type { FormTheme } from 'src/index'
+import form from 'src/index'
 
-const errorHander = (error: unknown): void => {
+const errorHandler = (error: unknown): void => {
     if (error instanceof Error && error.name === 'ExitPromptError') {
         console.log('✨')
         exit(0)
@@ -11,9 +12,17 @@ const errorHander = (error: unknown): void => {
     }
 }
 
-process.on('uncaughtException', errorHander)
+process.on('uncaughtException', errorHandler)
 
-export const demo = async (): Promise<void> => {
+export const demo = async (
+    {
+        variant = 'table',
+        dense = false,
+    }: {
+        variant: FormTheme['variant']
+        dense: FormTheme['dense']
+    } = { variant: 'table', dense: false },
+): Promise<void> => {
     console.log()
     try {
         const answers = await form({
@@ -22,46 +31,50 @@ export const demo = async (): Promise<void> => {
             fields: [
                 new Separator('✈️ Trip Details'),
                 {
-                    name: 'Traveler Name',
+                    label: 'Traveler Name',
                     type: 'text',
                     value: 'Firstname Lastname',
                     description: 'Your full name as it appears on your passport.',
                 },
                 {
-                    name: 'Destination City',
+                    label: 'Destination City',
                     type: 'text',
                     value: '',
                     description: 'Which city would you like to visit?',
                 },
                 new Separator('🏨 Preferences'),
                 {
-                    name: 'Include Hotels',
+                    label: 'Include Hotels',
                     type: 'boolean',
                     value: true,
                     description: 'Should we include hotel recommendations in your itinerary?',
                 },
                 {
-                    name: 'Train pass needed',
+                    label: 'Train pass needed',
                     type: 'boolean',
                     value: false,
                     description: 'Will you need a train pass for your trip?',
                 },
                 new Separator('🚂 Transportation'),
                 {
-                    name: 'Preferred Transport',
+                    label: 'Preferred Transport',
                     type: 'radio',
                     choices: ['High-speed Train', 'Budget Flight', 'Scenic Bus Route'],
                     value: 'High-speed Train',
                     description: 'How would you like to travel between cities?',
                 },
                 {
-                    name: 'Activities of Interest',
+                    label: 'Activities of Interest',
                     type: 'checkbox',
                     choices: ['Museums & Art', 'Local Cuisine', 'Historical Sites', 'Nightlife', 'Nature & Parks'],
                     value: ['Museums & Art', 'Local Cuisine'],
                     description: 'What activities interest you most? (Select all that apply)',
                 },
             ],
+            theme: {
+                variant,
+                dense,
+            },
         })
 
         console.log('\n🎯 Your Travel Preferences:\n')
@@ -70,7 +83,7 @@ export const demo = async (): Promise<void> => {
                 .map((a) =>
                     a instanceof Separator
                         ? '─'.repeat(40)
-                        : `${a.name}: ${
+                        : `${a.label}: ${
                               // It's preferred for the demo to print the value, warts and all
                               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                               a.value
@@ -88,6 +101,12 @@ export const demo = async (): Promise<void> => {
 }
 
 // If the --run flag was used, run it immediately
+// Read --variant and --dense flags from arguments
 if (process.argv.includes('--run')) {
-    await demo()
+    await demo({
+        variant:
+            (process.argv.find((arg) => arg.startsWith('--variant='))?.slice(10) as FormTheme['variant']) || 'table',
+        dense: process.argv.includes('--dense'),
+    })
+    exit(0)
 }

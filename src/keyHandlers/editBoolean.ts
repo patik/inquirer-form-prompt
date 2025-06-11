@@ -1,16 +1,7 @@
 import type { KeypressEvent } from '@inquirer/core'
-import type { BooleanField, InquirerReadline, InternalFields } from '../util/types.js'
+import type { BooleanField, InquirerReadline, InternalFields } from 'src/util/types'
 
-/**
- * Updates the entire `fields` array when one boolean field is being edited
- */
-export const editBooleanField = ({
-    fields,
-    currentField,
-    selectedIndex,
-    key,
-    rl,
-}: {
+type Props = {
     /**
      * All fields (i.e. in the current state)
      */
@@ -24,7 +15,7 @@ export const editBooleanField = ({
     /**
      * Index of the currently highlighted field
      */
-    selectedIndex: number
+    focusedIndex: number
 
     /**
      * Key pressed by the user
@@ -35,7 +26,12 @@ export const editBooleanField = ({
      * Readline instance
      */
     rl: InquirerReadline
-}): InternalFields => {
+}
+
+/**
+ * Updates the entire `fields` array when one boolean field is being edited
+ */
+export function editBooleanField({ fields, currentField, focusedIndex, key, rl }: Props): InternalFields {
     if (key.name !== 'left' && key.name !== 'right') {
         rl.clearLine(0)
         return fields
@@ -43,7 +39,7 @@ export const editBooleanField = ({
 
     const nextFields = [...fields]
 
-    nextFields[selectedIndex] = {
+    nextFields[focusedIndex] = {
         ...currentField,
         value: !currentField.value,
     }

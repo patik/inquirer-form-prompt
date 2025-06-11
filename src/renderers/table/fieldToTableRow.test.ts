@@ -1,81 +1,81 @@
 import { Separator } from '@inquirer/core'
+import { fieldToTableRow } from 'src/renderers/table/fieldToTableRow'
+import type { BooleanField, InternalCheckboxField, RadioField, TextField } from 'src/util/types'
 import { describe, expect, it, vi } from 'vitest'
-import { bgGray, green, white } from 'yoctocolors'
-import type { BooleanField, InternalCheckboxField, RadioField, TextField } from '../util/types.js'
-import { fieldToTableRow } from './fieldToTableRow.js'
+import { bgGray, green } from 'yoctocolors'
 
 // Mock the renderer functions
-vi.mock('./boolean.js', () => ({
-    renderBoolean: vi.fn((field, isSelected) => (isSelected ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
+vi.mock('src/renderers/common/boolean', () => ({
+    renderBoolean: vi.fn((_field, isFocused) => (isFocused ? 'mocked-boolean-selected' : 'mocked-boolean-unselected')),
 }))
 
-vi.mock('./checkbox.js', () => ({
-    renderCheckbox: vi.fn((field, isSelected) =>
-        isSelected ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
+vi.mock('src/renderers/common/checkbox', () => ({
+    renderCheckbox: vi.fn((_field, isFocused) =>
+        isFocused ? 'mocked-checkbox-selected' : 'mocked-checkbox-unselected',
     ),
 }))
 
-vi.mock('./radio.js', () => ({
-    renderRadio: vi.fn((field, isSelected) => (isSelected ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
+vi.mock('src/renderers/common/radio', () => ({
+    renderRadio: vi.fn((_field, isFocused) => (isFocused ? 'mocked-radio-selected' : 'mocked-radio-unselected')),
 }))
 
 describe('fieldToTableRow', () => {
     const textField: TextField = {
         type: 'text',
-        name: 'Text Field',
+        label: 'Text Field',
         value: 'Sample text',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Boolean Field',
+        label: 'Boolean Field',
         value: true,
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Radio Field',
+        label: 'Radio Field',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const checkboxField: InternalCheckboxField = {
         type: 'checkbox',
-        name: 'Checkbox Field',
+        label: 'Checkbox Field',
         choices: ['Option 1', 'Option 2'],
         value: ['Option 1'],
         highlightIndex: 0,
     }
 
     describe('when field is selected (highlighted)', () => {
-        it('should render text field with green name and bgGray white value', () => {
+        it('should render text field with green label and bgGray white value', () => {
             const renderField = fieldToTableRow(0)
             const result = renderField(textField, 0)
 
-            expect(result).toEqual([green('→ Text Field'), bgGray(white('Sample text'))])
+            expect(result).toEqual([green('→ Text Field'), bgGray('Sample text')])
         })
 
         it('should render text field with empty value as single space', () => {
             const emptyTextField: TextField = {
                 type: 'text',
-                name: 'Empty Field',
+                label: 'Empty Field',
                 value: '',
             }
             const renderField = fieldToTableRow(0)
             const result = renderField(emptyTextField, 0)
 
-            expect(result).toEqual([green('→ Empty Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Empty Field'), ' '])
         })
 
         it('should render text field with undefined value as single space', () => {
             const undefinedTextField: TextField = {
                 type: 'text',
-                name: 'Undefined Field',
+                label: 'Undefined Field',
             }
             const renderField = fieldToTableRow(0)
             const result = renderField(undefinedTextField, 0)
 
-            expect(result).toEqual([green('→ Undefined Field'), bgGray(white(' '))])
+            expect(result).toEqual([green('→ Undefined Field'), ' '])
         })
 
         it('should render boolean field with mocked renderer', () => {
@@ -101,7 +101,7 @@ describe('fieldToTableRow', () => {
     })
 
     describe('when field is not selected', () => {
-        it('should render text field with normal name and plain value', () => {
+        it('should render text field with normal label and plain value', () => {
             const renderField = fieldToTableRow(1)
             const result = renderField(textField, 0)
 
@@ -111,7 +111,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with empty value as single space', () => {
             const emptyTextField: TextField = {
                 type: 'text',
-                name: 'Empty Field',
+                label: 'Empty Field',
                 value: '',
             }
             const renderField = fieldToTableRow(1)
@@ -123,7 +123,7 @@ describe('fieldToTableRow', () => {
         it('should render text field with undefined value as single space', () => {
             const undefinedTextField: TextField = {
                 type: 'text',
-                name: 'Undefined Field',
+                label: 'Undefined Field',
             }
             const renderField = fieldToTableRow(1)
             const result = renderField(undefinedTextField, 0)
@@ -205,36 +205,36 @@ describe('fieldToTableRow', () => {
     })
 
     describe('edge cases', () => {
-        it('should handle negative selectedIndex', () => {
+        it('should handle negative focusedIndex', () => {
             const renderField = fieldToTableRow(-1)
             const result = renderField(textField, 0)
 
             expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
-        it('should handle selectedIndex larger than array', () => {
+        it('should handle focusedIndex larger than array', () => {
             const renderField = fieldToTableRow(100)
             const result = renderField(textField, 0)
 
             expect(result).toEqual(['  Text Field', 'Sample text'])
         })
 
-        it('should handle field with special characters in name', () => {
+        it('should handle field with special characters in label', () => {
             const specialField: TextField = {
                 type: 'text',
-                name: 'Field with émojis 🎉 and "quotes"',
+                label: 'Field with émojis 🎉 and "quotes"',
                 value: 'Special value',
             }
             const renderField = fieldToTableRow(0)
             const result = renderField(specialField, 0)
 
-            expect(result).toEqual([green('→ Field with émojis 🎉 and "quotes"'), bgGray(white('Special value'))])
+            expect(result).toEqual([green('→ Field with émojis 🎉 and "quotes"'), bgGray('Special value')])
         })
 
         it('should handle field with very long values', () => {
             const longValueField: TextField = {
                 type: 'text',
-                name: 'Long Field',
+                label: 'Long Field',
                 value: 'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
             }
             const renderField = fieldToTableRow(0)
@@ -243,9 +243,7 @@ describe('fieldToTableRow', () => {
             expect(result).toEqual([
                 green('→ Long Field'),
                 bgGray(
-                    white(
-                        'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
-                    ),
+                    'This is a very long value that might wrap or cause display issues in some scenarios but should be handled gracefully',
                 ),
             ])
         })

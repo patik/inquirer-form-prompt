@@ -1,7 +1,7 @@
 import { createPrompt } from '@inquirer/core'
 import readline from 'readline'
-import { promptCreator } from './promptCreator.js'
-import type { Config, ReturnedItems } from './util/types.js'
+import { promptCreator } from 'src/promptCreator'
+import type { Config, ReturnedItems } from 'src/util/types'
 
 export default async function form(options: Config): Promise<ReturnedItems> {
     const rl = readline.createInterface({
@@ -34,9 +34,10 @@ export type {
     Field,
     Fields,
     FormField,
+    FormTheme,
     RadioField,
     ReturnedField,
     ReturnedItem,
     ReturnedItems,
     TextField,
-} from './util/types.js'
+} from 'src/util/types'

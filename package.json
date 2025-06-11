@@ -1,10 +1,9 @@
 {
     "name": "inquirer-form-prompt",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "scripts": {
-        "start": "tsx ./src/main.ts",
         "build": "tsc",
-        "dev": "tsx watch ./src/main.ts",
+        "demo": "tsx ./src/demo.ts --run",
         "test": "vitest .",
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",
@@ -13,8 +12,7 @@
         "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
         "ci": "pnpm build && pnpm check-format && pnpm check-exports",
         "prepublishOnly": "pnpm run ci",
-        "prepare": "husky",
-        "demo": "tsx ./src/demo.ts --run"
+        "prepare": "husky"
     },
     "type": "module",
     "main": "./dist/index.js",
@@ -25,39 +23,41 @@
         "@inquirer/core": "^10.1.13",
         "@inquirer/figures": "^1.0.12",
         "ansi-escapes": "^7.0.0",
+        "boxen": "^8.0.1",
         "cli-table3": "^0.6.5",
         "clipboardy": "^4.0.0",
+        "strip-ansi": "^7.1.0",
         "yoctocolors": "^2.1.1"
     },
     "devDependencies": {
-        "@arethetypeswrong/cli": "^0.18.1",
+        "@arethetypeswrong/cli": "^0.18.2",
         "@eslint/js": "^9.28.0",
         "@inquirer/testing": "^2.1.47",
         "@inquirer/type": "^3.0.7",
-        "@types/node": "^22.15.30",
+        "@types/node": "^22.15.31",
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
         "eslint-plugin-prettier": "^5.4.1",
         "husky": "^9.1.7",
         "prettier": "3.5.3",
-        "tsx": "^4.19.4",
+        "tsx": "^4.20.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.33.1",
-        "vitest": "^3.2.2"
+        "vitest": "^3.2.3"
     },
     "keywords": [],
     "description": "Form-like, multi-input prompt for Inquirer.js",
     "author": {
         "name": "Craig Patik",
         "email": "craig@patik.com",
-        "url": "https://github.com/patik/inquirer-form-prompt"
+        "url": "https://patik.com"
     },
     "homepage": "https://github.com/patik/inquirer-form-prompt",
-    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/patik/inquirer-form-prompt.git"
     },
+    "license": "MIT",
     "publishConfig": {
         "access": "public"
     }

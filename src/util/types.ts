@@ -1,14 +1,21 @@
-import type { useKeypress, Separator } from '@inquirer/core'
+import type { Separator, Theme, useKeypress } from '@inquirer/core'
+import type { PartialDeep } from '@inquirer/type'
+
+export type FormTheme = {
+    variant?: 'table' | 'label-top'
+    dense?: boolean
+}
 
 export type Config = {
     message?: string
     submessage?: string
     default?: boolean
     fields: Fields
+    theme?: PartialDeep<Theme<FormTheme>>
 }
 
 type FieldBase = {
-    name: string
+    label: string
     description?: string
 }
 export type TextField = FieldBase & {
@@ -51,14 +58,15 @@ export type Fields = Array<Field>
 /**
  * Field with some additional data that is only used internally.
  */
-export type InternalField = TextField | BooleanField | RadioField | InternalCheckboxField | Separator
+export type InternalFormField = TextField | BooleanField | RadioField | InternalCheckboxField
+export type InternalField = InternalFormField | Separator
 
 /**
  * Fields with some additional data that is only used internally.
  */
 export type InternalFields = Array<InternalField>
 
-export type ReturnedField = Pick<FormField, 'type' | 'name' | 'value'>
+export type ReturnedField = Pick<FormField, 'type' | 'label' | 'value'>
 
 /**
  * Response that is returned to the user.

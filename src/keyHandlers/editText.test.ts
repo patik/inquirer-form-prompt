@@ -1,8 +1,8 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
+import { editTextField } from 'src/keyHandlers/editText'
+import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from '../util/types.js'
-import { editTextField } from './editText.js'
 
 // Mock clipboardy
 vi.mock('clipboardy', () => ({
@@ -23,20 +23,20 @@ describe('editTextField', async () => {
     // Sample fields for testing
     const textField: TextField = {
         type: 'text',
-        name: 'Test Text',
+        label: 'Test Text',
         value: 'initial value',
     }
 
     const radioField: RadioField = {
         type: 'radio',
-        name: 'Test Radio',
+        label: 'Test Radio',
         choices: ['Option 1', 'Option 2'],
         value: 'Option 1',
     }
 
     const booleanField: BooleanField = {
         type: 'boolean',
-        name: 'Test Boolean',
+        label: 'Test Boolean',
         value: true,
     }
 
@@ -54,7 +54,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -70,7 +70,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -86,7 +86,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -101,7 +101,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -119,7 +119,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -140,7 +140,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -156,7 +156,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -172,7 +172,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -188,7 +188,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -205,7 +205,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -225,7 +225,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -244,7 +244,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -260,7 +260,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -276,7 +276,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -292,7 +292,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -309,7 +309,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -328,7 +328,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -340,7 +340,7 @@ describe('editTextField', async () => {
     })
 
     describe('multiple fields scenarios', () => {
-        it('should update only the selected text field in mixed field types', () => {
+        it('should update only the focused text field in mixed field types', () => {
             const fields = [radioField, textField, booleanField]
             const key: KeypressEvent = { name: 'a' } as KeypressEvent
             mockRl.line = 'updated text'
@@ -348,7 +348,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key,
                 rl: mockRl,
             })
@@ -363,9 +363,9 @@ describe('editTextField', async () => {
         })
 
         it('should handle multiple text fields correctly', () => {
-            const textField1 = { ...textField, name: 'Text 1', value: 'value 1' }
-            const textField2 = { ...textField, name: 'Text 2', value: 'value 2' }
-            const textField3 = { ...textField, name: 'Text 3', value: 'value 3' }
+            const textField1 = { ...textField, label: 'Text 1', value: 'value 1' }
+            const textField2 = { ...textField, label: 'Text 2', value: 'value 2' }
+            const textField3 = { ...textField, label: 'Text 3', value: 'value 3' }
             const fields = [textField1, textField2, textField3]
             const key: KeypressEvent = { name: 'b' } as KeypressEvent
             mockRl.line = 'middle field updated'
@@ -373,7 +373,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField2,
-                selectedIndex: 1,
+                focusedIndex: 1,
                 key,
                 rl: mockRl,
             })
@@ -381,7 +381,7 @@ describe('editTextField', async () => {
             expect(result[0]).toBe(textField1) // Unchanged
             expect(result[2]).toBe(textField3) // Unchanged
             expect((result[1] as TextField).value).toBe('middle field updated')
-            expect((result[1] as TextField).name).toBe('Text 2')
+            expect((result[1] as TextField).label).toBe('Text 2')
         })
 
         it('should work with separators in fields array', () => {
@@ -393,7 +393,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -403,7 +403,7 @@ describe('editTextField', async () => {
             expect((result[0] as TextField).value).toBe('text with separator')
         })
 
-        it('should update first field when selectedIndex is 0', () => {
+        it('should update first field when focusedIndex is 0', () => {
             const fields = [textField, radioField, booleanField]
             const key: KeypressEvent = { name: 'f' } as KeypressEvent
             mockRl.line = 'first field'
@@ -411,7 +411,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -421,8 +421,8 @@ describe('editTextField', async () => {
             expect(result[2]).toBe(booleanField)
         })
 
-        it('should update last field when selectedIndex is last', () => {
-            const lastTextField = { ...textField, name: 'Last Text' }
+        it('should update last field when focusedIndex is last', () => {
+            const lastTextField = { ...textField, label: 'Last Text' }
             const fields = [radioField, booleanField, lastTextField]
             const key: KeypressEvent = { name: 'l' } as KeypressEvent
             mockRl.line = 'last field'
@@ -430,7 +430,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: lastTextField,
-                selectedIndex: 2,
+                focusedIndex: 2,
                 key,
                 rl: mockRl,
             })
@@ -445,7 +445,7 @@ describe('editTextField', async () => {
         it('should preserve all original field properties except value', () => {
             const complexTextField: TextField = {
                 type: 'text',
-                name: 'Complex Text Field',
+                label: 'Complex Text Field',
                 value: 'original',
                 // Add any other properties that might exist
             }
@@ -456,14 +456,14 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: complexTextField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
 
             const updatedField = result[0] as TextField
             expect(updatedField.type).toBe('text')
-            expect(updatedField.name).toBe('Complex Text Field')
+            expect(updatedField.label).toBe('Complex Text Field')
             expect(updatedField.value).toBe('new value')
         })
 
@@ -475,7 +475,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -493,7 +493,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -513,7 +513,7 @@ describe('editTextField', async () => {
                 editTextField({
                     fields,
                     currentField: textField,
-                    selectedIndex: 0,
+                    focusedIndex: 0,
                     key,
                     rl: mockRl,
                 })
@@ -528,7 +528,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -551,7 +551,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -567,7 +567,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -583,7 +583,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -601,7 +601,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -617,7 +617,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -633,7 +633,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -649,7 +649,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -665,7 +665,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -681,7 +681,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -691,7 +691,7 @@ describe('editTextField', async () => {
     })
 
     describe('boundary conditions', () => {
-        it('should handle selectedIndex at boundary (0)', () => {
+        it('should handle focusedIndex at boundary (0)', () => {
             const fields = [textField, radioField]
             const key: KeypressEvent = { name: 'b', ctrl: false }
             mockRl.line = 'boundary test'
@@ -699,7 +699,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -708,7 +708,7 @@ describe('editTextField', async () => {
             expect(result[1]).toBe(radioField)
         })
 
-        it('should handle very large selectedIndex', () => {
+        it('should handle very large focusedIndex', () => {
             const fields = [textField]
             const key: KeypressEvent = { name: 'l', ctrl: false }
             mockRl.line = 'large index'
@@ -716,7 +716,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 999,
+                focusedIndex: 999,
                 key,
                 rl: mockRl,
             })
@@ -728,7 +728,7 @@ describe('editTextField', async () => {
             })
         })
 
-        it('should handle negative selectedIndex gracefully', () => {
+        it('should handle negative focusedIndex gracefully', () => {
             const fields = [textField]
             const key: KeypressEvent = { name: 'n', ctrl: false }
             mockRl.line = 'negative index'
@@ -736,7 +736,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: -1,
+                focusedIndex: -1,
                 key,
                 rl: mockRl,
             })
@@ -759,7 +759,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -777,7 +777,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
@@ -794,7 +794,7 @@ describe('editTextField', async () => {
             const result = editTextField({
                 fields,
                 currentField: textField,
-                selectedIndex: 0,
+                focusedIndex: 0,
                 key,
                 rl: mockRl,
             })
