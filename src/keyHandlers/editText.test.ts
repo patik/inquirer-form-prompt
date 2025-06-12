@@ -1,7 +1,7 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
-import { editTextField } from 'src/keyHandlers/editText'
-import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types'
+import { editTextField } from 'src/keyHandlers/editText.js'
+import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types.js'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 // Mock clipboardy

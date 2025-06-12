@@ -1,14 +1,21 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { isEnterKey, Separator, useKeypress, usePrefix, useState } from '@inquirer/core'
 import ansiEscapes from 'ansi-escapes'
-import { editBooleanField } from 'src/keyHandlers/editBoolean'
-import { editCheckboxField } from 'src/keyHandlers/editCheckbox'
-import { editRadioField } from 'src/keyHandlers/editRadio'
-import { editTextField } from 'src/keyHandlers/editText'
-import { handleNavigation } from 'src/keyHandlers/handleNavigation'
-import { toLabelTop } from 'src/renderers/labelTop/toLabelTop'
-import { toTable } from 'src/renderers/table/toTable'
-import type { Config, Fields, InquirerReadline, InternalFields, InternalFormField, ReturnedItems } from 'src/util/types'
+import { editBooleanField } from 'src/keyHandlers/editBoolean.js'
+import { editCheckboxField } from 'src/keyHandlers/editCheckbox.js'
+import { editRadioField } from 'src/keyHandlers/editRadio.js'
+import { editTextField } from 'src/keyHandlers/editText.js'
+import { handleNavigation } from 'src/keyHandlers/handleNavigation.js'
+import { toLabelTop } from 'src/renderers/labelTop/toLabelTop.js'
+import { toTable } from 'src/renderers/table/toTable.js'
+import type {
+    Config,
+    Fields,
+    InquirerReadline,
+    InternalFields,
+    InternalFormField,
+    ReturnedItems,
+} from 'src/util/types.js'
 import { bold, dim } from 'yoctocolors'
 
 function toInternalFields(fields: Fields): InternalFields {

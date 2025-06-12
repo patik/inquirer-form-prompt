@@ -1,7 +1,7 @@
 import { Separator } from '@inquirer/core'
 import { exit } from 'node:process'
-import type { FormTheme } from 'src/index'
-import form from 'src/index'
+import type { FormTheme } from 'src/index.js'
+import form from 'src/index.js'
 
 const errorHandler = (error: unknown): void => {
     if (error instanceof Error && error.name === 'ExitPromptError') {

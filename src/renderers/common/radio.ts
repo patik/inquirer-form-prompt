@@ -1,5 +1,5 @@
 import figures from '@inquirer/figures'
-import type { RadioField } from 'src/util/types'
+import type { RadioField } from 'src/util/types.js'
 import { bgGray, bold, underline } from 'yoctocolors'
 
 function createChoiceRenderer(field: RadioField, isFieldSelected: boolean): (choice: string) => string {

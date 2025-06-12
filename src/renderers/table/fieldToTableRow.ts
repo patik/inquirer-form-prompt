@@ -1,9 +1,9 @@
 import { Separator } from '@inquirer/core'
 import figures from '@inquirer/figures'
-import { renderBoolean } from 'src/renderers/common/boolean'
-import { renderCheckbox } from 'src/renderers/common/checkbox'
-import { renderRadio } from 'src/renderers/common/radio'
-import type { InternalField, InternalFormField } from 'src/util/types'
+import { renderBoolean } from 'src/renderers/common/boolean.js'
+import { renderCheckbox } from 'src/renderers/common/checkbox.js'
+import { renderRadio } from 'src/renderers/common/radio.js'
+import type { InternalField, InternalFormField } from 'src/util/types.js'
 import { bgGray, green } from 'yoctocolors'
 
 function renderRightColumn(field: InternalFormField, isFocused: boolean): string {

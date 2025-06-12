@@ -1,7 +1,7 @@
 import { Separator } from '@inquirer/core'
 import Table from 'cli-table3'
-import { fieldToTableRow } from 'src/renderers/table/fieldToTableRow'
-import type { InternalFields } from 'src/util/types'
+import { fieldToTableRow } from 'src/renderers/table/fieldToTableRow.js'
+import type { InternalFields } from 'src/util/types.js'
 import { dim } from 'yoctocolors'
 
 export function toTable(fields: InternalFields, focusedIndex: number): string {

@@ -1,6 +1,6 @@
 import { Separator } from '@inquirer/core'
-import { fieldToLabelTop } from 'src/renderers/labelTop/fieldToLabelTop'
-import type { FormTheme, InternalFields } from 'src/util/types'
+import { fieldToLabelTop } from 'src/renderers/labelTop/fieldToLabelTop.js'
+import type { FormTheme, InternalFields } from 'src/util/types.js'
 
 const rowSpacer = (dense?: boolean): string => (dense ? '\n' : '\n\n')
 const sectionSpacer = (dense?: boolean): string => (dense ? '\n' : '\n')
