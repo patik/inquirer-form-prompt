@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { isDownKey, isUpKey, Separator } from '@inquirer/core'
-import type { Fields, InquirerReadline } from 'src/util/types'
+import type { Fields, InquirerReadline } from 'src/util/types.js'
 
 /**
  * Extend `KeypressEvent` to add the shift key, which is actually present at runtime.

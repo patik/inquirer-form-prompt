@@ -1,7 +1,7 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
-import { editRadioField } from 'src/keyHandlers/editRadio'
-import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types'
+import { editRadioField } from 'src/keyHandlers/editRadio.js'
+import type { BooleanField, InquirerReadline, InternalFields, RadioField, TextField } from 'src/util/types.js'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 describe('editRadioField', () => {

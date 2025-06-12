@@ -1,10 +1,10 @@
 import { Separator } from '@inquirer/core'
-import { toLabelTop } from 'src/renderers/labelTop/toLabelTop'
-import type { BooleanField, InternalCheckboxField, InternalFormField, RadioField, TextField } from 'src/util/types'
+import { toLabelTop } from 'src/renderers/labelTop/toLabelTop.js'
+import type { BooleanField, InternalCheckboxField, InternalFormField, RadioField, TextField } from 'src/util/types.js'
 import { describe, expect, it, vi } from 'vitest'
 
 // Mock the fieldToLabelTop function
-vi.mock('src/renderers/labelTop/fieldToLabelTop', () => ({
+vi.mock('src/renderers/labelTop/fieldToLabelTop.js', () => ({
     fieldToLabelTop: vi.fn(
         ({ field, isFocused, dense }: { field: InternalFormField; isFocused: boolean; dense?: boolean }) => {
             const focusIndicator = isFocused ? '[FOCUSED]' : '[UNFOCUSED]'

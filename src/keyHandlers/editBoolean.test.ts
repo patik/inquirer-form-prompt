@@ -1,6 +1,6 @@
 import type { KeypressEvent } from '@inquirer/core'
 import { Separator } from '@inquirer/core'
-import { editBooleanField } from 'src/keyHandlers/editBoolean'
+import { editBooleanField } from 'src/keyHandlers/editBoolean.js'
 import type {
     BooleanField,
     InquirerReadline,
@@ -8,7 +8,7 @@ import type {
     InternalFields,
     RadioField,
     TextField,
-} from 'src/util/types'
+} from 'src/util/types.js'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 describe('editBooleanField', () => {

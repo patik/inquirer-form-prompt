@@ -1,8 +1,8 @@
 {
     "name": "inquirer-form-prompt",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "scripts": {
-        "build": "tsc",
+        "build": "tsc && tsc-alias",
         "demo": "tsx ./src/demo.ts --run",
         "test": "vitest .",
         "test:once": "vitest run",
@@ -40,6 +40,7 @@
         "eslint-plugin-prettier": "^5.4.1",
         "husky": "^9.1.7",
         "prettier": "3.5.3",
+        "tsc-alias": "^1.8.16",
         "tsx": "^4.20.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.33.1",
