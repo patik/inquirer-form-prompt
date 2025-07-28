@@ -41,7 +41,7 @@ importers:
         version: 9.31.0
       '@inquirer/testing':
         specifier: ^2.1.47
-        version: 2.1.48(@types/node@22.15.31)
+        version: 2.1.49(@types/node@22.15.31)
       '@inquirer/type':
         specifier: ^3.0.7
         version: 3.0.7(@types/node@22.15.31)
@@ -321,8 +321,8 @@ packages:
     resolution: {integrity: sha512-MJttijd8rMFcKJC8NYmprWr6hD3r9Gd9qUC0XwPNwoEPWSMVJwA2MlXxF+nhZZNMY+HXsWa+o7KY2emWYIn0jQ==}
     engines: {node: '>=18'}
 
-  '@inquirer/testing@2.1.48':
-    resolution: {integrity: sha512-xXrfJsARpcvMnau09q8ziQ7VFZO+cisyp7tdGk2rBtTg09diVia/I8gQN5YaNZvRzqZvmLniYASYvqbzuyG0Dg==}
+  '@inquirer/testing@2.1.49':
+    resolution: {integrity: sha512-XAB4lEaqCwUi/RN40H3JiQqpbza9Ne/EkC15b6ftfaLk1DxSJYVmrf/suY6Owm7388MPqlGnQWV6L0HoqXOtRA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -332,6 +332,15 @@ packages:
 
   '@inquirer/type@3.0.7':
     resolution: {integrity: sha512-PfunHQcjwnju84L+ycmcMKB/pTPIngjUJvfnRhKY6FKPuYXlM4aQCb/nIdTFR6BEhMjFvngzvng/vBAJMZpLSA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/type@3.0.8':
+    resolution: {integrity: sha512-lg9Whz8onIHRthWaN1Q9EGLa/0LFJjyM8mEUbL1eTi6yMGvBf8gvyDLtxSXztQsxMvhxxNpJYrwa1YHdq+w4Jw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -1766,15 +1775,19 @@ snapshots:
 
   '@inquirer/figures@1.0.12': {}
 
-  '@inquirer/testing@2.1.48(@types/node@22.15.31)':
+  '@inquirer/testing@2.1.49(@types/node@22.15.31)':
     dependencies:
-      '@inquirer/type': 3.0.7(@types/node@22.15.31)
+      '@inquirer/type': 3.0.8(@types/node@22.15.31)
       ansi-escapes: 4.3.2
       mute-stream: 2.0.0
     optionalDependencies:
       '@types/node': 22.15.31
 
   '@inquirer/type@3.0.7(@types/node@22.15.31)':
+    optionalDependencies:
+      '@types/node': 22.15.31
+
+  '@inquirer/type@3.0.8(@types/node@22.15.31)':
     optionalDependencies:
       '@types/node': 22.15.31
 
