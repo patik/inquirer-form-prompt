@@ -41,7 +41,7 @@ importers:
         version: 9.34.0
       '@inquirer/testing':
         specifier: ^2.1.47
-        version: 2.1.49(@types/node@22.15.31)
+        version: 2.1.50(@types/node@22.15.31)
       '@inquirer/type':
         specifier: ^3.0.7
         version: 3.0.8(@types/node@22.15.31)
@@ -327,8 +327,8 @@ packages:
     resolution: {integrity: sha512-lGPVU3yO9ZNqA7vTYz26jny41lE7yoQansmqdMLBEfqaGsmdg7V3W9mK9Pvb5IL4EVZ9GnSDGMO/cJXud5dMaw==}
     engines: {node: '>=18'}
 
-  '@inquirer/testing@2.1.49':
-    resolution: {integrity: sha512-XAB4lEaqCwUi/RN40H3JiQqpbza9Ne/EkC15b6ftfaLk1DxSJYVmrf/suY6Owm7388MPqlGnQWV6L0HoqXOtRA==}
+  '@inquirer/testing@2.1.50':
+    resolution: {integrity: sha512-cdEl0m/E1eFsbnTYfz9mrDNi50E4Ov+0G1SxNkCTgAW4R3cXTBSp+vGz8OiCeVJvKIQfY+Zti14EdDgDw8dPEg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -361,8 +361,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@jridgewell/trace-mapping@0.3.30':
-    resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+  '@jridgewell/trace-mapping@0.3.31':
+    resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
   '@loaderkit/resolve@1.0.4':
     resolution: {integrity: sha512-rJzYKVcV4dxJv+vW6jlvagF8zvGxHJ2+HTr1e2qOejfmGhAApgJHl8Aog4mMszxceTRiKTTbnpgmTO1bEZHV/A==}
@@ -1775,10 +1775,9 @@ snapshots:
 
   '@inquirer/figures@1.0.13': {}
 
-  '@inquirer/testing@2.1.49(@types/node@22.15.31)':
+  '@inquirer/testing@2.1.50(@types/node@22.15.31)':
     dependencies:
       '@inquirer/type': 3.0.8(@types/node@22.15.31)
-      ansi-escapes: 4.3.2
       mute-stream: 2.0.0
     optionalDependencies:
       '@types/node': 22.15.31
@@ -1790,7 +1789,7 @@ snapshots:
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
-      '@jridgewell/trace-mapping': 0.3.30
+      '@jridgewell/trace-mapping': 0.3.31
     optional: true
 
   '@jridgewell/resolve-uri@3.1.2':
@@ -1799,7 +1798,7 @@ snapshots:
   '@jridgewell/source-map@0.3.11':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.30
+      '@jridgewell/trace-mapping': 0.3.31
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
@@ -1807,7 +1806,7 @@ snapshots:
   '@jridgewell/sourcemap-codec@1.5.5':
     optional: true
 
-  '@jridgewell/trace-mapping@0.3.30':
+  '@jridgewell/trace-mapping@0.3.31':
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
