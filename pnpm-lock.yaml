@@ -41,7 +41,7 @@ importers:
         version: 9.37.0
       '@inquirer/testing':
         specifier: ^2.1.47
-        version: 2.1.50(@types/node@22.15.31)
+        version: 2.1.51(@types/node@22.15.31)
       '@inquirer/type':
         specifier: ^3.0.7
         version: 3.0.8(@types/node@22.15.31)
@@ -327,8 +327,8 @@ packages:
     resolution: {integrity: sha512-lGPVU3yO9ZNqA7vTYz26jny41lE7yoQansmqdMLBEfqaGsmdg7V3W9mK9Pvb5IL4EVZ9GnSDGMO/cJXud5dMaw==}
     engines: {node: '>=18'}
 
-  '@inquirer/testing@2.1.50':
-    resolution: {integrity: sha512-cdEl0m/E1eFsbnTYfz9mrDNi50E4Ov+0G1SxNkCTgAW4R3cXTBSp+vGz8OiCeVJvKIQfY+Zti14EdDgDw8dPEg==}
+  '@inquirer/testing@2.1.51':
+    resolution: {integrity: sha512-ZY1mp+AAxhwdJ+IzioKTPgxyqHWLGYZpOzQ3nkHJ8CMp+vpRtI5k94fktBbIXCsjNtOEm8SMttgLPKEK9si2nQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -338,6 +338,15 @@ packages:
 
   '@inquirer/type@3.0.8':
     resolution: {integrity: sha512-lg9Whz8onIHRthWaN1Q9EGLa/0LFJjyM8mEUbL1eTi6yMGvBf8gvyDLtxSXztQsxMvhxxNpJYrwa1YHdq+w4Jw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/type@3.0.9':
+    resolution: {integrity: sha512-QPaNt/nmE2bLGQa9b7wwyRJoLZ7pN6rcyXvzU0YCmivmJyq1BVo94G98tStRWkoD1RgDX5C+dPlhhHzNdu/W/w==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/node': '>=18'
@@ -1787,14 +1796,18 @@ snapshots:
 
   '@inquirer/figures@1.0.13': {}
 
-  '@inquirer/testing@2.1.50(@types/node@22.15.31)':
+  '@inquirer/testing@2.1.51(@types/node@22.15.31)':
     dependencies:
-      '@inquirer/type': 3.0.8(@types/node@22.15.31)
+      '@inquirer/type': 3.0.9(@types/node@22.15.31)
       mute-stream: 2.0.0
     optionalDependencies:
       '@types/node': 22.15.31
 
   '@inquirer/type@3.0.8(@types/node@22.15.31)':
+    optionalDependencies:
+      '@types/node': 22.15.31
+
+  '@inquirer/type@3.0.9(@types/node@22.15.31)':
     optionalDependencies:
       '@types/node': 22.15.31
 
