@@ -38,7 +38,7 @@ importers:
         version: 0.18.2
       '@eslint/js':
         specifier: ^9.28.0
-        version: 9.39.0
+        version: 9.39.1
       '@inquirer/testing':
         specifier: ^2.1.47
         version: 2.1.52(@types/node@22.15.31)
