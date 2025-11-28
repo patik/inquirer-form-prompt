@@ -2,7 +2,7 @@ import figures from '@inquirer/figures'
 import { renderRadio } from 'src/renderers/common/radio.js'
 import type { RadioField } from 'src/util/types.js'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline } from 'yoctocolors'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 
 describe('renderRadio', () => {
     const baseField: RadioField = {

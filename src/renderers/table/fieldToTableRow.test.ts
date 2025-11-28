@@ -2,7 +2,7 @@ import { Separator } from '@inquirer/core'
 import { fieldToTableRow } from 'src/renderers/table/fieldToTableRow.js'
 import type { BooleanField, InternalCheckboxField, RadioField, TextField } from 'src/util/types.js'
 import { describe, expect, it, vi } from 'vitest'
-import { bgGray, green } from 'yoctocolors'
+import { bgGray, green } from 'src/util/styles.js'
 
 // Mock the renderer functions
 vi.mock('src/renderers/common/boolean.js', () => ({

@@ -5,7 +5,7 @@ import figures from '@inquirer/figures'
 import { renderCheckbox } from 'src/renderers/common/checkbox.js'
 import type { InternalCheckboxField } from 'src/util/types.js'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline } from 'yoctocolors'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 
 describe('renderCheckbox', () => {
     const baseField: InternalCheckboxField = {

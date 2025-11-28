@@ -5,7 +5,7 @@ import { renderRadio } from 'src/renderers/common/radio.js'
 import { renderText } from 'src/renderers/common/text.js'
 import type { FormTheme, InternalFormField } from 'src/util/types.js'
 import stripAnsi from 'strip-ansi'
-import { dim } from 'yoctocolors'
+import { dim } from 'src/util/styles.js'
 
 const staticOptions = {
     titleAlignment: 'left',

@@ -16,7 +16,7 @@ import type {
     InternalFormField,
     ReturnedItems,
 } from 'src/util/types.js'
-import { bold, dim } from 'yoctocolors'
+import { bold, dim } from 'src/util/styles.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {
