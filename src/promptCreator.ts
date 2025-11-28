@@ -31,6 +31,20 @@ function toInternalFields(fields: Fields): InternalFields {
     })
 }
 
+function toReturnedItems(fields: InternalFields): ReturnedItems {
+    return fields.map((field) => {
+        if (field instanceof Separator) {
+            return field
+        }
+
+        return {
+            type: field.type,
+            label: field.label,
+            value: field.value,
+        }
+    })
+}
+
 function getInitialIndex(fields: Fields): number {
     const firstNonSeparatorIndex = fields.findIndex((field) => !(field instanceof Separator))
 
@@ -121,7 +135,7 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
         config.theme?.variant === 'label-top'
             ? toLabelTop(fields, focusedIndex, config.theme.dense)
             : toTable(fields, focusedIndex)
-    const footerContent = config.footer ? config.footer(fields) : ''
+    const footerContent = config.footer ? config.footer(toReturnedItems(fields)) : ''
     const footerOutput = footerContent ? `\n${footerContent}` : ''
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
