@@ -279,7 +279,7 @@ describe('toLabelTop', () => {
             expect(result).toMatchInlineSnapshot(`
               "[FOCUSED][NORMAL] First Name: text
 
-              [2m──────────────[22m
+              ──────────────
 
               [UNFOCUSED][NORMAL] Last Name: text"
             `)

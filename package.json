@@ -20,20 +20,20 @@
         "dist"
     ],
     "dependencies": {
-        "@inquirer/core": "^10.1.13",
+        "@inquirer/core": "^11.0.1",
         "@inquirer/figures": "^1.0.12",
         "ansi-escapes": "^7.0.0",
         "boxen": "^8.0.1",
         "cli-table3": "^0.6.5",
-        "clipboardy": "^4.0.0",
+        "clipboardy": "^5.0.1",
         "strip-ansi": "^7.1.0",
         "yoctocolors": "^2.1.1"
     },
     "devDependencies": {
         "@arethetypeswrong/cli": "^0.18.2",
         "@eslint/js": "^9.28.0",
-        "@inquirer/testing": "^2.1.47",
-        "@inquirer/type": "^3.0.7",
+        "@inquirer/testing": "^3.0.1",
+        "@inquirer/type": "^4.0.1",
         "@types/node": "^22.15.31",
         "eslint": "^9.28.0",
         "eslint-config-prettier": "^10.1.5",
