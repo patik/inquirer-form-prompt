@@ -8,6 +8,7 @@ import { editTextField } from 'src/keyHandlers/editText.js'
 import { handleNavigation } from 'src/keyHandlers/handleNavigation.js'
 import { toLabelTop } from 'src/renderers/labelTop/toLabelTop.js'
 import { toTable } from 'src/renderers/table/toTable.js'
+import { bold, dim } from 'src/util/styles.js'
 import type {
     Config,
     Fields,
@@ -16,7 +17,6 @@ import type {
     InternalFormField,
     ReturnedItems,
 } from 'src/util/types.js'
-import { bold, dim } from 'src/util/styles.js'
 
 function toInternalFields(fields: Fields): InternalFields {
     return fields.map((field) => {

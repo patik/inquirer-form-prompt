@@ -3,9 +3,9 @@ import { renderBoolean } from 'src/renderers/common/boolean.js'
 import { renderCheckbox } from 'src/renderers/common/checkbox.js'
 import { renderRadio } from 'src/renderers/common/radio.js'
 import { renderText } from 'src/renderers/common/text.js'
+import { dim } from 'src/util/styles.js'
 import type { FormTheme, InternalFormField } from 'src/util/types.js'
 import stripAnsi from 'strip-ansi'
-import { dim } from 'src/util/styles.js'
 
 const staticOptions = {
     titleAlignment: 'left',
