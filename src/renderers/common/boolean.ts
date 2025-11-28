@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 import type { BooleanField } from 'src/util/types.js'
-import { bgGray, bold, underline } from 'yoctocolors'
 
 export function renderBoolean(field: BooleanField, isFieldFocused: boolean): string {
     const { value } = field

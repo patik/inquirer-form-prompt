@@ -3,9 +3,9 @@
 
 import figures from '@inquirer/figures'
 import { renderCheckbox } from 'src/renderers/common/checkbox.js'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 import type { InternalCheckboxField } from 'src/util/types.js'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline } from 'yoctocolors'
 
 describe('renderCheckbox', () => {
     const baseField: InternalCheckboxField = {

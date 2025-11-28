@@ -1,6 +1,6 @@
 import figures from '@inquirer/figures'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 import type { InternalCheckboxField } from 'src/util/types.js'
-import { bgGray, bold, underline } from 'yoctocolors'
 
 function createChoiceRenderer(
     field: InternalCheckboxField,

@@ -2,9 +2,9 @@
 
 import figures from '@inquirer/figures'
 import { renderBoolean } from 'src/renderers/common/boolean.js'
+import { bgGray, bold, underline } from 'src/util/styles.js'
 import type { BooleanField } from 'src/util/types.js'
 import { describe, expect, it } from 'vitest'
-import { bgGray, bold, underline } from 'yoctocolors'
 
 describe('renderBoolean', () => {
     const baseField: BooleanField = {
