@@ -549,8 +549,8 @@ describe('Form Prompt', () => {
                 footer: (values) => {
                     const name = values.find((v) => !(v instanceof Separator) && v.label === 'Name')
                     const city = values.find((v) => !(v instanceof Separator) && v.label === 'City')
-                    const nameValue = name && !(name instanceof Separator) ? name.value : ''
-                    const cityValue = city && !(city instanceof Separator) ? city.value : ''
+                    const nameValue = name && !(name instanceof Separator) ? String(name.value ?? '') : ''
+                    const cityValue = city && !(city instanceof Separator) ? String(city.value ?? '') : ''
                     return `Hello ${nameValue} from ${cityValue}!`
                 },
             })
@@ -571,7 +571,7 @@ describe('Form Prompt', () => {
                 ],
                 footer: (values) => {
                     const name = values.find((v) => !(v instanceof Separator) && v.label === 'Name')
-                    const nameValue = name && !(name instanceof Separator) ? (name.value ?? '') : ''
+                    const nameValue = name && !(name instanceof Separator) ? String(name.value ?? '') : ''
                     return nameValue ? `Welcome, ${nameValue}!` : 'Please enter your name'
                 },
             })
@@ -693,7 +693,8 @@ describe('Form Prompt', () => {
                 ],
                 footer: (values) => {
                     const theme = values.find((v) => !(v instanceof Separator) && v.label === 'Theme')
-                    const themeValue = theme && !(theme instanceof Separator) ? theme.value : 'unknown'
+                    const themeValue =
+                        theme && !(theme instanceof Separator) ? String(theme.value ?? 'unknown') : 'unknown'
                     return `Current theme: ${themeValue}`
                 },
             })

@@ -26,11 +26,13 @@ const generateTripSummary = (values: ReturnedItems): string => {
     const transport = values.find((v) => !(v instanceof Separator) && v.label === 'Preferred Transport')
     const activities = values.find((v) => !(v instanceof Separator) && v.label === 'Activities of Interest')
 
-    const nameValue = name && !(name instanceof Separator) && name.value ? name.value : 'Unknown Traveler'
-    const destValue = destination && !(destination instanceof Separator) && destination.value ? destination.value : '?'
+    const nameValue = name && !(name instanceof Separator) && name.value ? String(name.value) : 'Unknown Traveler'
+    const destValue =
+        destination && !(destination instanceof Separator) && destination.value ? String(destination.value) : '?'
     const hotelsValue = includeHotels && !(includeHotels instanceof Separator) && includeHotels.value ? '🏨' : ''
     const trainValue = trainPass && !(trainPass instanceof Separator) && trainPass.value ? '🚂' : ''
-    const transportValue = transport && !(transport instanceof Separator) && transport.value ? transport.value : 'TBD'
+    const transportValue =
+        transport && !(transport instanceof Separator) && transport.value ? String(transport.value) : 'TBD'
     const activitiesValue =
         activities && !(activities instanceof Separator) && Array.isArray(activities.value) && activities.value.length
             ? activities.value.length
