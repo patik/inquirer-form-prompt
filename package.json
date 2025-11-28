@@ -8,7 +8,7 @@
         "test:once": "vitest run",
         "format": "prettier --write --list-different .",
         "check-format": "prettier --check .",
-        "lint": "tsc --noEmit && eslint . --fix && npm run format",
+        "lint": "tsc --noEmit && eslint . --fix && pnpm run format",
         "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
         "ci": "pnpm build && pnpm check-format && pnpm check-exports",
         "prepublishOnly": "pnpm run ci",
