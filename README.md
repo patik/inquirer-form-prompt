@@ -48,7 +48,7 @@ const answer = await form({
 ```
 
 > [!tip]
-> See `src/demo.ts` for a more thorough example.
+> See `src/demo.ts` for a more thorough example. Try it with `pnpm demo`.
 
 ## Fields
 
