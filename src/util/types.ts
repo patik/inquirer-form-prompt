@@ -6,12 +6,23 @@ export type FormTheme = {
     dense?: boolean
 }
 
+/**
+ * A function that receives the current field values and returns a string to display as a footer.
+ * This footer updates in real-time as users fill in the form.
+ */
+export type FooterFunction = (values: ReturnedItems) => string
+
 export type Config = {
     message?: string
     submessage?: string
     default?: boolean
     fields: Fields
     theme?: PartialDeep<Theme<FormTheme>>
+    /**
+     * Optional function that generates a footer to display below the form.
+     * Receives the current field values and should return a string to display.
+     */
+    footer?: FooterFunction
 }
 
 type FieldBase = {

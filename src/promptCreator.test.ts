@@ -510,4 +510,213 @@ describe('Form Prompt', () => {
             expect(getScreen()).toMatchSnapshot()
         })
     })
+
+    describe('Footer', () => {
+        it('should render a static footer', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Form with footer',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: 'John',
+                    },
+                ],
+                footer: () => 'This is a static footer',
+            })
+
+            const screen = getScreen()
+            expect(screen).toContain('Form with footer')
+            expect(screen).toContain('Name')
+            expect(screen).toContain('This is a static footer')
+        })
+
+        it('should render a dynamic footer based on field values', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Dynamic footer test',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: 'Alice',
+                    },
+                    {
+                        type: 'text',
+                        label: 'City',
+                        value: 'New York',
+                    },
+                ],
+                footer: (values) => {
+                    const name = values.find((v) => !(v instanceof Separator) && v.label === 'Name')
+                    const city = values.find((v) => !(v instanceof Separator) && v.label === 'City')
+                    const nameValue = name && !(name instanceof Separator) ? name.value : ''
+                    const cityValue = city && !(city instanceof Separator) ? city.value : ''
+                    return `Hello ${nameValue} from ${cityValue}!`
+                },
+            })
+
+            const screen = getScreen()
+            expect(screen).toContain('Hello Alice from New York!')
+        })
+
+        it('should update footer when field values change', async () => {
+            const { getScreen, events } = await render(formPrompt, {
+                message: 'Updating footer',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: '',
+                    },
+                ],
+                footer: (values) => {
+                    const name = values.find((v) => !(v instanceof Separator) && v.label === 'Name')
+                    const nameValue = name && !(name instanceof Separator) ? (name.value ?? '') : ''
+                    return nameValue ? `Welcome, ${nameValue}!` : 'Please enter your name'
+                },
+            })
+
+            // Initially empty, should show default message
+            expect(getScreen()).toContain('Please enter your name')
+
+            // Type a name
+            events.type('Bob')
+
+            // Footer should update
+            expect(getScreen()).toContain('Welcome, Bob!')
+        })
+
+        it('should not render footer when footer function is not provided', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'No footer form',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: 'Test',
+                    },
+                ],
+            })
+
+            const screen = getScreen()
+            expect(screen).toContain('No footer form')
+            // Should not have extra newlines from footer
+            expect(screen).not.toContain('undefined')
+        })
+
+        it('should handle footer with separators in fields', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Form with separators',
+                fields: [
+                    new Separator('--- Personal Info ---'),
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: 'Jane',
+                    },
+                    new Separator('--- Contact ---'),
+                    {
+                        type: 'text',
+                        label: 'Email',
+                        value: 'jane@example.com',
+                    },
+                ],
+                footer: (values) => {
+                    const formFields = values.filter((v) => !(v instanceof Separator))
+                    return `Form has ${formFields.length} fields`
+                },
+            })
+
+            const screen = getScreen()
+            expect(screen).toContain('Form has 2 fields')
+        })
+
+        it('should handle footer with boolean field values', async () => {
+            const { getScreen, events } = await render(formPrompt, {
+                message: 'Boolean footer test',
+                fields: [
+                    {
+                        type: 'boolean',
+                        label: 'Subscribe',
+                        value: false,
+                    },
+                ],
+                footer: (values) => {
+                    const subscribe = values.find((v) => !(v instanceof Separator) && v.label === 'Subscribe')
+                    const isSubscribed = subscribe && !(subscribe instanceof Separator) ? subscribe.value : false
+                    return isSubscribed ? '✓ You will receive updates' : '✗ You will not receive updates'
+                },
+            })
+
+            // Initially false
+            expect(getScreen()).toContain('✗ You will not receive updates')
+
+            // Press left/right arrow to toggle boolean value
+            events.keypress('left')
+
+            // Footer should update
+            expect(getScreen()).toContain('✓ You will receive updates')
+        })
+
+        it('should handle footer with checkbox field values', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Checkbox footer test',
+                fields: [
+                    {
+                        type: 'checkbox',
+                        label: 'Languages',
+                        choices: ['JavaScript', 'TypeScript', 'Python'],
+                        value: ['JavaScript', 'TypeScript'],
+                    },
+                ],
+                footer: (values) => {
+                    const langs = values.find((v) => !(v instanceof Separator) && v.label === 'Languages')
+                    const langValues =
+                        langs && !(langs instanceof Separator) && Array.isArray(langs.value) ? langs.value : []
+                    return `Selected: ${langValues.join(', ')}`
+                },
+            })
+
+            expect(getScreen()).toContain('Selected: JavaScript, TypeScript')
+        })
+
+        it('should handle footer with radio field values', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Radio footer test',
+                fields: [
+                    {
+                        type: 'radio',
+                        label: 'Theme',
+                        choices: ['Light', 'Dark', 'Auto'],
+                        value: 'Dark',
+                    },
+                ],
+                footer: (values) => {
+                    const theme = values.find((v) => !(v instanceof Separator) && v.label === 'Theme')
+                    const themeValue = theme && !(theme instanceof Separator) ? theme.value : 'unknown'
+                    return `Current theme: ${themeValue}`
+                },
+            })
+
+            expect(getScreen()).toContain('Current theme: Dark')
+        })
+
+        it('should handle empty string returned from footer function', async () => {
+            const { getScreen } = await render(formPrompt, {
+                message: 'Empty footer',
+                fields: [
+                    {
+                        type: 'text',
+                        label: 'Name',
+                        value: 'Test',
+                    },
+                ],
+                footer: () => '',
+            })
+
+            const screen = getScreen()
+            expect(screen).toContain('Empty footer')
+            expect(screen).toContain('Name')
+        })
+    })
 })

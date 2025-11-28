@@ -121,8 +121,10 @@ export const promptCreator = (config: Config, done: (value: ReturnedItems) => vo
         config.theme?.variant === 'label-top'
             ? toLabelTop(fields, focusedIndex, config.theme.dense)
             : toTable(fields, focusedIndex)
+    const footerContent = config.footer ? config.footer(fields) : ''
+    const footerOutput = footerContent ? `\n${footerContent}` : ''
 
     return `${prefix} ${message}${submessage} ${dim('(tab/arrows to move between fields, enter to finish)')}
-${fieldOutput}${ansiEscapes.cursorHide}
+${fieldOutput}${footerOutput}${ansiEscapes.cursorHide}
 `
 }
