@@ -1,6 +1,10 @@
 import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default tseslint.config(
     {
@@ -17,7 +21,7 @@ export default tseslint.config(
         languageOptions: {
             parserOptions: {
                 project: ['./tsconfig.json'],
-                tsconfigRootDir: '.',
+                tsconfigRootDir: __dirname,
             },
         },
         rules: {

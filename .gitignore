@@ -3,4 +3,8 @@ dist/
 .DS_Store
 .vscode/
 tsconfig.tsbuildinfo
-package-lock.json
+
+# Shared Copilot instruction symlinks
+.github/instructions/*.instructions.md
+.github/chatmodes
+.github/prompts
