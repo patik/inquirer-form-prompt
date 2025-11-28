@@ -1,6 +1,6 @@
 import { Separator } from '@inquirer/core'
 import { exit } from 'node:process'
-import type { FormTheme } from 'src/index.js'
+import type { FormTheme, ReturnedItems } from 'src/index.js'
 import form from 'src/index.js'
 
 const errorHandler = (error: unknown): void => {
@@ -13,6 +13,33 @@ const errorHandler = (error: unknown): void => {
 }
 
 process.on('uncaughtException', errorHandler)
+
+/**
+ * Footer function that generates a live summary of the trip details.
+ * This updates in real-time as the user fills in the form.
+ */
+const generateTripSummary = (values: ReturnedItems): string => {
+    const name = values.find((v) => !(v instanceof Separator) && v.label === 'Traveler Name')
+    const destination = values.find((v) => !(v instanceof Separator) && v.label === 'Destination City')
+    const includeHotels = values.find((v) => !(v instanceof Separator) && v.label === 'Include Hotels')
+    const trainPass = values.find((v) => !(v instanceof Separator) && v.label === 'Train pass needed')
+    const transport = values.find((v) => !(v instanceof Separator) && v.label === 'Preferred Transport')
+    const activities = values.find((v) => !(v instanceof Separator) && v.label === 'Activities of Interest')
+
+    const nameValue = name && !(name instanceof Separator) && name.value ? String(name.value) : 'Unknown Traveler'
+    const destValue =
+        destination && !(destination instanceof Separator) && destination.value ? String(destination.value) : '?'
+    const hotelsValue = includeHotels && !(includeHotels instanceof Separator) && includeHotels.value ? '🏨' : ''
+    const trainValue = trainPass && !(trainPass instanceof Separator) && trainPass.value ? '🚂' : ''
+    const transportValue =
+        transport && !(transport instanceof Separator) && transport.value ? String(transport.value) : 'TBD'
+    const activitiesValue =
+        activities && !(activities instanceof Separator) && Array.isArray(activities.value) && activities.value.length
+            ? activities.value.length
+            : 0
+
+    return `━━━ Trip Summary ━━━\n🧳 ${nameValue} → ${destValue} | Transport: ${transportValue} ${hotelsValue}${trainValue} | ${activitiesValue} activities selected`
+}
 
 export const demo = async (
     {
@@ -75,6 +102,7 @@ export const demo = async (
                 variant,
                 dense,
             },
+            footer: generateTripSummary,
         })
 
         console.log('\n🎯 Your Travel Preferences:\n')

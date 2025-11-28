@@ -33,6 +33,7 @@ export type {
     Config,
     Field,
     Fields,
+    FooterFunction,
     FormField,
     FormTheme,
     RadioField,

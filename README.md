@@ -48,7 +48,7 @@ const answer = await form({
 ```
 
 > [!tip]
-> See `src/demo.ts` for a more thorough example.
+> See `src/demo.ts` for a more thorough example. Try it with `pnpm demo`.
 
 ## Fields
 
@@ -189,3 +189,43 @@ theme: {
     dense: true
 }
 ```
+
+## Footer
+
+The config object accepts an optional `footer` prop which is a function that receives the current field values and returns a string to display below the form. The footer updates in real-time as the user fills in the form.
+
+```tsx
+footer?: (values: ReturnedItems) => string
+```
+
+Example:
+
+```tsx
+import form, { ReturnedItems } from 'inquirer-form-prompt'
+import { Separator } from '@inquirer/core'
+
+const answer = await form({
+    message: 'User Profile',
+    fields: [
+        {
+            label: 'Name',
+            type: 'text',
+            value: '',
+        },
+        {
+            label: 'Age',
+            type: 'text',
+            value: '',
+        },
+    ],
+    footer: (values: ReturnedItems) => {
+        const name = values.find((v) => !(v instanceof Separator) && v.label === 'Name')
+        const age = values.find((v) => !(v instanceof Separator) && v.label === 'Age')
+        const nameValue = name && !(name instanceof Separator) && name.value ? name.value : 'Unknown'
+        const ageValue = age && !(age instanceof Separator) && age.value ? age.value : '?'
+        return `Profile: ${nameValue} (${ageValue} years old)`
+    },
+})
+```
+
+This is useful for showing summaries, validation hints, or computed values based on the current form state.
