@@ -43,7 +43,7 @@
         "tsx": "^4.20.0",
         "typescript": "^5.8.3",
         "typescript-eslint": "^8.48.0",
-        "vitest": "^3.2.3"
+        "vitest": "^4.0.14"
     },
     "keywords": [],
     "description": "Form-like, multi-input prompt for Inquirer.js",
