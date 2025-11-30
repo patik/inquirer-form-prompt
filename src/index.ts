@@ -43,3 +43,4 @@ export type {
     ReturnedItems,
     TextField,
 } from 'src/util/types.js'
+export { EscapeKeyError }
