@@ -1,5 +1,6 @@
 import { Separator } from '@inquirer/core'
 import { exit } from 'node:process'
+import { EscapeKeyError } from 'src/EscapeKeyError.js'
 import type { FormTheme, ReturnedItems } from 'src/index.js'
 import form from 'src/index.js'
 
@@ -120,7 +121,7 @@ export const demo = async (
                 .join('\n'),
         )
     } catch (error) {
-        if (error instanceof Error && error.message === 'Escape key pressed') {
+        if (error instanceof EscapeKeyError) {
             console.log('\n✈️ Trip planning cancelled - maybe next time!')
         } else {
             throw error

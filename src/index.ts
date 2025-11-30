@@ -1,5 +1,6 @@
 import { createPrompt } from '@inquirer/core'
 import readline from 'readline'
+import { EscapeKeyError } from 'src/EscapeKeyError.js'
 import { promptCreator } from 'src/promptCreator.js'
 import type { Config, ReturnedItems } from 'src/util/types.js'
 
@@ -22,7 +23,7 @@ export default async function form(options: Config): Promise<ReturnedItems> {
 
     // Check if the user aborted
     if (typeof answer === 'symbol' && String(answer) === 'Symbol(Escape key pressed)') {
-        throw new Error('Escape key pressed')
+        throw new EscapeKeyError()
     }
 
     return answer
