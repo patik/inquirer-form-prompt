@@ -38,7 +38,7 @@ importers:
         version: 9.39.2
       '@inquirer/testing':
         specifier: ^3.0.1
-        version: 3.0.2(@types/node@24.10.1)
+        version: 3.0.3(@types/node@24.10.1)
       '@inquirer/type':
         specifier: ^4.0.1
         version: 4.0.1(@types/node@24.10.1)
@@ -484,8 +484,8 @@ packages:
     resolution: {integrity: sha512-qXm6EVvQx/FmnSrCWCIGtMHwqeLgxABP8XgcaAoywsL0NFga9gD5kfG0gXiv80GjK9Hsoz4pgGwF/+CjygyV9A==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
 
-  '@inquirer/testing@3.0.2':
-    resolution: {integrity: sha512-yGCTAzpIlEbm72iEr5iI5Cp0l2GEhhsxOyPqndidVLFqRRN+GROiWcAMw3fooUwtVlZ+O8msxLYWsSRm2UUj5w==}
+  '@inquirer/testing@3.0.3':
+    resolution: {integrity: sha512-Dx60ale5wEC6B/W39ekNqGIU3McDvSe9Usn0WKTvPkyCRCuDZMwcEYqD538ih011EThk58HEfWO6CiCEN2CVMw==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
     peerDependencies:
       '@types/node': '>=18'
@@ -2039,7 +2039,7 @@ snapshots:
 
   '@inquirer/figures@2.0.2': {}
 
-  '@inquirer/testing@3.0.2(@types/node@24.10.1)':
+  '@inquirer/testing@3.0.3(@types/node@24.10.1)':
     dependencies:
       '@inquirer/type': 4.0.2(@types/node@24.10.1)
       mute-stream: 3.0.0
