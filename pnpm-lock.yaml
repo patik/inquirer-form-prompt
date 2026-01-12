@@ -38,7 +38,7 @@ importers:
         version: 9.39.2
       '@inquirer/testing':
         specifier: ^3.0.1
-        version: 3.0.3(@types/node@24.10.1)
+        version: 3.0.4(@types/node@24.10.1)
       '@inquirer/type':
         specifier: ^4.0.1
         version: 4.0.2(@types/node@24.10.1)
@@ -490,8 +490,8 @@ packages:
     resolution: {integrity: sha512-qXm6EVvQx/FmnSrCWCIGtMHwqeLgxABP8XgcaAoywsL0NFga9gD5kfG0gXiv80GjK9Hsoz4pgGwF/+CjygyV9A==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
 
-  '@inquirer/testing@3.0.3':
-    resolution: {integrity: sha512-Dx60ale5wEC6B/W39ekNqGIU3McDvSe9Usn0WKTvPkyCRCuDZMwcEYqD538ih011EThk58HEfWO6CiCEN2CVMw==}
+  '@inquirer/testing@3.0.4':
+    resolution: {integrity: sha512-iSx1+r44QsBWD0o/a3xIM8EoXcyVNncBhZ7cofHbGNtHfJk5X16Ne/gNNYVb0jdYbENSCMH0deWjgJ5P2cjJRg==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
     peerDependencies:
       '@types/node': '>=18'
@@ -501,6 +501,15 @@ packages:
 
   '@inquirer/type@4.0.2':
     resolution: {integrity: sha512-cae7mzluplsjSdgFA6ACLygb5jC8alO0UUnFPyu0E7tNRPrL+q/f8VcSXp+cjZQ7l5CMpDpi2G1+IQvkOiL1Lw==}
+    engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/type@4.0.3':
+    resolution: {integrity: sha512-cKZN7qcXOpj1h+1eTTcGDVLaBIHNMT1Rz9JqJP5MnEJ0JhgVWllx7H/tahUp5YEK1qaByH2Itb8wLG/iScD5kw==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^21.7.0 || ^20.12.0'}
     peerDependencies:
       '@types/node': '>=18'
@@ -2041,14 +2050,18 @@ snapshots:
 
   '@inquirer/figures@2.0.2': {}
 
-  '@inquirer/testing@3.0.3(@types/node@24.10.1)':
+  '@inquirer/testing@3.0.4(@types/node@24.10.1)':
     dependencies:
-      '@inquirer/type': 4.0.2(@types/node@24.10.1)
+      '@inquirer/type': 4.0.3(@types/node@24.10.1)
       mute-stream: 3.0.0
     optionalDependencies:
       '@types/node': 24.10.1
 
   '@inquirer/type@4.0.2(@types/node@24.10.1)':
+    optionalDependencies:
+      '@types/node': 24.10.1
+
+  '@inquirer/type@4.0.3(@types/node@24.10.1)':
     optionalDependencies:
       '@types/node': 24.10.1
 
