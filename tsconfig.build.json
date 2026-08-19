@@ -1,0 +1,9 @@
+{
+    // Build-only config: keeps tests and the demo out of `dist`, which is what gets published.
+    // The root tsconfig.json still includes them so `tsc --noEmit` and ESLint type-check them.
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.cache/tsconfig.build.tsbuildinfo"
+    },
+    "exclude": ["node_modules", "src/demo.ts", "src/**/*.test.ts"]
+}

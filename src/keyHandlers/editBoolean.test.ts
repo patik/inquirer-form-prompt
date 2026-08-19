@@ -60,7 +60,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -86,7 +86,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: trueBooleanField,
                 focusedIndex,
-                key: { name: 'right' } as KeypressEvent,
+                key: { name: 'right', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -112,7 +112,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: undefinedBooleanField,
                 focusedIndex,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -136,7 +136,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: noValueBooleanField,
                 focusedIndex,
-                key: { name: 'right' } as KeypressEvent,
+                key: { name: 'right', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -156,7 +156,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -178,7 +178,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -200,7 +200,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'right' } as KeypressEvent,
+                key: { name: 'right', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -222,7 +222,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -247,7 +247,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'return' } as KeypressEvent,
+                key: { name: 'return', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -263,7 +263,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'up' } as KeypressEvent,
+                key: { name: 'up', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -279,7 +279,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'down' } as KeypressEvent,
+                key: { name: 'down', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -295,7 +295,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'space' } as KeypressEvent,
+                key: { name: 'space', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -311,7 +311,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'tab' } as KeypressEvent,
+                key: { name: 'tab', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -327,7 +327,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'escape' } as KeypressEvent,
+                key: { name: 'escape', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -343,7 +343,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: 'a' } as KeypressEvent,
+                key: { name: 'a', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -359,7 +359,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex,
-                key: { name: '!' } as KeypressEvent,
+                key: { name: '!', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -393,7 +393,7 @@ describe('editBooleanField', () => {
                 fields: originalFields,
                 currentField: booleanField,
                 focusedIndex: 1,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -409,7 +409,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -423,7 +423,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -437,7 +437,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 1,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -455,7 +455,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -473,7 +473,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'right' } as KeypressEvent,
+                key: { name: 'right', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -497,7 +497,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: complexBooleanField,
                 focusedIndex: 0,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -518,7 +518,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 1,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -541,7 +541,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'left' } as KeypressEvent,
+                key: { name: 'left', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -550,7 +550,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'right' } as KeypressEvent,
+                key: { name: 'right', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -564,7 +564,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'invalid' } as KeypressEvent,
+                key: { name: 'invalid', ctrl: false, shift: false },
                 rl: mockRl,
             })
 
@@ -580,7 +580,7 @@ describe('editBooleanField', () => {
                 fields,
                 currentField: booleanField,
                 focusedIndex: 0,
-                key: { name: 'enter' } as KeypressEvent,
+                key: { name: 'enter', ctrl: false, shift: false },
                 rl: mockRl,
             })
 

@@ -37,7 +37,7 @@ describe('editRadioField', () => {
     describe('left key navigation', () => {
         it('should move to previous choice when not at first choice', () => {
             const field = { ...radioField, value: 'Option 2' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -55,7 +55,7 @@ describe('editRadioField', () => {
 
         it('should wrap to last choice when at first choice', () => {
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -73,7 +73,7 @@ describe('editRadioField', () => {
 
         it('should handle undefined value by treating as non-match and wrap to last choice', () => {
             const field: RadioField = { ...radioField, value: undefined }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -91,7 +91,7 @@ describe('editRadioField', () => {
 
         it('should handle empty string value by treating as non-match and wrap to last choice', () => {
             const field = { ...radioField, value: '' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -109,7 +109,7 @@ describe('editRadioField', () => {
 
         it('should handle value that does not match any choice by wrapping to last choice', () => {
             const field = { ...radioField, value: 'Non-existent Option' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -131,7 +131,7 @@ describe('editRadioField', () => {
                 choices: ['Only Option'],
                 value: 'Only Option',
             }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [singleChoiceField],
@@ -151,7 +151,7 @@ describe('editRadioField', () => {
     describe('right key navigation', () => {
         it('should move to next choice when not at last choice', () => {
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -169,7 +169,7 @@ describe('editRadioField', () => {
 
         it('should wrap to first choice when at last choice', () => {
             const field = { ...radioField, value: 'Option 3' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -187,7 +187,7 @@ describe('editRadioField', () => {
 
         it('should handle undefined value by selecting first choice', () => {
             const field: RadioField = { ...radioField, value: undefined }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -205,7 +205,7 @@ describe('editRadioField', () => {
 
         it('should handle empty string value by selecting first choice', () => {
             const field = { ...radioField, value: '' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -223,7 +223,7 @@ describe('editRadioField', () => {
 
         it('should handle value that does not match any choice by selecting first choice', () => {
             const field = { ...radioField, value: 'Non-existent Option' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -245,7 +245,7 @@ describe('editRadioField', () => {
                 choices: ['Only Option'],
                 value: 'Only Option',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [singleChoiceField],
@@ -266,7 +266,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for space key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'space' } as KeypressEvent
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -283,7 +283,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for enter key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'enter' } as KeypressEvent
+            const key: KeypressEvent = { name: 'enter', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -300,7 +300,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for escape key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'escape' } as KeypressEvent
+            const key: KeypressEvent = { name: 'escape', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -317,7 +317,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for tab key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'tab' } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -334,7 +334,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for up key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -351,7 +351,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for down key', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -368,7 +368,7 @@ describe('editRadioField', () => {
         it('should clear line and return unchanged fields for character keys', () => {
             const field = { ...radioField, value: 'Option 2' }
             const fields = [field]
-            const key: KeypressEvent = { name: 'a' } as KeypressEvent
+            const key: KeypressEvent = { name: 'a', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -387,7 +387,7 @@ describe('editRadioField', () => {
         it('should only modify the radio field at the specified index', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -409,7 +409,7 @@ describe('editRadioField', () => {
         it('should handle radio field at first position', () => {
             const fields: InternalFields = [radioField, textField, booleanField]
             const field = { ...radioField, value: 'Option 2' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -431,7 +431,7 @@ describe('editRadioField', () => {
         it('should handle radio field at last position', () => {
             const fields: InternalFields = [textField, booleanField, radioField]
             const field = { ...radioField, value: 'Option 3' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -454,7 +454,7 @@ describe('editRadioField', () => {
             const separator = new Separator('--- Section ---')
             const fields: InternalFields = [textField, separator, radioField, booleanField]
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields,
@@ -482,7 +482,7 @@ describe('editRadioField', () => {
                 choices: [],
                 value: undefined,
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [emptyChoicesField],
@@ -504,7 +504,7 @@ describe('editRadioField', () => {
                 choices: ['Option with "quotes"', 'Option with émojis 🎉', 'Option with <tags>'],
                 value: 'Option with "quotes"',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [specialField],
@@ -526,7 +526,7 @@ describe('editRadioField', () => {
                 choices: [' Leading space', 'Trailing space ', '  Both spaces  '],
                 value: ' Leading space',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [whitespaceField],
@@ -548,7 +548,7 @@ describe('editRadioField', () => {
                 choices: ['', 'Option 2', ''],
                 value: '',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [emptyStringField],
@@ -570,7 +570,7 @@ describe('editRadioField', () => {
                 choices: ['1', '2', '3'],
                 value: '2',
             }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [numericField],
@@ -595,7 +595,7 @@ describe('editRadioField', () => {
                 ],
                 value: 'Short',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [longField],
@@ -616,7 +616,7 @@ describe('editRadioField', () => {
         it('should create new fields array without modifying original', () => {
             const originalFields: InternalFields = [textField, radioField, booleanField]
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: originalFields,
@@ -633,7 +633,7 @@ describe('editRadioField', () => {
 
         it('should create new field object without modifying original field', () => {
             const originalField = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [originalField],
@@ -656,7 +656,7 @@ describe('editRadioField', () => {
                 choices: ['A', 'B', 'C'],
                 value: 'B',
             }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [complexField],
@@ -679,7 +679,7 @@ describe('editRadioField', () => {
     describe('key press handling', () => {
         it('should handle key with ctrl modifier', () => {
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -697,7 +697,7 @@ describe('editRadioField', () => {
 
         it('should handle key with meta modifier', () => {
             const field = { ...radioField, value: 'Option 2' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -715,7 +715,7 @@ describe('editRadioField', () => {
 
         it('should handle key with shift modifier', () => {
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -733,7 +733,7 @@ describe('editRadioField', () => {
 
         it('should handle key with multiple modifiers', () => {
             const field = { ...radioField, value: 'Option 3' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -757,7 +757,7 @@ describe('editRadioField', () => {
                 choices: ['Option 1', 'option 1', 'OPTION 1'],
                 value: 'option 1',
             }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [caseField],
@@ -779,7 +779,7 @@ describe('editRadioField', () => {
                 choices: ['Option 1', 'option 1', 'OPTION 1'],
                 value: 'OPTION 1',
             }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [caseField],
@@ -799,7 +799,7 @@ describe('editRadioField', () => {
     describe('boundary conditions', () => {
         it('should handle wrapping from first to last with left key', () => {
             const field = { ...radioField, value: 'Option 1' }
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -817,7 +817,7 @@ describe('editRadioField', () => {
 
         it('should handle wrapping from last to first with right key', () => {
             const field = { ...radioField, value: 'Option 3' }
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editRadioField({
                 fields: [field],
@@ -839,8 +839,8 @@ describe('editRadioField', () => {
                 choices: ['Only Choice'],
                 value: 'Only Choice',
             }
-            const leftKey: KeypressEvent = { name: 'left' } as KeypressEvent
-            const rightKey: KeypressEvent = { name: 'right' } as KeypressEvent
+            const leftKey: KeypressEvent = { name: 'left', ctrl: false, shift: false }
+            const rightKey: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const leftResult = editRadioField({
                 fields: [singleField],

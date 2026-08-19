@@ -2,7 +2,7 @@
     "name": "inquirer-form-prompt",
     "version": "1.0.0",
     "scripts": {
-        "build": "tsc && tsc-alias",
+        "build": "tsc -p tsconfig.build.json && tsc-alias -p tsconfig.build.json",
         "demo": "tsx ./src/demo.ts --run",
         "test": "vitest .",
         "test:once": "vitest run",
@@ -10,7 +10,7 @@
         "check-format": "prettier --check .",
         "lint": "tsc --noEmit && eslint . --fix",
         "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
-        "ci": "pnpm build && pnpm check-format && pnpm check-exports",
+        "ci": "pnpm build && pnpm check-format && pnpm check-exports && pnpm test:once",
         "prepublishOnly": "pnpm run ci",
         "tag-release": "./scripts/tag-release.sh",
         "prepare": "husky"

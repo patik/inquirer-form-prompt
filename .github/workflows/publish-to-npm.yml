@@ -42,7 +42,21 @@ jobs:
             - name: Upgrade npm
               run: npm install --global npm@latest
 
-            - name: Build
+            # The upgrade above only takes effect if the new npm wins on PATH over any npm
+            # shipped with the pnpm-managed Node runtime. Fail here rather than at publish time.
+            - name: Verify npm version
+              run: |
+                  version="$(npm --version)"
+                  echo "npm $version"
+                  node -e 'const [a, b, c] = process.argv[1].split(".").map(Number)
+                    if (a * 1e6 + b * 1e3 + c < 11 * 1e6 + 5 * 1e3 + 1) {
+                        console.error(`npm ${process.argv[1]} is too old; trusted publishing needs >= 11.5.1`)
+                        process.exit(1)
+                    }' "$version"
+
+            # Runs build + check-format + check-exports + tests. A tag must never publish
+            # a version whose test suite is failing.
+            - name: Build and test
               run: pnpm run ci
 
             # No NODE_AUTH_TOKEN: npm exchanges the workflow's OIDC token for a short-lived

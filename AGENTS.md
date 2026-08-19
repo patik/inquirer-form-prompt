@@ -15,13 +15,16 @@ pnpm test                 # vitest in watch mode
 pnpm test:once            # single run (used by the pre-commit hook and CI)
 pnpm test:once src/keyHandlers/editText.test.ts     # one file
 pnpm test:once -t 'should toggle'                   # one test by name
-pnpm lint                 # tsc --noEmit && eslint --fix && prettier --write
-pnpm build                # tsc && tsc-alias (rewrites `src/*` aliases in dist)
+pnpm lint                 # tsc --noEmit && eslint --fix
+pnpm format               # prettier --write
+pnpm build                # tsc && tsc-alias, both against tsconfig.build.json (rewrites `src/*` aliases in dist)
 pnpm demo                 # tsx ./src/demo.ts --run — interactive manual check
-pnpm run ci               # build + check-format + check-exports (also runs on prepublishOnly)
+pnpm run ci               # build + check-format + check-exports + test:once (also runs on prepublishOnly)
 ```
 
 `pnpm demo` is the only way to exercise real terminal rendering; run it after touching renderers or key handlers. Snapshots live in `src/__snapshots__/`; update with `pnpm test:once -u`.
+
+There are two TypeScript configs, and it's easy to edit the wrong one. `tsconfig.json` includes all of `src`, so `tsc --noEmit` and ESLint type-check the tests and the demo along with everything else. `tsconfig.build.json` extends it but excludes `src/**/*.test.ts` and `src/demo.ts`, because `dist` is what gets published and neither of those belongs in the published package. If you add a file that should not ship, exclude it there too.
 
 Releases are tag-driven: pushing a `v*.*.*` tag triggers both the npm publish and the GitHub release workflows. Bump `version` in `package.json` first.
 
@@ -60,4 +63,4 @@ There is a deliberate three-way split, and mixing them up is the most common sou
 - `noUncheckedIndexedAccess` is on, so indexed reads are `T | undefined` — guard them.
 - ESLint runs type-checked rules and bans `any`; explicit return types are expected on functions.
 - Prettier: 4 spaces, no semicolons, single quotes, 120 columns.
-- A Husky pre-commit hook runs `pnpm lint` then `pnpm test:once`.
+- A Husky pre-commit hook runs `pnpm lint`, then `pnpm format`, then `pnpm test:once`.
