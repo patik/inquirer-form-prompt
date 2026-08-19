@@ -32,6 +32,8 @@ jobs:
               run: pnpm check-format
             - name: Lint
               run: pnpm exec eslint .
+            - name: Formatt
+              run: pnpm run check-format
             - name: Build
               run: pnpm build
             - name: Check package exports
