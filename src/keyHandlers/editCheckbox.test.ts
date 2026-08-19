@@ -56,7 +56,7 @@ describe('editCheckboxField', () => {
     describe('left arrow key navigation', () => {
         it('should move highlight index from middle to previous option', () => {
             const field = { ...checkboxField, highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'left', ctrl: false }
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -74,7 +74,7 @@ describe('editCheckboxField', () => {
 
         it('should wrap to last option when at first option', () => {
             const field = { ...checkboxField, highlightIndex: 0 }
-            const key: KeypressEvent = { name: 'left', ctrl: false }
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -96,7 +96,7 @@ describe('editCheckboxField', () => {
                 choices: ['Only Option'],
                 highlightIndex: 0,
             }
-            const key: KeypressEvent = { name: 'left', ctrl: false }
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [singleChoiceField],
@@ -118,7 +118,7 @@ describe('editCheckboxField', () => {
                 choices: [],
                 highlightIndex: 0,
             }
-            const key: KeypressEvent = { name: 'left', ctrl: false }
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [emptyChoicesField],
@@ -138,7 +138,7 @@ describe('editCheckboxField', () => {
     describe('right arrow key navigation', () => {
         it('should move highlight index from middle to next option', () => {
             const field = { ...checkboxField, highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -156,7 +156,7 @@ describe('editCheckboxField', () => {
 
         it('should wrap to first option when at last option', () => {
             const field = { ...checkboxField, highlightIndex: 2 }
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -178,7 +178,7 @@ describe('editCheckboxField', () => {
                 choices: ['Only Option'],
                 highlightIndex: 0,
             }
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [singleChoiceField],
@@ -200,7 +200,7 @@ describe('editCheckboxField', () => {
                 choices: [],
                 highlightIndex: 0,
             }
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [emptyChoicesField],
@@ -220,7 +220,7 @@ describe('editCheckboxField', () => {
     describe('space key selection', () => {
         it('should add option to value when not already selected', () => {
             const field = { ...checkboxField, value: ['Option 1'], highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -239,7 +239,7 @@ describe('editCheckboxField', () => {
 
         it('should remove option from value when already selected', () => {
             const field = { ...checkboxField, value: ['Option 1', 'Option 2'], highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -258,7 +258,7 @@ describe('editCheckboxField', () => {
 
         it('should handle adding to empty value array', () => {
             const field = { ...checkboxField, value: [], highlightIndex: 0 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -277,7 +277,7 @@ describe('editCheckboxField', () => {
 
         it('should handle removing last selected option', () => {
             const field = { ...checkboxField, value: ['Option 2'], highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -296,7 +296,7 @@ describe('editCheckboxField', () => {
 
         it('should handle selecting all options', () => {
             const field = { ...checkboxField, value: ['Option 1', 'Option 2'], highlightIndex: 2 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -315,7 +315,7 @@ describe('editCheckboxField', () => {
 
         it('should handle highlighting out of bounds index', () => {
             const field = { ...checkboxField, value: [], highlightIndex: 5 } // Out of bounds
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -340,7 +340,7 @@ describe('editCheckboxField', () => {
                 value: [],
                 highlightIndex: 0,
             }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [emptyChoicesField],
@@ -373,7 +373,7 @@ describe('editCheckboxField', () => {
             const { highlightIndex: _, ...fieldProps } = fieldWithoutHighlight
             const fieldWithUndefinedHighlight = fieldProps as InternalField
 
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [fieldWithUndefinedHighlight],
@@ -393,7 +393,7 @@ describe('editCheckboxField', () => {
     describe('other key handling', () => {
         it('should not modify field for unsupported keys', () => {
             const field = { ...checkboxField, highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'enter', ctrl: false }
+            const key: KeypressEvent = { name: 'enter', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -409,7 +409,7 @@ describe('editCheckboxField', () => {
 
         it('should not modify field for modifier keys', () => {
             const field = { ...checkboxField, highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'tab', ctrl: false }
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],
@@ -431,7 +431,7 @@ describe('editCheckboxField', () => {
             const field3 = { ...checkboxField, label: 'Field 3' }
             const fields = [field1, field2, field3]
 
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields,
@@ -449,7 +449,7 @@ describe('editCheckboxField', () => {
 
         it('should handle checkbox field among mixed field types', () => {
             const fields = sampleFields
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields,
@@ -476,7 +476,7 @@ describe('editCheckboxField', () => {
                 value: [],
                 highlightIndex: 1,
             }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [specialField],
@@ -499,7 +499,7 @@ describe('editCheckboxField', () => {
                 value: ['Option 1'],
                 highlightIndex: 1, // Second "Option 1"
             }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [duplicateField],
@@ -525,8 +525,8 @@ describe('editCheckboxField', () => {
                 highlightIndex: 50,
             }
 
-            const leftKey: KeypressEvent = { name: 'left', ctrl: false }
-            const rightKey: KeypressEvent = { name: 'right', ctrl: false }
+            const leftKey: KeypressEvent = { name: 'left', ctrl: false, shift: false }
+            const rightKey: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const leftResult = editCheckboxField({
                 fields: [longField],
@@ -563,8 +563,8 @@ describe('editCheckboxField', () => {
                 highlightIndex: 99,
             }
 
-            const leftKey: KeypressEvent = { name: 'left', ctrl: false }
-            const rightKey: KeypressEvent = { name: 'right', ctrl: false }
+            const leftKey: KeypressEvent = { name: 'left', ctrl: false, shift: false }
+            const rightKey: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const leftFromStart = editCheckboxField({
                 fields: [fieldAtStart],
@@ -592,7 +592,7 @@ describe('editCheckboxField', () => {
             const originalFields = [checkboxField]
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const originalFieldsCopy = JSON.parse(JSON.stringify(originalFields))
-            const key: KeypressEvent = { name: 'right', ctrl: false }
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             editCheckboxField({
                 fields: originalFields,
@@ -609,7 +609,7 @@ describe('editCheckboxField', () => {
             const originalField = { ...checkboxField }
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const originalFieldCopy = JSON.parse(JSON.stringify(originalField))
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             editCheckboxField({
                 fields: [originalField],
@@ -625,7 +625,7 @@ describe('editCheckboxField', () => {
         it('should create new arrays for value modifications', () => {
             const originalValue = ['Option 1']
             const field = { ...checkboxField, value: originalValue, highlightIndex: 1 }
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = editCheckboxField({
                 fields: [field],

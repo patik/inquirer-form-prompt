@@ -697,7 +697,7 @@ describe('handleNavigation', () => {
         it('should handle down key with ctrl modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: true, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -715,7 +715,7 @@ describe('handleNavigation', () => {
         it('should handle up key with shift modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'up', shift: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', shift: true, ctrl: false }
 
             const result = handleNavigation({
                 fields,
@@ -733,7 +733,7 @@ describe('handleNavigation', () => {
         it('should handle tab key with alt modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'tab', meta: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', meta: true, ctrl: false, shift: false } as KeypressEvent
 
             const result = handleNavigation({
                 fields,

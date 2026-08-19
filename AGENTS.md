@@ -18,7 +18,7 @@ pnpm test:once -t 'should toggle'                   # one test by name
 pnpm lint                 # tsc --noEmit && eslint --fix && prettier --write
 pnpm build                # tsc && tsc-alias (rewrites `src/*` aliases in dist)
 pnpm demo                 # tsx ./src/demo.ts --run — interactive manual check
-pnpm ci                   # build + check-format + check-exports (also runs on prepublishOnly)
+pnpm run ci               # build + check-format + check-exports (also runs on prepublishOnly)
 ```
 
 `pnpm demo` is the only way to exercise real terminal rendering; run it after touching renderers or key handlers. Snapshots live in `src/__snapshots__/`; update with `pnpm test:once -u`.

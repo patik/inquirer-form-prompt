@@ -33,7 +33,7 @@ function updateField({ currentField, key }: Pick<Props, 'currentField' | 'key'>)
     const currentChoiceIndex = choices.indexOf(value ?? '')
     const lastChoiceIndex = choices.length - 1
     const nextField = { ...currentField }
-    let nextChoiceIndex = 0
+    let nextChoiceIndex: number
 
     if (key.name === 'left') {
         if (currentChoiceIndex < 1) {

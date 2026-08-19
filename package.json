@@ -1,6 +1,6 @@
 {
     "name": "inquirer-form-prompt",
-    "version": "0.9.2",
+    "version": "1.0.0",
     "scripts": {
         "build": "tsc && tsc-alias",
         "demo": "tsx ./src/demo.ts --run",
@@ -12,6 +12,7 @@
         "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
         "ci": "pnpm build && pnpm check-format && pnpm check-exports",
         "prepublishOnly": "pnpm run ci",
+        "tag-release": "./scripts/tag-release.sh",
         "prepare": "husky"
     },
     "type": "module",
@@ -20,30 +21,30 @@
         "dist"
     ],
     "dependencies": {
-        "@inquirer/core": "^11.0.1",
-        "@inquirer/figures": "^1.0.12",
-        "ansi-escapes": "^7.0.0",
+        "@inquirer/core": "^12.0.0",
+        "@inquirer/figures": "^2.0.8",
+        "ansi-escapes": "^7.3.0",
         "boxen": "^8.0.1",
         "cli-table3": "^0.6.5",
-        "clipboardy": "^5.0.1",
-        "strip-ansi": "^7.1.0"
+        "clipboardy": "^5.3.2",
+        "strip-ansi": "^7.2.0"
     },
     "devDependencies": {
-        "@arethetypeswrong/cli": "^0.18.2",
-        "@eslint/js": "^9.28.0",
-        "@inquirer/testing": "^3.0.1",
-        "@inquirer/type": "^4.0.1",
-        "@types/node": "^24.10.1",
-        "eslint": "^9.28.0",
-        "eslint-config-prettier": "^10.1.5",
-        "eslint-plugin-prettier": "^5.4.1",
+        "@arethetypeswrong/cli": "^0.18.5",
+        "@eslint/js": "^10.0.1",
+        "@inquirer/testing": "^3.3.10",
+        "@inquirer/type": "^4.0.7",
+        "@types/node": "^26.2.0",
+        "eslint": "^10.8.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.6",
         "husky": "^9.1.7",
-        "prettier": "3.7.4",
-        "tsc-alias": "^1.8.16",
-        "tsx": "^4.20.0",
-        "typescript": "^5.8.3",
-        "typescript-eslint": "^8.48.0",
-        "vitest": "^4.0.14"
+        "prettier": "3.9.6",
+        "tsc-alias": "^1.9.2",
+        "tsx": "^4.23.12",
+        "typescript": "^6.0.3",
+        "typescript-eslint": "^8.67.0",
+        "vitest": "^4.1.11"
     },
     "keywords": [],
     "description": "Form-like, multi-input prompt for Inquirer.js",
@@ -58,6 +59,10 @@
         "url": "https://github.com/patik/inquirer-form-prompt.git"
     },
     "license": "MIT",
+    "engines": {
+        "node": ">=23.5.0 || ^22.13.0"
+    },
+    "packageManager": "pnpm@11.22.0",
     "publishConfig": {
         "access": "public"
     }

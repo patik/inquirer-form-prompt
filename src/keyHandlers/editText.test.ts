@@ -81,7 +81,7 @@ describe('editTextField', async () => {
 
         it('should ignore left arrow key with modifiers', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'left', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: true, shift: false }
 
             const result = editTextField({
                 fields,
@@ -96,7 +96,7 @@ describe('editTextField', async () => {
 
         it('should ignore right arrow key with modifiers', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'right', shift: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', shift: true, ctrl: false }
 
             const result = editTextField({
                 fields,
@@ -218,7 +218,7 @@ describe('editTextField', async () => {
     describe('clipboard paste behavior', () => {
         it('should use clipboard value when Ctrl+V is pressed', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockRl.line = 'current input'
             mockClipboard.readSync.mockReturnValue('pasted text')
 
@@ -237,7 +237,7 @@ describe('editTextField', async () => {
 
         it('should handle empty clipboard on paste', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockRl.line = 'current input'
             mockClipboard.readSync.mockReturnValue('')
 
@@ -254,7 +254,7 @@ describe('editTextField', async () => {
 
         it('should handle special characters in clipboard', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockClipboard.readSync.mockReturnValue('Clipboard: !@#$%^&*()_+-=[]{}|;:\'",.<>?/`~')
 
             const result = editTextField({
@@ -270,7 +270,7 @@ describe('editTextField', async () => {
 
         it('should handle unicode in clipboard', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockClipboard.readSync.mockReturnValue('🎨 Clipboard: café naïve résumé 日本語 中文 🌟')
 
             const result = editTextField({
@@ -286,7 +286,7 @@ describe('editTextField', async () => {
 
         it('should handle multiline clipboard content', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockClipboard.readSync.mockReturnValue('Line 1\nLine 2\nLine 3')
 
             const result = editTextField({
@@ -321,7 +321,7 @@ describe('editTextField', async () => {
 
         it('should not use clipboard for other keys with ctrl', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'c', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'c', ctrl: true, shift: false }
             mockRl.line = 'ctrl+c pressed'
             mockClipboard.readSync.mockReturnValue('clipboard content')
 
@@ -503,7 +503,7 @@ describe('editTextField', async () => {
 
         it('should handle clipboard read errors gracefully', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockRl.line = 'fallback text'
             mockClipboard.readSync.mockImplementation(() => {
                 throw new Error('Clipboard access denied')
@@ -545,7 +545,7 @@ describe('editTextField', async () => {
     describe('key modifier combinations', () => {
         it('should handle shift+key combinations (non-paste)', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'a', shift: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'a', shift: true, ctrl: false }
             mockRl.line = 'SHIFT+A'
 
             const result = editTextField({
@@ -561,7 +561,7 @@ describe('editTextField', async () => {
 
         it('should handle alt+key combinations', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'a', meta: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'a', meta: true, ctrl: false, shift: false } as KeypressEvent
             mockRl.line = 'alt+a pressed'
 
             const result = editTextField({
@@ -577,7 +577,7 @@ describe('editTextField', async () => {
 
         it('should handle ctrl+shift+key combinations (non-paste)', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'z', ctrl: true, shift: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'z', ctrl: true, shift: true }
             mockRl.line = 'ctrl+shift+z'
 
             const result = editTextField({
@@ -659,7 +659,7 @@ describe('editTextField', async () => {
 
         it('should handle tab key', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'tab', ctrl: false }
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
             mockRl.line = 'tab\tkey'
 
             const result = editTextField({
@@ -675,7 +675,7 @@ describe('editTextField', async () => {
 
         it('should handle space key', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'space', ctrl: false }
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
             mockRl.line = 'space key pressed'
 
             const result = editTextField({
@@ -693,7 +693,7 @@ describe('editTextField', async () => {
     describe('boundary conditions', () => {
         it('should handle focusedIndex at boundary (0)', () => {
             const fields = [textField, radioField]
-            const key: KeypressEvent = { name: 'b', ctrl: false }
+            const key: KeypressEvent = { name: 'b', ctrl: false, shift: false }
             mockRl.line = 'boundary test'
 
             const result = editTextField({
@@ -710,7 +710,7 @@ describe('editTextField', async () => {
 
         it('should handle very large focusedIndex', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'l', ctrl: false }
+            const key: KeypressEvent = { name: 'l', ctrl: false, shift: false }
             mockRl.line = 'large index'
 
             const result = editTextField({
@@ -730,7 +730,7 @@ describe('editTextField', async () => {
 
         it('should handle negative focusedIndex gracefully', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'n', ctrl: false }
+            const key: KeypressEvent = { name: 'n', ctrl: false, shift: false }
             mockRl.line = 'negative index'
 
             const result = editTextField({
@@ -752,7 +752,7 @@ describe('editTextField', async () => {
     describe('clipboard edge cases', () => {
         it('should handle clipboard with very long content', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true }
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             const longClipboardContent = 'x'.repeat(100000)
             mockClipboard.readSync.mockReturnValue(longClipboardContent)
 
@@ -770,7 +770,7 @@ describe('editTextField', async () => {
 
         it('should handle clipboard returning null/undefined', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true }
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             // @ts-expect-error Just a test
             mockClipboard.readSync.mockReturnValue(null)
 
@@ -787,7 +787,7 @@ describe('editTextField', async () => {
 
         it('should prioritize clipboard over rl.line for paste operation', () => {
             const fields = [textField]
-            const key: KeypressEvent = { name: 'v', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'v', ctrl: true, shift: false }
             mockRl.line = 'current typing'
             mockClipboard.readSync.mockReturnValue('clipboard wins')
 

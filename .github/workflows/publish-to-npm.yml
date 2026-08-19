@@ -30,30 +30,17 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
-            - name: Install pnpm
-              uses: pnpm/action-setup@v4
+            - name: Set up pnpm and Node.js
+              uses: pnpm/setup@v2
               with:
-                  version: 10
-                  run_install: false
-
-            # `registry-url` is deliberately omitted: it makes setup-node write
-            # `//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}` into .npmrc, and with no token set
-            # npm treats that empty line as "auth is already configured" and never starts the OIDC
-            # exchange, failing with ENEEDAUTH. https://github.com/actions/setup-node/issues/1551
-            - name: Use Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-                  cache: 'pnpm'
+                  runtime: node@22
+                  cache: true
 
             # Trusted publishing needs npm 11.5.1+, which is newer than the npm bundled with Node
             - name: Upgrade npm
               run: npm install --global npm@latest
-
-            - name: Install dependencies
-              run: pnpm install
 
             - name: Build
               run: pnpm run ci
