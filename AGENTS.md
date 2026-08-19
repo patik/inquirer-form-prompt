@@ -25,6 +25,8 @@ pnpm ci                   # build + check-format + check-exports (also runs on p
 
 Releases are tag-driven: pushing a `v*.*.*` tag triggers both the npm publish and the GitHub release workflows. Bump `version` in `package.json` first.
 
+Publishing uses npm [trusted publishing](https://docs.npmjs.com/trusted-publishers) over OIDC, so there is no `NPM_TOKEN` secret. The trusted publisher registered on npmjs.com is pinned to the workflow filename, so renaming or moving `.github/workflows/publish-to-npm.yml` breaks releases until the npm setting is updated to match.
+
 ## Architecture
 
 `src/index.ts` is the only public entry point. It wraps `createPrompt(promptCreator)`, manually hides/shows the terminal cursor around the prompt, and converts the escape-key sentinel into a thrown `EscapeKeyError`.
@@ -37,7 +39,7 @@ Releases are tag-driven: pushing a `v*.*.*` tag triggers both the npm publish an
 
 Two layers, kept strictly separate:
 
-- **`src/keyHandlers/`** — pure state transitions. Each `editXField({ fields, currentField, key, focusedIndex, rl })` returns a *new* `InternalFields` array (return `fields` unchanged to signal "ignored this key"). No rendering, no side effects beyond `rl.clearLine`.
+- **`src/keyHandlers/`** — pure state transitions. Each `editXField({ fields, currentField, key, focusedIndex, rl })` returns a _new_ `InternalFields` array (return `fields` unchanged to signal "ignored this key"). No rendering, no side effects beyond `rl.clearLine`.
 - **`src/renderers/`** — pure `fields → string`. `toTable` (default) and `toLabelTop` are the two theme variants; both split output into sections at `Separator` entries and delegate per-field markup to `renderers/common/*`. Add a new variant here and branch in `promptCreator`.
 
 ### Types (`src/util/types.ts`)
@@ -45,7 +47,7 @@ Two layers, kept strictly separate:
 There is a deliberate three-way split, and mixing them up is the most common source of type errors:
 
 - **User-facing**: `Field`/`Fields`, `FormField`, `Config`.
-- **Internal**: `InternalField`/`InternalFields`, which add fields the user never sets — currently `highlightIndex` on checkboxes (the cursor *within* a checkbox's choices, distinct from `focusedIndex` across the form). `toInternalFields()` adds them on mount.
+- **Internal**: `InternalField`/`InternalFields`, which add fields the user never sets — currently `highlightIndex` on checkboxes (the cursor _within_ a checkbox's choices, distinct from `focusedIndex` across the form). `toInternalFields()` adds them on mount.
 - **Returned**: `ReturnedItem`/`ReturnedItems` — `{ type, label, value }` only, plus passed-through `Separator` instances. `toReturnedItems()` strips internals; this is what `footer()` receives.
 
 `Separator` (from `@inquirer/core`) can appear anywhere in a fields array. Every loop over fields must handle it — always via `field instanceof Separator`.
