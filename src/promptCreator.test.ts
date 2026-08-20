@@ -2,15 +2,43 @@ import { createPrompt, Separator } from '@inquirer/core'
 import { render } from '@inquirer/testing'
 import { promptCreator } from 'src/promptCreator.js'
 import type { Config, ReturnedItems } from 'src/util/types.js'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
 // Create a proper prompt function compatible with @inquirer/testing
 const formPrompt = createPrompt<ReturnedItems, Config>(promptCreator)
 
+type RenderedForm = Awaited<ReturnType<typeof render<ReturnedItems, Config>>>
+
+/**
+ * `render()` starts a prompt and leaves it running until something resolves it. Most tests here
+ * only inspect `getScreen()`, so their prompt is still open when the test ends. @inquirer/core
+ * registers a signal-exit handler that rejects every open prompt with `ExitPromptError` once the
+ * worker process exits, and nothing is awaiting those promises by then, so vitest reports them as
+ * unhandled rejections. Whether they land before the process finishes exiting is a race, which is
+ * why this only failed on the CI. Render through this helper so `afterEach` can close them.
+ */
+const openPrompts = new Set<RenderedForm>()
+
+async function renderForm(config: Config): Promise<RenderedForm> {
+    const rendered = await render(formPrompt, config)
+    openPrompts.add(rendered)
+    return rendered
+}
+
+afterEach(async () => {
+    for (const { answer, events } of openPrompts) {
+        // `promptCreator` handles escape before it dispatches to any field handler, so this
+        // resolves the prompt no matter which fields the test configured.
+        events.keypress('escape')
+        await answer.catch(() => undefined)
+    }
+    openPrompts.clear()
+})
+
 describe('Form Prompt', () => {
     describe('Basic Rendering', () => {
         it('should render a form with text fields', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Please fill out this form',
                 fields: [
                     {
@@ -36,7 +64,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render a form with boolean fields', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Settings',
                 fields: [
                     {
@@ -61,7 +89,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render a form with radio fields', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Select option',
                 fields: [
                     {
@@ -80,7 +108,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render a form with checkbox fields', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Select technologies',
                 fields: [
                     {
@@ -99,7 +127,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render a form with separators', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'User Profile',
                 fields: [
                     {
@@ -130,7 +158,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render submessage when provided', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Main message',
                 submessage: 'Additional instructions here',
                 fields: [
@@ -148,7 +176,7 @@ describe('Form Prompt', () => {
         })
 
         it('should work without a main message', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 fields: [
                     {
                         type: 'text',
@@ -167,7 +195,7 @@ describe('Form Prompt', () => {
 
     describe('Field Selection and Cursor', () => {
         it('should handle initial field selection correctly', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 fields: [
                     new Separator('--- Header ---'),
                     {
@@ -191,7 +219,7 @@ describe('Form Prompt', () => {
         })
 
         it('should show field description when field is focused', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 fields: [
                     {
                         type: 'text',
@@ -215,7 +243,7 @@ describe('Form Prompt', () => {
 
     describe('Navigation and Interaction', () => {
         it('should allow navigation between fields with arrow keys', async () => {
-            const { getScreen, events } = await render(formPrompt, {
+            const { getScreen, events } = await renderForm({
                 message: 'Test Navigation',
                 fields: [
                     {
@@ -253,7 +281,7 @@ describe('Form Prompt', () => {
         })
 
         it('should complete the form when enter is pressed', async () => {
-            const { answer, events } = await render(formPrompt, {
+            const { answer, events } = await renderForm({
                 message: 'Complete this form',
                 fields: [
                     {
@@ -287,7 +315,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle escape key to cancel', async () => {
-            const { answer, events } = await render(formPrompt, {
+            const { answer, events } = await renderForm({
                 message: 'Test Cancel',
                 fields: [
                     {
@@ -309,7 +337,7 @@ describe('Form Prompt', () => {
 
     describe('Mixed Field Types', () => {
         it('should render complex forms with all field types', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Complete Survey',
                 submessage: 'Please fill out all fields',
                 fields: [
@@ -358,7 +386,7 @@ describe('Form Prompt', () => {
 
     describe('Edge Cases', () => {
         it('should handle fields with undefined values', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Edge cases',
                 fields: [
                     {
@@ -388,7 +416,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle empty arrays for checkbox choices', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 fields: [
                     {
                         type: 'checkbox',
@@ -404,7 +432,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle very long field names', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 fields: [
                     {
                         type: 'text',
@@ -420,7 +448,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle forms with only separators', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Only separators',
                 fields: [
                     new Separator('--- Section 1 ---'),
@@ -437,7 +465,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle empty fields array', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Empty form',
                 fields: [],
             })
@@ -450,7 +478,7 @@ describe('Form Prompt', () => {
 
     describe('Snapshots', () => {
         it('should match snapshot for basic form', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'User Information',
                 fields: [
                     {
@@ -476,7 +504,7 @@ describe('Form Prompt', () => {
         })
 
         it('should match snapshot for complex form with separators', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Complete Profile',
                 submessage: 'Fill out all sections',
                 fields: [
@@ -513,7 +541,7 @@ describe('Form Prompt', () => {
 
     describe('Footer', () => {
         it('should render a static footer', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Form with footer',
                 fields: [
                     {
@@ -532,7 +560,7 @@ describe('Form Prompt', () => {
         })
 
         it('should render a dynamic footer based on field values', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Dynamic footer test',
                 fields: [
                     {
@@ -560,7 +588,7 @@ describe('Form Prompt', () => {
         })
 
         it('should update footer when field values change', async () => {
-            const { getScreen, events } = await render(formPrompt, {
+            const { getScreen, events } = await renderForm({
                 message: 'Updating footer',
                 fields: [
                     {
@@ -587,7 +615,7 @@ describe('Form Prompt', () => {
         })
 
         it('should not render footer when footer function is not provided', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'No footer form',
                 fields: [
                     {
@@ -605,7 +633,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle footer with separators in fields', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Form with separators',
                 fields: [
                     new Separator('--- Personal Info ---'),
@@ -632,7 +660,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle footer with boolean field values', async () => {
-            const { getScreen, events } = await render(formPrompt, {
+            const { getScreen, events } = await renderForm({
                 message: 'Boolean footer test',
                 fields: [
                     {
@@ -659,7 +687,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle footer with checkbox field values', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Checkbox footer test',
                 fields: [
                     {
@@ -681,7 +709,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle footer with radio field values', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Radio footer test',
                 fields: [
                     {
@@ -703,7 +731,7 @@ describe('Form Prompt', () => {
         })
 
         it('should handle empty string returned from footer function', async () => {
-            const { getScreen } = await render(formPrompt, {
+            const { getScreen } = await renderForm({
                 message: 'Empty footer',
                 fields: [
                     {

@@ -32,18 +32,28 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v7
 
+            # node@24 rather than the 22 the library floor allows: recent npm releases
+            # require `^22.22.2 || ^24.15.0 || >=26.0.0`, so Node 22 only barely satisfies
+            # npm@latest and would break the next time npm raises that floor. This job only
+            # builds and publishes; the 22.x support matrix is covered by lint-and-tests.yml.
             - name: Set up pnpm and Node.js
               uses: pnpm/setup@v2
               with:
-                  runtime: node@22
+                  runtime: node@24
                   cache: true
 
-            # Trusted publishing needs npm 11.5.1+, which is newer than the npm bundled with Node
-            - name: Upgrade npm
-              run: npm install --global npm@latest
+            # Trusted publishing needs npm 11.5.1+, and the npm bundled with Node is older
+            # than that. `pnpm/setup` runs `pnpm runtime set node ... -g`, which puts Node and
+            # its bundled npm in $PNPM_HOME at the front of PATH, so a plain
+            # `npm install --global` installs behind $PNPM_HOME and never wins. Install into a
+            # prefix we control and put that prefix first instead.
+            - name: Install npm for publishing
+              run: |
+                  npm install --global --prefix "$RUNNER_TEMP/npm" npm@latest
+                  echo "$RUNNER_TEMP/npm/bin" >> "$GITHUB_PATH"
 
-            # The upgrade above only takes effect if the new npm wins on PATH over any npm
-            # shipped with the pnpm-managed Node runtime. Fail here rather than at publish time.
+            # Confirm the npm we just installed is the one later steps will actually run.
+            # Fail here rather than at publish time.
             - name: Verify npm version
               run: |
                   version="$(npm --version)"
