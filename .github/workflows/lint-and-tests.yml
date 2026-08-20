@@ -33,7 +33,7 @@ jobs:
             - name: Lint
               run: pnpm exec eslint .
             # `pnpm build` compiles tsconfig.build.json, which excludes tests and the demo.
-            # This checks the whole of `src` instead, so test files are still type-checked.
+            # This checks the whole of `src` instead, so test files are also type-checked.
             - name: Typecheck
               run: pnpm exec tsc --noEmit
             - name: Build
