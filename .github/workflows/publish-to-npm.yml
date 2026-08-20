@@ -1,3 +1,15 @@
+# Publishes to npm using trusted publishing (OIDC), so no NPM_TOKEN is required.
+# https://docs.npmjs.com/trusted-publishers
+#
+# One-time setup on npmjs.com (Package settings > Trusted publisher):
+#   Publisher:        GitHub Actions
+#   Organization:     patik
+#   Repository:       inquirer-form-prompt
+#   Workflow:         publish-to-npm.yml
+#   Environment:      (leave empty)
+# Renaming or moving this file will break publishing until the trusted publisher
+# config on npmjs.com is updated to match.
+
 name: Publish to NPM
 
 on:
@@ -8,30 +20,46 @@ on:
             # git tag -d v1.2.3 && git push origin :refs/tags/v1.2.3
             - 'v*.*.*' # Only publish on version tags like v1.2.3
 
+permissions:
+    contents: read
+    id-token: write # Required for trusted publishing; also generates provenance
+
 jobs:
     publish:
         runs-on: ubuntu-latest
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
-            - name: Use Node.js
-              uses: actions/setup-node@v4
+            - name: Set up pnpm and Node.js
+              uses: pnpm/setup@v2
               with:
-                  node-version: '20'
-                  registry-url: 'https://registry.npmjs.org/'
+                  runtime: node@22
+                  cache: true
 
-            - name: Install pnpm
-              run: npm install -g pnpm
+            # Trusted publishing needs npm 11.5.1+, which is newer than the npm bundled with Node
+            - name: Upgrade npm
+              run: npm install --global npm@latest
 
-            - name: Install dependencies
-              run: pnpm install
+            # The upgrade above only takes effect if the new npm wins on PATH over any npm
+            # shipped with the pnpm-managed Node runtime. Fail here rather than at publish time.
+            - name: Verify npm version
+              run: |
+                  version="$(npm --version)"
+                  echo "npm $version"
+                  node -e 'const [a, b, c] = process.argv[1].split(".").map(Number)
+                    if (a * 1e6 + b * 1e3 + c < 11 * 1e6 + 5 * 1e3 + 1) {
+                        console.error(`npm ${process.argv[1]} is too old; trusted publishing needs >= 11.5.1`)
+                        process.exit(1)
+                    }' "$version"
 
-            - name: Build
+            # Runs build + check-format + check-exports + tests. A tag must never publish
+            # a version whose test suite is failing.
+            - name: Build and test
               run: pnpm run ci
 
+            # No NODE_AUTH_TOKEN: npm exchanges the workflow's OIDC token for a short-lived
+            # publish token on its own
             - name: Publish to NPM
-              run: npm publish --access public --no-git-checks
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npm publish --access public

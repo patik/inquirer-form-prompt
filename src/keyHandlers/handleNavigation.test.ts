@@ -43,7 +43,7 @@ describe('handleNavigation', () => {
         it('should move from first field to second field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -61,7 +61,7 @@ describe('handleNavigation', () => {
         it('should move from middle field to next field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -79,7 +79,7 @@ describe('handleNavigation', () => {
         it('should wrap from last field to first field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -97,7 +97,7 @@ describe('handleNavigation', () => {
         it('should skip separators when moving down', () => {
             const fields: InternalFields = [textField, separator, radioField, booleanField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -116,7 +116,7 @@ describe('handleNavigation', () => {
             const separator2 = new Separator('--- Another ---')
             const fields: InternalFields = [textField, separator, separator2, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -134,7 +134,7 @@ describe('handleNavigation', () => {
         it('should wrap to beginning when all remaining fields are separators', () => {
             const fields: InternalFields = [textField, radioField, separator, separator]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -154,7 +154,7 @@ describe('handleNavigation', () => {
         it('should move from last field to previous field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -172,7 +172,7 @@ describe('handleNavigation', () => {
         it('should move from middle field to previous field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -190,7 +190,7 @@ describe('handleNavigation', () => {
         it('should wrap from first field to last field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -208,7 +208,7 @@ describe('handleNavigation', () => {
         it('should skip separators when moving up', () => {
             const fields: InternalFields = [textField, radioField, separator, booleanField]
             const focusedIndex = 3
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -227,7 +227,7 @@ describe('handleNavigation', () => {
             const separator2 = new Separator('--- Another ---')
             const fields: InternalFields = [textField, separator, separator2, booleanField]
             const focusedIndex = 3
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -245,7 +245,7 @@ describe('handleNavigation', () => {
         it('should wrap to last non-separator from first when previous fields are separators', () => {
             const fields: InternalFields = [separator, separator, textField, radioField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -265,7 +265,7 @@ describe('handleNavigation', () => {
         it('should behave like down key - move to next field', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'tab' } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -283,7 +283,7 @@ describe('handleNavigation', () => {
         it('should wrap from last field to first field like down key', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'tab' } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -301,7 +301,7 @@ describe('handleNavigation', () => {
         it('should skip separators like down key', () => {
             const fields: InternalFields = [textField, separator, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'tab' } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -321,7 +321,7 @@ describe('handleNavigation', () => {
         it('should return false for enter key', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'return' } as KeypressEvent
+            const key: KeypressEvent = { name: 'return', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -339,7 +339,7 @@ describe('handleNavigation', () => {
         it('should return false for left arrow key', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'left' } as KeypressEvent
+            const key: KeypressEvent = { name: 'left', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -357,7 +357,7 @@ describe('handleNavigation', () => {
         it('should return false for right arrow key', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'right' } as KeypressEvent
+            const key: KeypressEvent = { name: 'right', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -375,7 +375,7 @@ describe('handleNavigation', () => {
         it('should return false for space key', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'space' } as KeypressEvent
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -393,7 +393,7 @@ describe('handleNavigation', () => {
         it('should return false for alphanumeric keys', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'a' } as KeypressEvent
+            const key: KeypressEvent = { name: 'a', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -411,7 +411,7 @@ describe('handleNavigation', () => {
         it('should return false for escape key', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'escape' } as KeypressEvent
+            const key: KeypressEvent = { name: 'escape', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -431,7 +431,7 @@ describe('handleNavigation', () => {
         it('should wrap to itself when moving down from single field', () => {
             const fields: InternalFields = [textField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -449,7 +449,7 @@ describe('handleNavigation', () => {
         it('should wrap to itself when moving up from single field', () => {
             const fields: InternalFields = [textField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -467,7 +467,7 @@ describe('handleNavigation', () => {
         it('should handle single field with tab navigation', () => {
             const fields: InternalFields = [radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'tab' } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -487,7 +487,7 @@ describe('handleNavigation', () => {
         it('should handle empty fields array gracefully for down key', () => {
             const fields: InternalFields = []
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -505,7 +505,7 @@ describe('handleNavigation', () => {
         it('should handle empty fields array gracefully for up key', () => {
             const fields: InternalFields = []
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -526,7 +526,7 @@ describe('handleNavigation', () => {
             const separator2 = new Separator('--- Another ---')
             const fields: InternalFields = [separator, separator2]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -546,7 +546,7 @@ describe('handleNavigation', () => {
             const separator2 = new Separator('--- Another ---')
             const fields: InternalFields = [separator, separator2]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -567,7 +567,7 @@ describe('handleNavigation', () => {
         it('should handle negative focusedIndex for down navigation', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = -1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -585,7 +585,7 @@ describe('handleNavigation', () => {
         it('should handle focusedIndex larger than array length for down navigation', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 10
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -603,7 +603,7 @@ describe('handleNavigation', () => {
         it('should handle focusedIndex at array length minus 1 for up navigation', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 2 // Last valid index
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -623,7 +623,7 @@ describe('handleNavigation', () => {
         it('should handle separator at beginning and end', () => {
             const fields: InternalFields = [separator, textField, radioField, separator]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -641,7 +641,7 @@ describe('handleNavigation', () => {
         it('should handle separator in middle with up navigation', () => {
             const fields: InternalFields = [textField, separator, radioField, booleanField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -659,7 +659,7 @@ describe('handleNavigation', () => {
         it('should handle wrapping with separators at end', () => {
             const fields: InternalFields = [textField, radioField, separator, separator]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -677,7 +677,7 @@ describe('handleNavigation', () => {
         it('should handle wrapping with separators at beginning', () => {
             const fields: InternalFields = [separator, separator, textField, radioField]
             const focusedIndex = 2
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -697,7 +697,7 @@ describe('handleNavigation', () => {
         it('should handle down key with ctrl modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down', ctrl: true } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: true, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -715,7 +715,7 @@ describe('handleNavigation', () => {
         it('should handle up key with shift modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'up', shift: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', shift: true, ctrl: false }
 
             const result = handleNavigation({
                 fields,
@@ -733,7 +733,7 @@ describe('handleNavigation', () => {
         it('should handle tab key with alt modifier', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'tab', meta: true, ctrl: false } as KeypressEvent
+            const key: KeypressEvent = { name: 'tab', meta: true, ctrl: false, shift: false } as KeypressEvent
 
             const result = handleNavigation({
                 fields,
@@ -761,7 +761,7 @@ describe('handleNavigation', () => {
 
             const fields: InternalFields = [textField, radioField, booleanField, checkboxField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -787,7 +787,7 @@ describe('handleNavigation', () => {
 
             const fields: InternalFields = [textField, checkboxField, radioField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'up' } as KeypressEvent
+            const key: KeypressEvent = { name: 'up', ctrl: false, shift: false }
 
             const result = handleNavigation({
                 fields,
@@ -810,7 +810,7 @@ describe('handleNavigation', () => {
 
             navigationKeys.forEach((keyName) => {
                 vi.clearAllMocks()
-                const key: KeypressEvent = { name: keyName } as KeypressEvent
+                const key: KeypressEvent = { name: keyName, ctrl: false, shift: false }
 
                 handleNavigation({
                     fields,
@@ -830,7 +830,7 @@ describe('handleNavigation', () => {
 
             nonNavigationKeys.forEach((keyName) => {
                 vi.clearAllMocks()
-                const key: KeypressEvent = { name: keyName } as KeypressEvent
+                const key: KeypressEvent = { name: keyName, ctrl: false, shift: false }
 
                 handleNavigation({
                     fields,
@@ -849,7 +849,7 @@ describe('handleNavigation', () => {
         it('should only call setfocusedIndex once per navigation', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             handleNavigation({
                 fields,
@@ -865,7 +865,7 @@ describe('handleNavigation', () => {
         it('should not call setfocusedIndex for non-navigation keys', () => {
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'space' } as KeypressEvent
+            const key: KeypressEvent = { name: 'space', ctrl: false, shift: false }
 
             handleNavigation({
                 fields,
@@ -885,7 +885,7 @@ describe('handleNavigation', () => {
             const navigationKeys = ['down', 'up', 'tab']
 
             navigationKeys.forEach((keyName) => {
-                const key: KeypressEvent = { name: keyName } as KeypressEvent
+                const key: KeypressEvent = { name: keyName, ctrl: false, shift: false }
                 const result = handleNavigation({
                     fields,
                     focusedIndex: 0,
@@ -903,7 +903,7 @@ describe('handleNavigation', () => {
             const nonNavigationKeys = ['left', 'right', 'space', 'enter', 'return', 'a', 'escape', 'backspace']
 
             nonNavigationKeys.forEach((keyName) => {
-                const key: KeypressEvent = { name: keyName } as KeypressEvent
+                const key: KeypressEvent = { name: keyName, ctrl: false, shift: false }
                 const result = handleNavigation({
                     fields,
                     focusedIndex: 0,
@@ -922,7 +922,7 @@ describe('handleNavigation', () => {
             const fields: InternalFields = [textField, radioField, booleanField]
             const originalFields = [...fields]
             const focusedIndex = 1
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             handleNavigation({
                 fields,
@@ -943,7 +943,7 @@ describe('handleNavigation', () => {
             const originalRadioField = { ...radioField }
             const fields: InternalFields = [textField, radioField]
             const focusedIndex = 0
-            const key: KeypressEvent = { name: 'down' } as KeypressEvent
+            const key: KeypressEvent = { name: 'down', ctrl: false, shift: false }
 
             handleNavigation({
                 fields,
