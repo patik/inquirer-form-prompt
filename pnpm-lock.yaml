@@ -38,7 +38,7 @@ importers:
         version: 10.0.1(eslint@10.13.0(supports-color@7.2.0))
       '@inquirer/testing':
         specifier: ^3.3.10
-        version: 3.3.14(@types/node@26.6.5)(vitest@4.1.11(@types/node@26.6.5)(vite@8.2.2(@types/node@26.6.5)(esbuild@0.28.2)(tsx@4.23.15)))
+        version: 3.3.16(@types/node@26.6.5)(vitest@4.1.11(@types/node@26.6.5)(vite@8.2.2(@types/node@26.6.5)(esbuild@0.28.2)(tsx@4.23.15)))
       '@inquirer/type':
         specifier: ^4.0.7
         version: 4.2.0(@types/node@26.6.5)
@@ -338,8 +338,8 @@ packages:
     resolution: {integrity: sha512-EAWgUTGQ/Umgga51dE3B2PUHbufuXarDfg86uVgoSgNHNNQnyFKcOrQLWVqYMghuSyHh8+2HUH0Js9cTC1WAdg==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^20.17.0'}
 
-  '@inquirer/testing@3.3.14':
-    resolution: {integrity: sha512-jlKdnUGmcthFrHR+/4WzQG+OcOI0MdzUlvf0nsUXRCv7LSu2ul54KtPpHhNHkvUGaqzX8hNem5tBiJ+Pikc4Ng==}
+  '@inquirer/testing@3.3.16':
+    resolution: {integrity: sha512-4eGBW8p80WDpjipems6ni+oPR2uHRO2PvI59czb1+YCZisjTlLSw33wYNeF84hyZAZLQPdCdYaa0SkP+VUWLxA==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^20.17.0'}
     peerDependencies:
       '@inquirer/checkbox': '>=1.0.0'
@@ -394,6 +394,15 @@ packages:
 
   '@inquirer/type@4.2.0':
     resolution: {integrity: sha512-2rnHX8RPo4glJYqnFc/v3nQeIhDcjyRRyaT7MGcfL/8xv/8K03SXYoA2tX06WVSKywWOE/ncbG3dtuzLjR5TCQ==}
+    engines: {node: '>=23.5.0 || ^22.13.0 || ^20.17.0'}
+    peerDependencies:
+      '@types/node': '>=18'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+
+  '@inquirer/type@4.2.1':
+    resolution: {integrity: sha512-lDkPsnv5M5CcYB2T1qTc3dobNTPkVr4DU3Ic2Q6SW8/qVRHgvzdRdmVZ6YqG9Ag1aJTeMsLU0s0WPRh3CZWDQQ==}
     engines: {node: '>=23.5.0 || ^22.13.0 || ^20.17.0'}
     peerDependencies:
       '@types/node': '>=18'
@@ -1951,9 +1960,9 @@ snapshots:
 
   '@inquirer/figures@2.0.9': {}
 
-  '@inquirer/testing@3.3.14(@types/node@26.6.5)(vitest@4.1.11(@types/node@26.6.5)(vite@8.2.2(@types/node@26.6.5)(esbuild@0.28.2)(tsx@4.23.15)))':
+  '@inquirer/testing@3.3.16(@types/node@26.6.5)(vitest@4.1.11(@types/node@26.6.5)(vite@8.2.2(@types/node@26.6.5)(esbuild@0.28.2)(tsx@4.23.15)))':
     dependencies:
-      '@inquirer/type': 4.2.0(@types/node@26.6.5)
+      '@inquirer/type': 4.2.1(@types/node@26.6.5)
       '@xterm/headless': 6.0.0
       mute-stream: 3.0.0
     optionalDependencies:
@@ -1961,6 +1970,10 @@ snapshots:
       vitest: 4.1.11(@types/node@26.6.5)(vite@8.2.2(@types/node@26.6.5)(esbuild@0.28.2)(tsx@4.23.15))
 
   '@inquirer/type@4.2.0(@types/node@26.6.5)':
+    optionalDependencies:
+      '@types/node': 26.6.5
+
+  '@inquirer/type@4.2.1(@types/node@26.6.5)':
     optionalDependencies:
       '@types/node': 26.6.5
 
