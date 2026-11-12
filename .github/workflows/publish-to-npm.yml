@@ -37,7 +37,7 @@ jobs:
             # npm@latest and would break the next time npm raises that floor. This job only
             # builds and publishes; the 22.x support matrix is covered by lint-and-tests.yml.
             - name: Set up pnpm and Node.js
-              uses: pnpm/setup@v2
+              uses: pnpm/setup@v3
               with:
                   runtime: node@24
                   cache: true
